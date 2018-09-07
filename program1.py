@@ -1,0 +1,5 @@
+print("Hello World!")
+username = input("What's your name? ")
+print("Greetings, " + username + "!")
+activity = input("What would you like to do today? ")
+print("I love to " + activity + " too!")
