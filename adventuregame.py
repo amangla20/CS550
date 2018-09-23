@@ -1,5 +1,3 @@
-# try to use a while loop checker
-
 # story layout: go to stables or king to find clue to go to a place that will lead you to the sorceress' lair. Old wise guy "right is the way of evil" and then ask which path they should go on
 
 #timer on the game????
@@ -23,62 +21,54 @@ def start():
 		elif
 """
 
-	if result == '1':
+	if checkInput(result, '1', '2') == '1':
 		throneRoom()
-	elif result == '2':
+	elif checkInput(result, '1', '2') == '2':
 		stables()
-	else:
-		print("I don't know what " + result + " means. Try typing a 1 or a 2.")
-		start()
 
 def checkTime():
-
 	if (time.time() < startTime + 300):
 		pass
 	else:
 		timedout = input("Oh no! You took too much time to save the prince, and now the sorceress has whisked him away to a world where he could never be found. You've failed your quest! The kingdom will now fall into eternal mourning, the curse set upon the kingdom by the sorceress. Would you like to try to save the prince again? ")
-		if timedout = 'N':
-			print("Oh well. The kingdom will be desolate until the next hero comes along. Thanks for trying!")
-		elif timedout = 'Y':
+		if checkInput(timedout, 'N', 'Y') == 'N':
+			print("Oh well. The kingdom will remain desolate until the next hero comes along. Thanks for trying!")
+		elif checkInput(timedout, 'N', 'Y') == 'Y':
 			start()
-		else:
-			print("I don't know what " + choice + " means. Try typing a 'N' or a 'Y'.")
-			checkTime()
 
 def checkInput(choice, a, b):
 	while choice != a or choice != b:
-		print("I don't know what " + choice + " means. Try typing a 1 or a 2.")
+		print("I don't know what " + choice + " means. Try typing a "+a+" or a "+b+". ")
 	return choice
 
 def throneRoom():
+	checkTime()
 	king = input("\n\nThe king is in much distress, but they say he was the last one to see his son before the abduction.\n\nDo you \n1) ask him for clues or \n2) let him grieve in peace?\n\n>>")
-	if king == '1':
+
+	if checkInput(king, '1', '2') == '1':
 		pass
 		kingClue() # have the clue lead them to somewhere that would lead them to where the stables would lead them
-	elif king == '2':
+	elif checkInput(king, '1', '2') == '2':
 		pass
 		peaceGrieve() # have them go now to the stables
-	else:
-		print("I don't know what " + result + " means. Try typing a 1 or a 2.")
-		# throneRoom()
 
 def stables():
+	checkTime()
 	stableBoy = input("\n\nThe stable boy is looking for the horse, Misty, that the prince was riding when he was abducted. However, he forgot if Misty likes 1) carrots or 2) peanuts. What will you use to lure Misty? ")
-	if stableBoy == '1':
+	if checkInput(stableBoy, '1', '2') == '1':
 		pass
-	elif stableBoy = '2':
+	elif checkInput(stableBoy, '1', '2') = '2':
 		pass
 
 def kingClue():
+	checkTime()
 	clue = input("\n\nMy boy, oh my boy! What will we ever do? He was my pride and joy, that boy. He was so found of that garden of ours, that he spent every waking minute in it tending to the sunflowers. That wretched wench dragged him off because she was jealous of my happiness.\n\nNow that you have gained this clue, do you wish to 1) go straight to the garden or 2) talk to the stable boy to gain more clues?\n\n>>")
-	if clue = '1':
+	if checkInput(clue, '1', '2') == '1':
 		pass
-	if clue = '2':
+	if checkInput(clue, '1', '2') == '2':
 		stables()
-	else:
-		print("I don't know what " + result + " means. Try typing a 1 or a 2.")
-		# kingClue()
 
 def peaceGrieve():
 	pass
+
 start()
