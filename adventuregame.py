@@ -46,11 +46,9 @@ def throneRoom():
 	king = input("\n\nThe king is in much distress, but they say he was the last one to see his son before the abduction.\n\nDo you \n1) ask him for clues or \n2) let him grieve in peace and head to the stables?\n\n>> ")
 
 	if checkInput(king, '1', '2') == '1':
-		pass
-		kingClue() # have the clue lead them to somewhere that would lead them to where the stables would lead them
+		kingClue()
 	elif checkInput(king, '1', '2') == '2':
-		pass
-		peaceGrieve() # have them go now to the queen
+		peaceGrieve()
 
 def stables():
 	checkTime()
@@ -61,6 +59,7 @@ def stables():
 		findMisty()
 
 def findMisty():
+	global startTime
 	checkTime()
 	startTime += 30
 	print("\n\nYou spend an hour looking for Misty, while time to save the prince ticks by. Then, a thought occurs to you. The prince could have been abducted along with Misty! After all, the sorceress could have somehow led them through a spell to her lair. You decide that you must go back to the garden and follow the stable boy's original clue.\n\n>>")
@@ -68,7 +67,7 @@ def findMisty():
 
 def kingClue():
 	checkTime()
-	clue = input("\n\nMy boy, oh my boy! What will we ever do? He was my pride and joy, that boy. He was so found of that garden of ours, that he spent every waking minute in it tending to the sunflowers. That wretched wench dragged him off because she was jealous of my happiness. Just remember one thing! The sorceress once told me that 'Right is the way of evil.'\n\nNow that you have gained this clue, do you wish to 1) go straight to the garden or 2) talk to the stable boy to gain more clues?\n\n>> ")
+	clue = input("\n\nMy boy, oh my boy! What will we ever do? He was my pride and joy, that boy. He was so fond of that garden of ours, that he spent every waking minute in it tending to the sunflowers. Not to mention the second thing he was most fond of - his favorite horse, Misty! He always brought her to that garden with him. That wretched sorceress dragged him off because she was jealous of my happiness. Just remember one thing! The sorceress once told me (back when she was a normal person) that 'Right is the way of evil.'\n\nNow that you have gained this clue, do you wish to 1) go straight to the garden or 2) talk to the stable boy to gain more clues?\n\n>> ")
 	if checkInput(clue, '1', '2') == '1':
 		garden()
 	if checkInput(clue, '1', '2') == '2':
@@ -77,6 +76,10 @@ def kingClue():
 def peaceGrieve():
 	checkTime()
 	queen = input("\n\nNow that you left the king to grieve in peace, you encounter the queen walking back from her morning walk around the gardens. She tells you that her husband would answer any questions asked to him in this period of grieving because he is determined to find his son and bring him back. Do you 1) go back to the throne room to talk to the king or 2) head to the stables?\n\n>> ")
+	if checkInput(queen, '1', '2') == '1':
+		throneRoom()
+	elif checkInput(queen, '1', '2') == '2':
+		stables()
 
 def garden():
 	checkTime()
@@ -91,13 +94,22 @@ def leftPath():
 	leftChoice = input("\n\nThe path ahead is windy and filled with chilly winds. Knowing that the sorceress has a knack for picking scary places to set up her lair, you are reassured by the state of this path leading you to your destiny. Do you want to\n1) continue down the left path or\n2) turn back to choose between paths again? ")
 	if checkInput(leftChoice, '1', '2') == '1':
 		continueLeft()
-	elif checkInput(leftChoice, '1', '2') == '1':
+	elif checkInput(leftChoice, '1', '2') == '2':
 		garden()
 
 def continueLeft():
+	global startTime
 	checkTime()
-	startTime += 15
-	goBack = input("\n\nYou walked for quite a while and have now come to a dead end in the road. Looks like you didn't heed the advice you were given very well! ")
+	startTime += 30
+	print("\n\nYou walked for quite a while and have now come to a dead end in the road. Looks like you didn't heed the advice you were given very well!")
+	garden()
 
+def rightPath():
+	checkTime()
+	rightChoice = input("\n\nThe path ahead is calm and clear, as hot as a summer day. It definitely doesn't give off the vibe of a path leading to a scary secret lair. But then again, looks are often deceiving. Do you want to \n1) continue down the right path or\n2) turn back and choose between paths again? ")
+	if checkInput(rightChoice, '1', '2') == '1':
+		continueRight()
+	elif checkInput(rightChoice, '1', '2') == '2':
+		garden()
 
 start()
