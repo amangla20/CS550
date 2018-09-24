@@ -5,7 +5,7 @@
 # On my honor, I have neither given nor received unauthorized aid.
 import time
 startTime = None
-
+#start the game
 def start():
 	global startTime
 	startTime = time.time()
@@ -17,7 +17,7 @@ def start():
 		throneRoom()
 	else:
 		stables()
-
+# checking timer
 def checkTime():
 	if (time.time() < startTime + 300):
 		pass
@@ -27,7 +27,7 @@ def checkTime():
 			start()
 		else:
 			print("Oh well. The kingdom will remain desolate until the next hero comes along. Thanks for trying!")
-
+# method to error check
 def checkInput(choice, a, b):
 	print(choice,a,b)
 	while choice != a and choice != b:
@@ -39,7 +39,7 @@ def checkInput(choice, a, b):
 	else:
 		return choice
 	"""
-
+# you can talk to the king
 def throneRoom():
 	checkTime()
 	king = input("\n\nThe king is in much distress, but they say he was the last one to see his son before the abduction.\n\nDo you \n1) ask him for clues or \n2) let him grieve in peace and head to the stables?\n\n>> ")
@@ -48,7 +48,7 @@ def throneRoom():
 		kingClue()
 	else:
 		peaceGrieve()
-
+# stable boy gives clues
 def stables():
 	checkTime()
 	stableBoy = input("\n\nThe stable boy is looking for the horse, Misty, that the prince was riding when he was abducted. Misty was last seen at the garden with the prince, who was tending to his favorite sunflower patch. The stable boy seems very sad, as Misty was his favorite horse to take care of. Misty always 'knew the right way to go about things.'\n\nWould you like to\n1) go to the garden or\n2) help the stable boy find Misty?\n\n>> ")
@@ -56,14 +56,14 @@ def stables():
 		garden()
 	else:
 		findMisty()
-
+# don't do this, user!
 def findMisty():
 	global startTime
 	checkTime()
 	startTime += 30
 	print("\n\nYou spend an hour looking for Misty, while time to save the prince ticks by. Because of your preoccupation with Misty rather than saving the prince, 30 seconds have been deducted from the time you have remaining. Then, a thought occurs to you. The prince could have been abducted along with Misty! After all, the sorceress could have somehow led them through a spell to her lair. You decide that you must go back to the garden and follow the stable boy's original clue.\n\n>> ")
 	garden()
-
+# king's clue
 def kingClue():
 	checkTime()
 	clue = input("\n\nMy boy, oh my boy! What will we ever do? He was my pride and joy, that boy. He was so fond of that garden of ours, that he spent every waking minute in it tending to the sunflowers. Not to mention the second thing he was most fond of - his favorite horse, Misty! He always brought her to that garden with him. That wretched sorceress dragged him off because she was jealous of my happiness. Just remember one thing! The sorceress once told me (back when she was a normal person) that 'Right is the way of evil.'\n\nNow that you have gained this clue, do you wish to\n1) go straight to the garden or\n2) talk to the stable boy to gain more clues?\n\n>> ")
@@ -71,7 +71,7 @@ def kingClue():
 		garden()
 	else:
 		stables()
-
+# leave but bump into queen
 def peaceGrieve():
 	checkTime()
 	queen = input("\n\nNow that you left the king to grieve in peace, you encounter the queen walking back from her morning walk around the gardens. She tells you that her husband would answer any questions asked to him in this period of grieving because he is determined to find his son and bring him back.\n\nDo you\n1) go back to the throne room to talk to the king or\n2) head to the stables?\n\n>> ")
@@ -79,7 +79,7 @@ def peaceGrieve():
 		throneRoom()
 	else:
 		stables()
-
+# paths to forest
 def garden():
 	checkTime()
 	garden = input("\n\nNow that you have found the sunflowers, you notice something interesting about the sunflowers closest to the forest. It looks like they were trampled by something somehow, maybe a horse. It looks as though the prince went this way! There are two paths into the forest.\n\nDo you go to the\n1) left or the\n2) right? ")
@@ -87,7 +87,7 @@ def garden():
 		leftPath()
 	else:
 		rightPath()
-
+# don't choose this path, choose the way of evil
 def leftPath():
 	checkTime()
 	leftChoice = input("\n\nThe path ahead is windy and filled with chilly winds. Knowing that the sorceress has a knack for picking scary places to set up her lair, you are reassured by the state of this path leading you to your destiny.\n\nDo you want to\n1) continue down the left path or\n2) turn back to choose between paths again? ")
@@ -105,7 +105,7 @@ def continueLeft():
 		garden()
 	else:
 		garden()
-
+# right path to choose
 def rightPath():
 	checkTime()
 	rightChoice = input("\n\nThe path ahead is calm and clear, as hot as a summer day. It definitely doesn't give off the vibe of a path leading to a scary secret lair. But then again, looks are often deceiving.\n\nDo you want to \n1) continue down the right path or\n2) turn back and choose between paths again? ")
@@ -121,7 +121,7 @@ def continueRight():
 		cave()
 	else:
 		pasture()
-
+# you find misty
 def pasture():
 	checkTime()
 	misty = input("\n\nAs you arrive at the pasture, you see the outline of... is that a horse? It's the beloved Misty! You've found her! You get up close and examine her. She is tied to a wooden fence but she seems content with her food. The knot on her rope seems really difficult to untie, and the prince is nowhere to be found on this pasture in the middle of nowhere. Wait! Something suddenly catches your eye about Misty's collar. The collar has the numbers '1029' engraved on it.\n\nNow, you have a choice to either\n1) go explore the cave or\n2) help untie Misty! >> ")
@@ -129,7 +129,7 @@ def pasture():
 		cave()
 	else:
 		untieMisty()
-
+# lair cave
 def cave():
 	checkTime()
 	code = input("\n\nYou arrive at the cave, which is underground under a body of water. You snoop around and find two sets of footprints leading to a wall of the cave... yet they suddenly disappear. This definitely looks like the work of magic! Or...is it? You trace your hand down the side of the limestone rock wall and find yourself somehow turning something...something that sounds mechanical. When you peer at what your hand is touching, you see a combination type lock that seems to be accepting four numbers.\n\nDo you\n1) try a four-digit code or\n2) go back to the old gate-keeper? >> ")
@@ -147,7 +147,7 @@ def untieMisty():
 		cave()
 	else:
 		cave()
-
+# 1029 code
 def unlock():
 	checkTime()
 	inputCode = input("The lock reads, Enter the 4-digit PIN: ")
@@ -159,7 +159,7 @@ def unlock():
 			continueRight()
 		else:
 			unlock()
-
+# free the prince!
 def lair():
 	# no more checking the time, as the prince has been found and the timer is now invalid.
 	free = input("\n\nSuddenly, the rock formation shakes and opens its doors. You step inside, and the rock repositions itself. Woah! You feel a sudden drop. When the doors open, you see the prince, face fallen, scrunched up against the side of a large cage. The key is tauntingly in his reach, but he can't seem to get it. The prince suddenly spots you, and brings a finger to his lips to mouth 'Shhh.' You look to the side and find the snoring sorceress, taking an afternoon siesta. You tip-toe over to the prince and use the key to unlock him. You both continue out of the lair, leaving the sorceress to find out the surprise when she wakes up later.\n\nType 1 or 2 to continue. >> ")
@@ -174,7 +174,7 @@ def exit():
 		win()
 	else:
 		win()
-
+# you won!
 def win():
 	wish = input("\n\nWhen you arrive at the kingdom, you are celebrated as a hero. The king and queen are so happy with you that they are willing to grant any wish of yours.\nWhat would you like to wish for?\n\n>> ")
 	print("The king and queen say that they can surely make that happen, although no one has ever asked for "+wish+" before. ")
