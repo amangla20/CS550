@@ -1,10 +1,11 @@
 
 import time
 startTime = None
+
 def start():
 	global startTime
 	startTime = time.time()
-	print("\n\nWelcome to Text Adventures! In this game, you will be taken through a series of steps in order to restore order in the kingdom. Be careful what you choose, as some paths may take longer than others. For picking the wrong path, you may be penalized with time deduction. Be thorough, but not too thorough in your search. Remember, the clock is ticking! All choices you make in this quest will require an answer of 1 or 2, so make sure to remember to use these answer choices only.")
+	print("\n\nWelcome to Text Adventures! In this game, you will be taken through a series of steps in order to restore order in the kingdom. Be careful what you choose, as some paths may take longer than others. For picking the wrong path, you may be penalized with time deduction. Be thorough, but not too thorough in your search. Remember, the clock is ticking! You only have 5 minutes to rescue the prince. All choices you make in this quest will require an answer of 1 or 2, so make sure to remember to use these answer choices only.")
 
 	result = input("\n\n\nYou are here to save the prince!\n\nHe has been kidnapped by the evil sorceress that curses our kingdom. First, you must look for clues as to where the sorceress could have taken him.\n\nYou can either: \n1) Visit the throne room or \n2) Visit the stables.\n\n>> ")
 
@@ -20,7 +21,6 @@ def checkTime():
 		timedout = input("\n\nOh no! You took too much time to save the prince, and now the sorceress has whisked him away to a world where he could never be found. You've failed your quest! The kingdom will now fall into eternal mourning, the curse set upon the kingdom by the sorceress. Would you like to try to save the prince again? Type 1 for no and 2 for yes. ")
 		if checkInput(timedout, '1', '2') == '1':
 			print("Oh well. The kingdom will remain desolate until the next hero comes along. Thanks for trying!")
-			pass
 		elif checkInput(timedout, '1', '2') == '2':
 			start()
 
@@ -97,9 +97,9 @@ def continueLeft():
 	checkTime()
 	startTime += 30
 	turnaround = input("\n\nYou walked for quite a while and have now come to a dead end in the road. Looks like you didn't heed the advice you were given very well! Type 1 or 2 to continue back to the two paths. ")
-	if checkInput(leftChoice, '1', '2') == '1':
+	if checkInput(turnaround, '1', '2') == '1':
 		garden()
-	elif checkInput(leftChoice, '1', '2') == '2':
+	elif checkInput(turnaround, '1', '2') == '2':
 		garden()
 
 def rightPath():
@@ -156,7 +156,7 @@ def unlock():
 			unlock()
 
 def lair():
-	checkTime()
+	# no more checking the time, as the prince has been found and the timer is now invalid.
 	free = input("Suddenly, the rock formation shakes and opens its doors. You step inside, and the rock repositions itself. Woah! You feel a sudden drop. When the doors open, you see the prince, face fallen, scrunched up against the side of a large cage. The key is tauntingly in his reach, but he can't seem to get it. The prince suddenly spots you, and brings a finger to his lips to mouth 'Shhh.' You look to the side and find the snoring sorceress, taking an afternoon siesta. You tip-toe over to the prince and use the key to unlock him. You both continue out of the lair, leaving the sorceress to find out the surprise when she wakes up later. Type 1 or 2 to continue. >> ")
 	if checkInput(free, '1', '2') == '1':
 		exit()
@@ -164,12 +164,11 @@ def lair():
 		exit()
 
 def exit():
-	# no more checking the time, as the prince has been found and the timer is now invalid.
 	leave = input("You emerge from the cave and travel to the gates to find the old man standing behind Misty, who has somehow been freed from her predicament. You and the prince ride back to the kingdom to deliver the good news that the prince is safe. Type a 1 or a 2 to continue. >> ")
 	if checkInput(leave, '1', '2') == '1':
-		exit()
+		win()
 	elif checkInput(leave, '1', '2') == '2':
-		exit()
+		win()
 
 def win():
 	gamewon = input("When you arrive at the kingdom, you are celebrated as a hero. The king and queen are so happy with you that they are willing to grant any wish of yours. What would you like to wish for? >> ")
@@ -177,8 +176,6 @@ def win():
 	courting = input("After the festivities, the prince pulls you aside and asks you if you would like to enter a courtship with him, as he can't take his eyes off the brave person who saved him. Do you say 1) yes or 2) no? >> ")
 	if checkInput(courting, '1', '2') == '1':
 		print("Aww! I just love young love. I wish you a happily ever after. Thank you so much for embarking on this quest with me! Farewell, until we meet again.")
-		pass
 	elif checkInput(courting, '1', '2') == '2':
 		print("The prince totally understands. First of all, you don't really know him that well, and second of all, your a strong independent person who don't need no man. Well, it was so great having you along for this quest. Goodbye! See you again on the next quest.")
-		pass
 start()
