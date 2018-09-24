@@ -1,25 +1,12 @@
-# story layout: go to stables or king to find clue to go to a place that will lead you to the sorceress' lair. Old wise guy "right is the way of evil" and then ask which path they should go on
 
-#timer on the game????
 import time
 startTime = None
 def start():
 	global startTime
 	startTime = time.time()
-	print("Welcome to Text Adventures! In this game, you will be taken through a series of steps in order to restore order in the kingdom. Be careful what you choose, as some paths may take longer than others. For picking the wrong path, you may be penalized with time deduction. Be thorough, but not too thorough in your search. Remember, the clock is ticking! All choices you make in this quest will require an answer of 1 or 2, so make sure to remember to use these answer choices only.")
+	print("\n\nWelcome to Text Adventures! In this game, you will be taken through a series of steps in order to restore order in the kingdom. Be careful what you choose, as some paths may take longer than others. For picking the wrong path, you may be penalized with time deduction. Be thorough, but not too thorough in your search. Remember, the clock is ticking! All choices you make in this quest will require an answer of 1 or 2, so make sure to remember to use these answer choices only.")
 
 	result = input("\n\n\nYou are here to save the prince!\n\nHe has been kidnapped by the evil sorceress that curses our kingdom. First, you must look for clues as to where the sorceress could have taken him.\n\nYou can either: \n1) Visit the throne room or \n2) Visit the stables.\n\n>> ")
-
-"""
-	# one way to do it
-	if result == '1':
-		result = input("You go left or right. What do you choose?")
-		if result == "left":
-			pass
-		elif result == "right":
-			pass
-		elif
-"""
 
 	if checkInput(result, '1', '2') == '1':
 		throneRoom()
@@ -30,16 +17,25 @@ def checkTime():
 	if (time.time() < startTime + 300):
 		pass
 	else:
-		timedout = input("\n\nOh no! You took too much time to save the prince, and now the sorceress has whisked him away to a world where he could never be found. You've failed your quest! The kingdom will now fall into eternal mourning, the curse set upon the kingdom by the sorceress. Would you like to try to save the prince again? ")
-		if checkInput(timedout, 'N', 'Y') == 'N':
+		timedout = input("\n\nOh no! You took too much time to save the prince, and now the sorceress has whisked him away to a world where he could never be found. You've failed your quest! The kingdom will now fall into eternal mourning, the curse set upon the kingdom by the sorceress. Would you like to try to save the prince again? Type 1 for no and 2 for yes. ")
+		if checkInput(timedout, '1', '2') == '1':
 			print("Oh well. The kingdom will remain desolate until the next hero comes along. Thanks for trying!")
-		elif checkInput(timedout, 'N', 'Y') == 'Y':
+			pass
+		elif checkInput(timedout, '1', '2') == '2':
 			start()
 
 def checkInput(choice, a, b):
+	"""
 	while choice != a or choice != b:
 		print("I don't know what " + choice + " means. Try typing a "+a+" or a "+b+". ")
+		break
 	return choice
+	"""
+	if choice != a or choice != b:
+		choice = input("I don't know what " + choice + " means. Try typing a "+a+" or a "+b+". ")
+	else:
+		return choice
+
 
 def throneRoom():
 	checkTime()
@@ -55,7 +51,7 @@ def stables():
 	stableBoy = input("\n\nThe stable boy is looking for the horse, Misty, that the prince was riding when he was abducted. Misty was last seen at the garden with the prince, who was tending to his favorite sunflower patch. The stable boy seems very sad, as Misty was his favorite horse to take care of. Misty always 'knew the right way to go about things.' Would you like to 1) go to the garden or 2) help the stable boy find Misty? \n\n>> ")
 	if checkInput(stableBoy, '1', '2') == '1':
 		garden()
-	elif checkInput(stableBoy, '1', '2') = '2':
+	elif checkInput(stableBoy, '1', '2') == '2':
 		findMisty()
 
 def findMisty():
@@ -101,8 +97,11 @@ def continueLeft():
 	global startTime
 	checkTime()
 	startTime += 30
-	print("\n\nYou walked for quite a while and have now come to a dead end in the road. Looks like you didn't heed the advice you were given very well!")
-	garden()
+	turnaround = input("\n\nYou walked for quite a while and have now come to a dead end in the road. Looks like you didn't heed the advice you were given very well! Type 1 or 2 to continue back to the two paths. ")
+	if checkInput(leftChoice, '1', '2') == '1':
+		garden()
+	elif checkInput(leftChoice, '1', '2') == '2':
+		garden()
 
 def rightPath():
 	checkTime()
@@ -112,4 +111,75 @@ def rightPath():
 	elif checkInput(rightChoice, '1', '2') == '2':
 		garden()
 
+def continueRight():
+	checkTime()
+	oldman = input("\n\nYou soon happen upon an old wise-looking man, standing as a guard in front of a frought-iron gate. He looks into your eyes and simply says 'The fields of mist contain your key.' Then, he moves aside and the large gates open, revealing an underwater cave on one side and a green pasture on the the other. Do you choose to 1) visit the cave or 2) visit the pasture? ")
+	if checkInput(oldman, '1', '2') == '1':
+		cave()
+	elif checkInput(oldman, '1', '2') == '2':
+		pasture()
+
+def pasture():
+	checkTime()
+	misty = input("\n\nAs you arrive at the pasture, you see the outline of... is that a horse? It's the beloved Misty! You've found her! You get up close and examine her. She is tied to a wooden fence but she seems content with her food. The knot on her rope seems really difficult to untie, and the prince is nowhere to be found on this pasture in the middle of nowhere. Wait! Something suddenly catches your eye about Misty's collar. The collar has the numbers '1029' engraved on it. Now, you have a choice to either\n1) go explore the cave or\n2) help untie Misty! >> ")
+	if checkInput(misty, '1', '2') == '1':
+		cave()
+	elif checkInput(misty, '1', '2') == '2':
+		untieMisty()
+
+def cave():
+	checkTime()
+	code = input("You arrive at the cave, which is underground under a body of water. You snoop around and find two sets of footprints leading to a wall of the cave... yet they suddenly disappear. This definitely looks like the work of magic! Or...is it? You trace your hand down the side of the limestone rock wall and find yourself somehow turning something...something that sounds mechanical. When you peer at what your hand is touching, you see a combination type lock that seems to be accepting four numbers. Do you 1) try a four-digit code or 2) go back to the old gate-keeper? >> ")
+	if checkInput(code, '1', '2') == '1':
+		unlock()
+	elif checkInput(code, '1', '2') == '2':
+		continueRight()
+
+def untieMisty():
+	checkTime()
+	startTime += 30
+	untie = input("\n\nYou wrestle with the knot for what seems like hours, but it seems like a spell has been cast on the knot so that any progress you do with undoing the knot, it seems to knot itself back together even worse than before. Pretty soon, poor Misty seems to be in a tangled mess, but she's still happy because she has her favorite snacks by her side. Her collar still prominently reads, '1029'. You, however, just wasted time by not thinking about the prince and thinking about his horse instead. Looks like you will have to go to the cave for now.\n\nType 1 or 2 to continue.\n\n>> ")
+	if checkInput(untie, '1', '2') == '1':
+		cave()
+	elif checkInput(untie, '1', '2') == '1':
+		cave()
+
+def unlock():
+	checkTime()
+	inputCode = input("The lock reads, Enter the 4-digit PIN: ")
+	if inputCode == '1029':
+		lair()
+	else:
+		print("Oops! Looks like you didn't put in the right pin code. You'll have to try again or gather more clues. Would you like to 1) return to the old man or 2) try again? ")
+		if checkInput(inputCode, '1', '2') == '1':
+			continueRight()
+		elif checkInput(inputCode, '1', '2') == '2':
+			unlock()
+
+def lair():
+	checkTime()
+	free = input("Suddenly, the rock formation shakes and opens its doors. You step inside, and the rock repositions itself. Woah! You feel a sudden drop. When the doors open, you see the prince, face fallen, scrunched up against the side of a large cage. The key is tauntingly in his reach, but he can't seem to get it. The prince suddenly spots you, and brings a finger to his lips to mouth 'Shhh.' You look to the side and find the snoring sorceress, taking an afternoon siesta. You tip-toe over to the prince and use the key to unlock him. You both continue out of the lair, leaving the sorceress to find out the surprise when she wakes up later. Type 1 or 2 to continue. >> ")
+	if checkInput(free, '1', '2') == '1':
+		exit()
+	elif checkInput(free, '1', '2') == '2':
+		exit()
+
+def exit():
+	# no more checking the time, as the prince has been found and the timer is now invalid.
+	leave = input("You emerge from the cave and travel to the gates to find the old man standing behind Misty, who has somehow been freed from her predicament. You and the prince ride back to the kingdom to deliver the good news that the prince is safe. Type a 1 or a 2 to continue. >> ")
+	if checkInput(leave, '1', '2') == '1':
+		exit()
+	elif checkInput(leave, '1', '2') == '2':
+		exit()
+
+def win():
+	gamewon = input("When you arrive at the kingdom, you are celebrated as a hero. The king and queen are so happy with you that they are willing to grant any wish of yours. What would you like to wish for? >> ")
+	print("The king and queen say that they can surely make that happen, although no one has ever asked for "+gamewon+" before. ")
+	courting = input("After the festivities, the prince pulls you aside and asks you if you would like to enter a courtship with him, as he can't take his eyes off the brave person who saved him. Do you say 1) yes or 2) no? >> ")
+	if checkInput(courting, '1', '2') == '1':
+		print("Aww! I just love young love. I wish you a happily ever after. Thank you so much for embarking on this quest with me! Farewell, until we meet again.")
+		pass
+	elif checkInput(courting, '1', '2') == '2':
+		print("The prince totally understands. First of all, you don't really know him that well, and second of all, your a strong independent person who don't need no man. Well, it was so great having you along for this quest. Goodbye! See you again on the next quest.")
+		pass
 start()
