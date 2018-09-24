@@ -25,17 +25,16 @@ def checkTime():
 			start()
 
 def checkInput(choice, a, b):
-	"""
-	while choice != a or choice != b:
-		print("I don't know what " + choice + " means. Try typing a "+a+" or a "+b+". ")
-		break
+	
+	while choice != a and choice != b:
+		choice = input("I don't know what " + choice + " means. Try typing a "+a+" or a "+b+". ")
 	return choice
 	"""
 	if choice != a or choice != b:
 		choice = input("I don't know what " + choice + " means. Try typing a "+a+" or a "+b+". ")
 	else:
 		return choice
-
+	"""
 
 def throneRoom():
 	checkTime()
