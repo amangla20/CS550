@@ -57,7 +57,7 @@ def findMisty():
 	global startTime
 	checkTime()
 	startTime += 30
-	print("\n\nYou spend an hour looking for Misty, while time to save the prince ticks by. Then, a thought occurs to you. The prince could have been abducted along with Misty! After all, the sorceress could have somehow led them through a spell to her lair. You decide that you must go back to the garden and follow the stable boy's original clue.\n\n>>")
+	print("\n\nYou spend an hour looking for Misty, while time to save the prince ticks by. Because of your preoccupation with Misty rather than saving the prince, 30 seconds have been deducted from the time you have remaining. Then, a thought occurs to you. The prince could have been abducted along with Misty! After all, the sorceress could have somehow led them through a spell to her lair. You decide that you must go back to the garden and follow the stable boy's original clue.\n\n>>")
 	garden()
 
 def kingClue():
@@ -96,7 +96,7 @@ def continueLeft():
 	global startTime
 	checkTime()
 	startTime += 30
-	turnaround = input("\n\nYou walked for quite a while and have now come to a dead end in the road. Looks like you didn't heed the advice you were given very well! Type 1 or 2 to continue back to the two paths. ")
+	turnaround = input("\n\nYou walked for quite a while and have now come to a dead end in the road. Looks like you didn't heed the advice you were given very well! 30 seconds have been deducted from the time you have left. Type 1 or 2 to continue back to the two paths. ")
 	if checkInput(turnaround, '1', '2') == '1':
 		garden()
 	elif checkInput(turnaround, '1', '2') == '2':
@@ -135,9 +135,10 @@ def cave():
 		continueRight()
 
 def untieMisty():
+	global startTime
 	checkTime()
 	startTime += 30
-	untie = input("\n\nYou wrestle with the knot for what seems like hours, but it seems like a spell has been cast on the knot so that any progress you do with undoing the knot, it seems to knot itself back together even worse than before. Pretty soon, poor Misty seems to be in a tangled mess, but she's still happy because she has her favorite snacks by her side. Her collar still prominently reads, '1029'. You, however, just wasted time by not thinking about the prince and thinking about his horse instead. Looks like you will have to go to the cave for now.\n\nType 1 or 2 to continue.\n\n>> ")
+	untie = input("\n\nYou wrestle with the knot for what seems like hours, but it seems like a spell has been cast on the knot so that any progress you do with undoing the knot, it seems to knot itself back together even worse than before. Pretty soon, poor Misty seems to be in a tangled mess, but she's still happy because she has her favorite snacks by her side. Her collar still prominently reads, '1029'. You, however, just wasted time by not thinking about the prince and thinking about his horse instead. 30 seconds have been deducted from the time you have left. Looks like you will have to go to the cave for now.\n\nType 1 or 2 to continue.\n\n>> ")
 	if checkInput(untie, '1', '2') == '1':
 		cave()
 	elif checkInput(untie, '1', '2') == '1':
