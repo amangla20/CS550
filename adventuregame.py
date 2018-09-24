@@ -29,7 +29,6 @@ def checkTime():
 			print("Oh well. The kingdom will remain desolate until the next hero comes along. Thanks for trying!")
 # method to error check
 def checkInput(choice, a, b):
-	print(choice,a,b)
 	while choice != a and choice != b:
 		choice = input("I don't know what " + choice + " means. Try typing a "+a+" or a "+b+". ")
 	return choice
