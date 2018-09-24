@@ -18,11 +18,11 @@ def checkTime():
 	if (time.time() < startTime + 300):
 		pass
 	else:
-		timedout = input("\n\nOh no! You took too much time to save the prince, and now the sorceress has whisked him away to a world where he could never be found. You've failed your quest! The kingdom will now fall into eternal mourning, the curse set upon the kingdom by the sorceress. Would you like to try to save the prince again? Type 1 for no and 2 for yes. ")
+		timedout = input("\n\nOh no! You took too much time to save the prince, and now the sorceress has whisked him away to a world where he could never be found. You've failed your quest! The kingdom will now fall into eternal mourning, the curse set upon the kingdom by the sorceress. Would you like to try to save the prince again? Type 1 for yes and 2 for no. ")
 		if checkInput(timedout, '1', '2') == '1':
-			print("Oh well. The kingdom will remain desolate until the next hero comes along. Thanks for trying!")
-		elif checkInput(timedout, '1', '2') == '2':
 			start()
+		elif checkInput(timedout, '1', '2') == '2':
+			print("Oh well. The kingdom will remain desolate until the next hero comes along. Thanks for trying!")
 
 def checkInput(choice, a, b):
 	
@@ -149,10 +149,10 @@ def unlock():
 	if inputCode == '1029':
 		lair()
 	else:
-		print("Oops! Looks like you didn't put in the right pin code. You'll have to try again or gather more clues. Would you like to 1) return to the old man or 2) try again? ")
-		if checkInput(inputCode, '1', '2') == '1':
+		locked = input("Oops! Looks like you didn't put in the right pin code. You'll have to try again or gather more clues. Would you like to 1) return to the old man or 2) try again? ")
+		if checkInput(locked, '1', '2') == '1':
 			continueRight()
-		elif checkInput(inputCode, '1', '2') == '2':
+		elif checkInput(locked, '1', '2') == '2':
 			unlock()
 
 def lair():
@@ -171,11 +171,21 @@ def exit():
 		win()
 
 def win():
-	gamewon = input("When you arrive at the kingdom, you are celebrated as a hero. The king and queen are so happy with you that they are willing to grant any wish of yours. What would you like to wish for? >> ")
-	print("The king and queen say that they can surely make that happen, although no one has ever asked for "+gamewon+" before. ")
+	wish = input("When you arrive at the kingdom, you are celebrated as a hero. The king and queen are so happy with you that they are willing to grant any wish of yours. What would you like to wish for? >> ")
+	print("The king and queen say that they can surely make that happen, although no one has ever asked for "+wish+" before. ")
 	courting = input("After the festivities, the prince pulls you aside and asks you if you would like to enter a courtship with him, as he can't take his eyes off the brave person who saved him. Do you say 1) yes or 2) no? >> ")
 	if checkInput(courting, '1', '2') == '1':
-		print("Aww! I just love young love. I wish you a happily ever after. Thank you so much for embarking on this quest with me! Farewell, until we meet again.")
+		playAgain = input("Aww! I just love young love. I wish you a happily ever after. Thank you so much for embarking on this quest with me! Would you like to save the prince again? Type 1 for yes and 2 for no. ")
+		# although this is repeated in the other elif statement, I can't use a method because when I tried that, it seems like the variable playAgain is specific to the win() method
+		if checkInput(playAgain, '1', '2') == '1':
+			start()
+		elif checkInput(playAgain, '1', '2') == '2':
+			print("Farewell, my dear friend. I will miss you.")
 	elif checkInput(courting, '1', '2') == '2':
-		print("The prince totally understands. First of all, you don't really know him that well, and second of all, your a strong independent person who don't need no man. Well, it was so great having you along for this quest. Goodbye! See you again on the next quest.")
+		playAgain = input("The prince totally understands. First of all, you don't really know him that well, and second of all, your a strong independent person who don't need no man. Well, it was so great having you along for this quest. Would you like to save the prince again? Type 1 for yes and 2 for no.")
+		if checkInput(playAgain, '1', '2') == '1':
+			start()
+		elif checkInput(playAgain, '1', '2') == '2':
+			print("Farewell, my dear friend. I will miss you.")
+
 start()
