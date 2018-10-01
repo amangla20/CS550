@@ -6,8 +6,8 @@ import random as r
 
 while True:
 	try:
-		w = int(sys.argv[1])
-		h = int(sys.argv[2])
+		w = int(sys.argv[1]) + 2
+		h = int(sys.argv[2]) + 2
 		b = int(sys.argv[3])
 		break
 	except ValueError:
@@ -20,8 +20,8 @@ field = [[0]*w for x in range(h)]
 # I found that randint was better than randrange because it includes the last number in it: https://stackoverflow.com/questions/3540431/difference-between-random-randint-vs-randrange
 
 for number in range(b):
-	x = r.randrange(w)
-	y = r.randrange(h)
+	x = r.randrange(1,w-1)
+	y = r.randrange(1,h-1)
 	#print(x)
 	#print(y)
 	field[y][x] = "*"
@@ -29,44 +29,33 @@ for number in range(b):
 #for x in range(len(field)):
 	#print(*field[x])
 
-def checkAround():
-	global current
-	current = field[y][x]
-	if x + 1 <= w:
-		if field[y][x+1] == "*":
-			# one position to the right
-			current += 1
-	elif x - 1 >= 0:
-		if field[y][x-1] == "*":
-			# one position to the left
-			current += 1
-	elif y + 1 <= y:
-		if field[y+1][x] == "*":
-			# one position above
-			current += 1
-	elif y - 1 >= 0:
-		if field[y-1][x] == "*":
-			# one position below
-			current += 1
-	elif x + 1 <= w and y + 1 <= h:
-		if field[y+1][x+1] == "*":
-			current += 1
-	elif x + 1 <= w and y - 1 >= 0:
-		if field[y-1][x+1] == "*":
-			current += 1
-	elif x - 1 <= 0 and y + 1 <= h:
-		if field[y+1][x-1] == "*":
-			current += 1
-	elif x - 1 <= 0 and y - 1 >= 0:
-		if field[y-1][x-1] == "*":
-			current += 1
+	
 
-for a in range(len(field)):
-	current = field[y][x]
-	if current != "*":
-		checkAround()
-	else:
-		pass
+for y in range(1,h-1):
+	for x in range(1,w-1):
+		if field[y][x] == "*":
+			if field[y][x+1] != "*":
+				# one position to the right
+				field[y][x+1] += 1
+			if field[y][x-1] != "*":
+				# one position to the left
+				field[y][x-1] += 1
+			if field[y+1][x] != "*":
+				# one position above
+				field[y+1][x] += 1
+			if field[y-1][x] != "*":
+				# one position below
+				field[y-1][x] += 1
+			if field[y+1][x+1] != "*":
+				field[y+1][x+1] += 1
+			if field[y-1][x+1] != "*":
+				field[y-1][x+1] += 1
+			if field[y+1][x-1] != "*":
+				field[y+1][x-1] += 1
+			if field[y-1][x-1] != "*":
+				field[y-1][x-1] += 1
 # print at the end with 0s turning into the right number
-for x in range(len(field)):
-	print(*field[x])
+for y in range(1,h-1):
+	for x in range(1,w-1):
+		print(field[y][x],end=" ")
+	print("")
