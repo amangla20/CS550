@@ -13,7 +13,7 @@ while True:
 	except ValueError:
 		print("Sorry, that is not an integer! Try again.")
 field = [[0]*w for x in range(h)]
-
+# debug/check if it works
 for x in range(len(field)):
 	print(*field[x])
 
@@ -25,7 +25,7 @@ for number in range(b):
 	print(x)
 	print(y)
 	field[y][x] = "*"
-
+# debug
 for x in range(len(field)):
 	print(*field[x])
 
@@ -65,6 +65,6 @@ for a in range(y*x):
 	current = field[y][x]
 	if current == "*":
 		checkAround()
-
+# print at the end with 0s turning into the right number
 for x in range(len(field)):
 	print(*field[x])
