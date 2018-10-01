@@ -14,20 +14,20 @@ while True:
 		print("Sorry, that is not an integer! Try again.")
 field = [[0]*w for x in range(h)]
 # debug/check if it works
-for x in range(len(field)):
-	print(*field[x])
+#for x in range(len(field)):
+	#print(*field[x])
 
 # I found that randint was better than randrange because it includes the last number in it: https://stackoverflow.com/questions/3540431/difference-between-random-randint-vs-randrange
 
 for number in range(b):
 	x = r.randrange(w)
 	y = r.randrange(h)
-	print(x)
-	print(y)
+	#print(x)
+	#print(y)
 	field[y][x] = "*"
 # debug
-for x in range(len(field)):
-	print(*field[x])
+#for x in range(len(field)):
+	#print(*field[x])
 
 def checkAround():
 	global current
@@ -61,10 +61,12 @@ def checkAround():
 		if field[y-1][x-1] == "*":
 			current += 1
 
-for a in range(y*x):
+for a in range(len(field)):
 	current = field[y][x]
 	if current != "*":
 		checkAround()
+	else:
+		pass
 # print at the end with 0s turning into the right number
 for x in range(len(field)):
 	print(*field[x])
