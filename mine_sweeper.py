@@ -63,7 +63,7 @@ def checkAround():
 
 for a in range(y*x):
 	current = field[y][x]
-	if current == "*":
+	if current != "*":
 		checkAround()
 # print at the end with 0s turning into the right number
 for x in range(len(field)):
