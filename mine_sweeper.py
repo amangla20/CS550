@@ -76,6 +76,7 @@ def choose():
 	if space[2] == f:
 		userField[space[1]][space[0]] == "f"
 		flagCount += 1
+		choose()
 	else:
 		# check using solution
 		if field[space[1]][space[0]] == "*":
@@ -83,9 +84,14 @@ def choose():
 		else:
 			if field[space[1]][space[0]] == 0:
 				# reveal contiguous spaces
+				choose()
 			else:
 				userField[space[1]][space[0]] = field[space[1]][space[0]]
+				choose()
 
 # while loop saying while whole board is not filled, do this action, and when it is full, check to see if the flags are over bombs
+# play again feature? maybe?
+def gameOver():
+	print("Sorry, you just unearthed a bomb!")
 
 
