@@ -3,7 +3,7 @@
 
 import sys
 import random as r
-
+flagCount = 0
 while True:
 	try:
 		w = int(sys.argv[1]) + 2
@@ -75,6 +75,7 @@ def choose():
 	# if flag, else (else if clear)
 	if space[2] == f:
 		userField[space[1]][space[0]] == "f"
+		flagCount += 1
 	else:
 		# check using solution
 		if field[space[1]][space[0]] == "*":
@@ -84,5 +85,7 @@ def choose():
 				# reveal contiguous spaces
 			else:
 				userField[space[1]][space[0]] = field[space[1]][space[0]]
+
+# while loop saying while whole board is not filled, do this action, and when it is full, check to see if the flags are over bombs
 
 
