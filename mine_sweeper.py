@@ -59,3 +59,15 @@ for y in range(1,h-1):
 	for x in range(1,w-1):
 		print(field[y][x],end=" ")
 	print("")
+
+def choose():
+	space = input("Choose a space to either clear or flag. Provide the x and y coordinates, and type 'f' for flag and 'c' for clear.") # can command line arguments work outside first python file calling
+	if space[2] == f:
+		field[space[1]][space[0]] == "f"
+	else:
+		if field[space[1]][space[0]] == "*":
+			gameOver()
+		else:
+			# reveal space
+
+
