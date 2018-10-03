@@ -55,19 +55,34 @@ for y in range(1,h-1):
 			if field[y-1][x-1] != "*":
 				field[y-1][x-1] += 1
 # print at the end with 0s turning into the right number
+# is there a way to "hide" a board or solution?
+# this is my "hidden solution" field
+"""
 for y in range(1,h-1):
 	for x in range(1,w-1):
 		print(field[y][x],end=" ")
 	print("")
+"""
+# use "X" or 0?
+userField = [["X"]*w for x in range(h)]
+for y in range(1,h-1):
+	for x in range(1,w-1):
+		print(userField[y][x],end=" ")
+	print("")
 
 def choose():
 	space = input("Choose a space to either clear or flag. Provide the x and y coordinates, and type 'f' for flag and 'c' for clear.") # can command line arguments work outside first python file calling
+	# if flag, else (else if clear)
 	if space[2] == f:
-		field[space[1]][space[0]] == "f"
+		userField[space[1]][space[0]] == "f"
 	else:
+		# check using solution
 		if field[space[1]][space[0]] == "*":
 			gameOver()
 		else:
-			# reveal space
+			if field[space[1]][space[0]] == 0:
+				# reveal contiguous spaces
+			else:
+				userField[space[1]][space[0]] = field[space[1]][space[0]]
 
 
