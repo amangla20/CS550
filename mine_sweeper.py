@@ -8,6 +8,9 @@
 import sys
 import random as r
 flagCount = 0
+# count of the spaces that have been revealed
+numRevealed = 0
+bombs = []
 while True:
 	try:
 		w = int(sys.argv[1]) + 2
@@ -17,6 +20,7 @@ while True:
 	except ValueError:
 		print("Sorry, that is not an integer! Try again.")
 field = [[0]*w for x in range(h)]
+userField = [["X"]*w for x in range(h)]
 # debug/check if it works
 #for x in range(len(field)):
 	#print(*field[x])
@@ -70,18 +74,19 @@ for y in range(1,h-1):
 
 # use "X" or 0?
 def printUserField():
-	userField = [["X"]*w for x in range(h)]
+	
 	for y in range(1,h-1):
 		for x in range(1,w-1):
 			print(userField[y][x],end=" ")
 		print("")
 
 def choose():
+	global numRevealed
 	space = input("Choose a space to either clear or flag. Provide the x and y coordinates, and type 'f' for flag and 'c' for clear. Enter your answer in the following format: x, y, [f or c]") # can command line arguments work outside first python file calling
 	# if flag, else (else if clear)
 	userChoice = space.split(', ')
-	y = userChoice[1]
-	x = userChoice[0]
+	y = int(userChoice[1])
+	x = int(userChoice[0])
 	if userChoice[2] == "f":
 		userField[y][x] == "f"
 		flagCount += 1
@@ -98,6 +103,8 @@ def choose():
 				choose()
 			else:
 				userField[y][x] = field[y][x]
+				numRevealed += 1
+				printUserField()
 				choose()
 
 # while loop saying while whole board is not filled, do this action, and when it is full, check to see if the flags are over bombs
@@ -112,6 +119,8 @@ def checkFlags():
 			return correctFlags
 		if correctFlags == b:
 			win()
+	if flagCount + numRevealed == w*h:
+		print("Uh oh! Looks like you flagged some spaces that aren't bombs. Keep going!")
 
 # wrong this is the if statement to use for ending game checking all clear spaces and flags
 		if userField[y][x] == field[y][x]:
@@ -121,6 +130,10 @@ def checkFlags():
 def win():
 	print("Yay! You won! You just swept the mines like a champ.")
 
-
+#while flagCount + numRevealed < w*h:
 printUserField()
 choose()
+# when all spaces are revealed, and the while loop is exited, but the amount of flags is greater than b, then 
+#if flagCount > b:
+# WAIT! Do I not need a while loop like while the spaces haven't been cleared since I'm already checking the flags every time?
+
