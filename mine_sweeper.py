@@ -25,6 +25,8 @@ field = [[0]*w for x in range(h)]
 for number in range(b):
 	x = r.randrange(1,w-1)
 	y = r.randrange(1,h-1)
+	# array keeps track of bomb positions
+	bombs.append([x,y])
 	#print(x)
 	#print(y)
 	field[y][x] = "*"
@@ -105,12 +107,20 @@ def gameOver():
 
 def checkFlags():
 	if flagCount == b:
-		# wrong this is the if statement to use for ending game checking all clear spaces and flags
+		for i in range(b):
+			if userField[bombs[i][0]][bombs[i][1]] == field[bombs[i][0]][bombs[i][1]]:correctFlags += 1 
+			return correctFlags
+		if correctFlags == b:
+			win()
+
+# wrong this is the if statement to use for ending game checking all clear spaces and flags
 		if userField[y][x] == field[y][x]:
 			print("You won!")
 
-
 		# check if flags are in the right spaces
+def win():
+	print("Yay! You won! You just swept the mines like a champ.")
+
 
 printUserField()
 choose()
