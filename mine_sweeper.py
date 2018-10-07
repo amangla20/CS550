@@ -121,14 +121,15 @@ def printUserField():
 # play again feature? maybe?
 def gameOver():
 	print("Sorry, you just unearthed a bomb!")
-
+# need to create a "user bombs" array
 def checkFlags():
 	global flagCount
 	global numRevealed
 	global correctFlags
 	if flagCount == b:
 		for i in range(b):
-			if userField[bombs[i][0]][bombs[i][1]] == field[bombs[i][0]][bombs[i][1]]:correctFlags += 1 
+			if userField[bombs[i][0]][bombs[i][1]] == "f":
+				correctFlags += 1 
 			return correctFlags
 		if correctFlags == b:
 			win()
