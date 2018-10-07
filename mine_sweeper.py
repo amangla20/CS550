@@ -14,6 +14,7 @@ numRevealed = 0
 correctFlags = 0
 bombs = []
 zerosRevealed = []
+zerosDone = []
 while True:
 	try:
 		w = int(sys.argv[1]) + 2
@@ -106,6 +107,8 @@ def choose():
 			else:
 				userField[y][x] = field[y][x]
 				numRevealed += 1
+				# check flags even when clearing because if the last space on the board is revealed through clear, and the flags are more than the number of bombs, then checkFlags needs to be called in order to issue warning statement
+				checkFlags()
 				printUserField()
 				choose()
 
@@ -144,11 +147,19 @@ def checkZeroes():
 	while zerosRevealed:
 		for x in range(field[y][x]-1,field[y][x]+2):
 			for y in range(field[y][x]-1,field[y][x]+2):
+				# Intersect both lists with list comprehension
+				# remove zeros that have already been included and checked
+				intersection = [list(filter(lambda x: x in zerosDone, sublist)) for sublist in zerosRevealed]
+				zerosRevealed.remove(intersection)
 				for item in zerosRevealed:
 					userField[y][x] = field[y][x]
+					zerosRevealed.remove(field[y][x])
+					# append zeros here because this when you remove it from zeros revealed
+					zerosDone.append(field[y][x])
 					if field[y][x] == 0:
 						if y > 0 and y < h and x > 0 and x < w:
 							zerosRevealed.append(field[y][x])
+							# where do i append to zeros done???
 
 		# for x in zerosRevealed:
 		# 	if field[y][x+1] == 0:
