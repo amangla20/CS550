@@ -8,7 +8,7 @@
 # if statement that makes amount of bombs entered less than w * h
 import sys
 import random as r
-flagCount = 0
+flags = []
 # count of the spaces that have been revealed
 numRevealed = 0
 correctFlags = 0
@@ -82,7 +82,6 @@ for y in range(1,h-1):
 
 def choose():
 	global numRevealed
-	global flagCount
 	space = input("Choose a space to either clear or flag. Provide the x and y coordinates, and type 'f' for flag and 'c' for clear. Enter your answer in the following format: x, y, [f or c] ") # can command line arguments work outside first python file calling
 	# if flag, else (else if clear)
 	userChoice = space.split(', ')
@@ -90,15 +89,16 @@ def choose():
 	x = int(userChoice[0])
 	if userChoice[2] == "f":
 		userField[y][x] = "f"
-		flagCount += 1
-		checkFlags()
+		flags.append([x,y])
 		printUserField()
-		choose()
+		checkFlags()
 	else:
 		# check using solution
 		if field[y][x] == "*":
 			gameOver()
 		else:
+			if field[y][x] == "f":
+				flags.remove([x,y])
 			if field[y][x] == 0:
 				# reveal contiguous spaces
 				zerosRevealed.append(field[y][x])
@@ -108,9 +108,9 @@ def choose():
 				userField[y][x] = field[y][x]
 				numRevealed += 1
 				# check flags even when clearing because if the last space on the board is revealed through clear, and the flags are more than the number of bombs, then checkFlags needs to be called in order to issue warning statement
-				checkFlags()
 				printUserField()
-				choose()
+				checkFlags()
+				
 
 def printUserField():
 	for y in range(1,h-1):
@@ -123,24 +123,24 @@ def gameOver():
 	print("Sorry, you just unearthed a bomb!")
 # need to create a "user bombs" array
 def checkFlags():
-	global flagCount
 	global numRevealed
 	global correctFlags
-	if flagCount == b:
+	if len(flags) + numRevealed == w*h:
+		print("Uh oh! Looks like you flagged some spaces that aren't bombs. Keep going!")
+		choose()
+	elif len(flags) == b:
 		for i in range(b):
-			if userField[bombs[i][0]][bombs[i][1]] == "f":
-				correctFlags += 1 
-			return correctFlags
+			if userField[bombs[i][1]][bombs[i][0]] == "f":
+				correctFlags += 1
 		if correctFlags == b:
 			win()
-	if flagCount + numRevealed == w*h:
-		print("Uh oh! Looks like you flagged some spaces that aren't bombs. Keep going!")
+		else:
+			choose()
+	else:
+		choose()
+	# needs to reupdate itself each time
+	correctFlags = 0
 
-# wrong this is the if statement to use for ending game checking all clear spaces and flags
-		if userField[y][x] == field[y][x]:
-			print("You won!")
-
-		# check if flags are in the right spaces
 def win():
 	print("Yay! You won! You just swept the mines like a champ.")
 
