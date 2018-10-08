@@ -3,20 +3,20 @@
 # This code is the code for a minesweeper game in which participants must flag all of the bombs and not uncover any bombs before they finish the game.
 # This is the link on string splitting:
 # https://www.geeksforgeeks.org/python-string-split/
-
-# I spent an hour and really couldn't figure out how to count the spaces next to the bomb and show the number. This is my try.
-# the grid starts with (0,0) at the top left corner, and with the first row being 0 value for (x,y) (sort of like the axis if it was a coordinate grid)
-# TO ADD:
-# if statement that makes amount of bombs entered less than w * h
+# On my honor, I have neither given nor received unauthorized aid.
 import sys
 import random as r
+# keep track of flag positions
 flags = []
 # count of the spaces that have been revealed
+# find out how many have been revealed
 numRevealed = 0
 correctFlags = 0
+# keep track of bomb positions
 bombs = []
+# list keeps track of the zero
 zerosRevealed = []
-
+# get width, height and number of bombs
 while True:
 	try:
 		w = int(sys.argv[1]) + 2
@@ -25,12 +25,10 @@ while True:
 		break
 	except ValueError:
 		print("Sorry, that is not an integer! Try again.")
-
+# set field and user field
 field = [[0]*w for x in range(h)]
 userField = [["X"]*w for x in range(h)]
-# debug/check if it works
-#for x in range(len(field)):
-	#print(*field[x])
+# start the game
 def start():
 	global w
 	global h
@@ -73,6 +71,7 @@ def start():
 					field[y+1][x-1] += 1
 				if field[y-1][x-1] != "*":
 					field[y-1][x-1] += 1
+	print("Welcome to Minesweeper! The top left corner of the board is (1,1) and going to the right adds to the x-value and down adds to the y-value. Make sure you flag all the bombs and show us your mastery of mine sweeping!")
 	printUserField()	
 	choose()
 	# print at the end with 0s turning into the right number
@@ -84,11 +83,8 @@ def start():
 			print(field[y][x],end=" ")
 		print("")
 """
-	
-
-
+# choose the space, c or f
 def choose():
-	global numRevealed
 	global w
 	global h
 	global b
@@ -114,6 +110,9 @@ def choose():
 		else:
 			if userField[y][x] == "f":
 				flags.remove([x,y])
+				userField[y][x] = field[y][x]
+				printUserField()
+				checkFlags()
 			elif field[y][x] == 0:
 				# reveal contiguous spaces
 				zerosRevealed.append([x,y])
@@ -122,12 +121,11 @@ def choose():
 				choose()
 			else:
 				userField[y][x] = field[y][x]
-				numRevealed += 1
 				# check flags even when clearing because if the last space on the board is revealed through clear, and the flags are more than the number of bombs, then checkFlags needs to be called in order to issue warning statement
 				printUserField()
 				checkFlags()
 				
-
+#reference the user field so they see what's been revealed
 def printUserField():
 	global w
 	global h
@@ -137,10 +135,10 @@ def printUserField():
 			print(userField[y][x],end=" ")
 		print("")
 # while loop saying while whole board is not filled, do this action, and when it is full, check to see if the flags are over bombs
-# play again feature? maybe?
+# GAME OVER! Don't get second chance...
 def gameOver():
 	print("Sorry, you just unearthed a bomb!")
-# need to create a "user bombs" array
+# check if the flags are all correct
 def checkFlags():
 	global numRevealed
 	global correctFlags
@@ -169,17 +167,16 @@ def checkFlags():
 		choose()
 	# needs to reupdate itself each time
 	correctFlags = 0
-
+# YOU WON! Play again or not.
 def win():
 	playAgain = input("Yay! You won! You just swept the mines like a champ.\nWould you like to play again? Answer 'Y' or 'N'")
 	if playAgain == 'Y':
 		field = [[0]*w for x in range(h)]
 		userField = [["X"]*w for x in range(h)]
 		start()
-
 	else:
 		print("Goodbye!")
-
+# check the zeros for contiguous and revealing
 def checkZeroes():
 	global numRevealed
 	global w
@@ -195,4 +192,5 @@ def checkZeroes():
 					if y > 0 and y < h-1 and x > 0 and x < w-1:
 						zerosRevealed.append([x,y])
 				userField[y][x] = field[y][x]
+# start the program
 start()
