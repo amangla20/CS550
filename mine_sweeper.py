@@ -45,7 +45,6 @@ def start():
 		# array keeps track of bomb positions
 		bombs.append([x,y])
 		field[y][x] = "*"
-		print(bombs)
 	# check around the bomb and add numbers
 	for y in range(1,h-1):
 		for x in range(1,w-1):
