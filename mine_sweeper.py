@@ -42,12 +42,7 @@ def start():
 		#print(x)
 		#print(y)
 		field[y][x] = "*"
-	# debug
-	#for x in range(len(field)):
-		#print(*field[x])
-
-		
-
+	# check around the bomb and add numbers
 	for y in range(1,h-1):
 		for x in range(1,w-1):
 			if field[y][x] == "*":
