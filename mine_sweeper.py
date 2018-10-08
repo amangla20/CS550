@@ -16,7 +16,7 @@ numRevealed = 0
 correctFlags = 0
 bombs = []
 zerosRevealed = []
-zerosDone = []
+
 while True:
 	try:
 		w = int(sys.argv[1]) + 2
@@ -31,69 +31,82 @@ userField = [["X"]*w for x in range(h)]
 # debug/check if it works
 #for x in range(len(field)):
 	#print(*field[x])
+def start():
+	global w
+	global h
+	global b
+	# MAKE AN ARRAY OF THE X AND Y VALUES OF THE BOMBS
+	for number in range(b):
+		x = r.randrange(1,w-1)
+		y = r.randrange(1,h-1)
+		# array keeps track of bomb positions
+		bombs.append([x,y])
+		#print(x)
+		#print(y)
+		field[y][x] = "*"
+	# debug
+	#for x in range(len(field)):
+		#print(*field[x])
 
-# MAKE AN ARRAY OF THE X AND Y VALUES OF THE BOMBS
-for number in range(b):
-	x = r.randrange(1,w-1)
-	y = r.randrange(1,h-1)
-	# array keeps track of bomb positions
-	bombs.append([x,y])
-	#print(x)
-	#print(y)
-	field[y][x] = "*"
-# debug
-#for x in range(len(field)):
-	#print(*field[x])
+		
 
+	for y in range(1,h-1):
+		for x in range(1,w-1):
+			if field[y][x] == "*":
+				if field[y][x+1] != "*":
+					# one position to the right
+					field[y][x+1] += 1
+				if field[y][x-1] != "*":
+					# one position to the left
+					field[y][x-1] += 1
+				if field[y+1][x] != "*":
+					# one position above
+					field[y+1][x] += 1
+				if field[y-1][x] != "*":
+					# one position below
+					field[y-1][x] += 1
+				if field[y+1][x+1] != "*":
+					field[y+1][x+1] += 1
+				if field[y-1][x+1] != "*":
+					field[y-1][x+1] += 1
+				if field[y+1][x-1] != "*":
+					field[y+1][x-1] += 1
+				if field[y-1][x-1] != "*":
+					field[y-1][x-1] += 1
+	printUserField()	
+	choose()
+	# print at the end with 0s turning into the right number
+	# is there a way to "hide" a board or solution?
+	# this is my "hidden solution" field
+"""
+	for y in range(1,h-1):
+		for x in range(1,w-1):
+			print(field[y][x],end=" ")
+		print("")
+"""
 	
-
-for y in range(1,h-1):
-	for x in range(1,w-1):
-		if field[y][x] == "*":
-			if field[y][x+1] != "*":
-				# one position to the right
-				field[y][x+1] += 1
-			if field[y][x-1] != "*":
-				# one position to the left
-				field[y][x-1] += 1
-			if field[y+1][x] != "*":
-				# one position above
-				field[y+1][x] += 1
-			if field[y-1][x] != "*":
-				# one position below
-				field[y-1][x] += 1
-			if field[y+1][x+1] != "*":
-				field[y+1][x+1] += 1
-			if field[y-1][x+1] != "*":
-				field[y-1][x+1] += 1
-			if field[y+1][x-1] != "*":
-				field[y+1][x-1] += 1
-			if field[y-1][x-1] != "*":
-				field[y-1][x-1] += 1
-# print at the end with 0s turning into the right number
-# is there a way to "hide" a board or solution?
-# this is my "hidden solution" field
-
-for y in range(1,h-1):
-	for x in range(1,w-1):
-		print(field[y][x],end=" ")
-	print("")
-
-# use "X" or 0?
 
 
 def choose():
 	global numRevealed
+	global w
+	global h
+	global b
 	space = input("Choose a space to either clear or flag. Provide the x and y coordinates, and type 'f' for flag and 'c' for clear. Enter your answer in the following format: x, y, [f or c] ") # can command line arguments work outside first python file calling
 	# if flag, else (else if clear)
 	userChoice = space.split(', ')
 	y = int(userChoice[1])
 	x = int(userChoice[0])
 	if userChoice[2] == "f":
-		userField[y][x] = "f"
-		flags.append([x,y])
-		printUserField()
-		checkFlags()
+		if userField[y][x] == "X":
+			userField[y][x] = "f"
+			flags.append([x,y])
+			printUserField()
+			checkFlags()
+		else:
+			print("You've already revealed that space! You can't flag it now!")
+			printUserField()
+			checkFlags()
 	else:
 		# check using solution
 		if field[y][x] == "*":
@@ -116,6 +129,9 @@ def choose():
 				
 
 def printUserField():
+	global w
+	global h
+	global b
 	for y in range(1,h-1):
 		for x in range(1,w-1):
 			print(userField[y][x],end=" ")
@@ -128,10 +144,20 @@ def gameOver():
 def checkFlags():
 	global numRevealed
 	global correctFlags
-	if len(flags) + numRevealed == w*h:
+	global w
+	global h
+	global b
+	# tell the user if they have revealed the entire board, but have too many flags, that they need to keep going
+	for y in range(1,h-1):
+		for x in range(1,w-1):
+			if userField[y][x] != "X":
+				numRevealed += 1
+	if numRevealed == (w-2)*(h-2):
 		print("Uh oh! Looks like you flagged some spaces that aren't bombs. Keep going!")
-		choose()
-	elif len(flags) == b:
+	# reset the number revealed variable
+	numRevealed = 0
+	# only useful to check if flags are in the right place if the number of flags = bombs
+	if len(flags) == b:
 		for i in range(b):
 			if userField[bombs[i][1]][bombs[i][0]] == "f":
 				correctFlags += 1
@@ -145,42 +171,28 @@ def checkFlags():
 	correctFlags = 0
 
 def win():
-	print("Yay! You won! You just swept the mines like a champ.")
+	playAgain = input("Yay! You won! You just swept the mines like a champ.\nWould you like to play again? Answer 'Y' or 'N'")
+	if playAgain == 'Y':
+		field = [[0]*w for x in range(h)]
+		userField = [["X"]*w for x in range(h)]
+		start()
+
+	else:
+		print("Goodbye!")
 
 def checkZeroes():
+	global numRevealed
+	global w
+	global h
+	global b
 	while zerosRevealed:
 		originaly = zerosRevealed[0][1]
 		originalx = zerosRevealed[0][0]
-		print(originaly)
-		print(originalx)
 		zerosRevealed.remove(zerosRevealed[0])
 		for y in range(originaly-1,originaly+2):
-			for x in range(originalx-1,originalx+2):
-				print([x,y])
-				print(zerosRevealed)
-				print(1)
-				# Intersect both lists with list comprehension
-				# remove zeros that have already been included and checked
-				# intersection = [list(filter(lambda x: x in zerosDone, sublist)) for sublist in zerosRevealed]
-				# intersection = [(zerosRevealed[i][a],zerosDone[j][b]) for i in range(len(zerosRevealed)) for j in range(len(zerosDone)) for a in range(1) for b in range(1) if zerosRevealed[i][0] == zerosDone[j][0] and zerosRevealed[i][1] == zerosDone[j][1]]
-				# if intersection != []:
-					# zerosRevealed.remove(intersection)					
-				print(2)
-				#print(field[y][x])
-				print(3)
+			for x in range(originalx-1,originalx+2):				
 				if field[y][x] == 0 and userField[y][x] == "X":
-					print(4)
 					if y > 0 and y < h-1 and x > 0 and x < w-1:
-						print(5)
 						zerosRevealed.append([x,y])
 				userField[y][x] = field[y][x]
-		
-
-#while flagCount + numRevealed < w*h:
-printUserField()
-choose()
-# when all spaces are revealed, and the while loop is exited, but the amount of flags is greater than b, then 
-#if flagCount > b:
-# WAIT! Do I not need a while loop like while the spaces haven't been cleared since I'm already checking the flags every time?
-# reveal the sides at the beginning
-
+start()
