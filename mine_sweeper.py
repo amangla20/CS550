@@ -101,8 +101,9 @@ def choose():
 				flags.remove([x,y])
 			if field[y][x] == 0:
 				# reveal contiguous spaces
-				zerosRevealed.append(field[y][x])
+				zerosRevealed.append([x,y])
 				checkZeroes()
+				printUserField()
 				choose()
 			else:
 				userField[y][x] = field[y][x]
@@ -146,62 +147,36 @@ def win():
 
 def checkZeroes():
 	while zerosRevealed:
-		for x in range(field[y][x]-1,field[y][x]+2):
-			for y in range(field[y][x]-1,field[y][x]+2):
+		y = zerosRevealed[0][1]
+		x = zerosRevealed[0][0]
+		for y in range(y-1,y+2):
+			for x in range(x-1,x+2):
+				print(1)
 				# Intersect both lists with list comprehension
 				# remove zeros that have already been included and checked
-				intersection = [list(filter(lambda x: x in zerosDone, sublist)) for sublist in zerosRevealed]
-				zerosRevealed.remove(intersection)
-				for item in zerosRevealed:
-					userField[y][x] = field[y][x]
-					zerosRevealed.remove(field[y][x])
-					# append zeros here because this when you remove it from zeros revealed
-					zerosDone.append(field[y][x])
-					if field[y][x] == 0:
-						if y > 0 and y < h and x > 0 and x < w:
-							zerosRevealed.append(field[y][x])
-							# where do i append to zeros done???
-
-		# for x in zerosRevealed:
-		# 	if field[y][x+1] == 0:
-		# 		# one position to the right
-		# 		userField[y][x+1] = field[y][x+1]
-		# 		numRevealed += 1
-		# 		if y > 0 and y < h-1 and x > 0 and x < w-1:
-		# 			zerosRevealed.append(field[y][x+1])
-		# 	if field[y][x-1] == 0:
-		# 		# one position to the left
-		# 		userField[y][x-1] = field[y][x-1]
-		# 		numRevealed += 1
-		# 		if y > 0 and y < h-1 and x > 0 and x < w-1:
-		# 			zerosRevealed.append(field[y][x-1])
-		# 	if field[y+1][x] == 0:
-		# 		# one position above
-		# 		userField[y+1][x] = field[y+1][x]
-		# 		numRevealed += 1
-		# 		if y > 0 and y < h-1 and x > 0 and x < w-1:
-		# 			zerosRevealed.append(field[y][x+1])
-		# 	if field[y-1][x] == 0:
-		# 		# one position below
-		# 		userField[y-1][x] = field[y-1][x]
-		# 		numRevealed += 1
-		# 		if y > 0 and y < h-1 and x > 0 and x < w-1:
-		# 			zerosRevealed.append(field[y][x+1])
-		# 	if field[y+1][x+1] == 0:
-		# 		userField[y+1][x+1] = field[y+1][x+1]
-		# 		numRevealed += 1
-		# 		if y > 0 and y < h-1 and x > 0 and x < w-1:
-		# 			zerosRevealed.append(field[y][x+1])
-		# 	if field[y-1][x+1] == 0:
-		# 		userField[y-1][x+1] = field[y-1][x+1]
-		# 		numRevealed += 1
-		# 		if y > 0 and y < h-1 and x > 0 and x < w-1:
-		# 			zerosRevealed.append(field[y][x+1])
-		# 	if field[y+1][x-1] != "*":
-		# 		field[y+1][x-1] += 1
-		# 	if field[y-1][x-1] != "*":
-		# 		field[y-1][x-1] += 1
-
+				# intersection = [list(filter(lambda x: x in zerosDone, sublist)) for sublist in zerosRevealed]
+				# intersection = [(zerosRevealed[i][a],zerosDone[j][b]) for i in range(len(zerosRevealed)) for j in range(len(zerosDone)) for a in range(1) for b in range(1) if zerosRevealed[i][0] == zerosDone[j][0] and zerosRevealed[i][1] == zerosDone[j][1]]
+				# if intersection != []:
+					# zerosRevealed.remove(intersection)					
+				print(2)
+				print(field[y][x])
+				if len(zerosDone) > 0:
+					for i in range(len(zerosDone)):
+						for j in range(len(zerosRevealed)):
+							if zerosRevealed[j][1] == zerosDone[i][1] and zerosRevealed[j][0] == zerosDone[i][0]:
+								print(6)
+								zerosRevealed.remove([x,y])
+				print(3)
+				userField[y][x] = field[y][x]
+				zerosRevealed.remove([x,y])
+				# append zeros here because this when you remove it from zeros revealed
+				zerosDone.append([x,y])
+				if field[y][x] == 0:
+					print(4)
+					if y > 0 and y < h and x > 0 and x < w:
+						print(5)
+						zerosRevealed.append([x,y])
+								# where do i append to zeros done???
 #while flagCount + numRevealed < w*h:
 printUserField()
 choose()
