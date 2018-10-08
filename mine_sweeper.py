@@ -1,6 +1,8 @@
+# Anjali Mangla
+# 10/08/2018
+# This code is the code for a minesweeper game in which participants must flag all of the bombs and not uncover any bombs before they finish the game.
 # This is the link on string splitting:
 # https://www.geeksforgeeks.org/python-string-split/
-
 
 # I spent an hour and really couldn't figure out how to count the spaces next to the bomb and show the number. This is my try.
 # the grid starts with (0,0) at the top left corner, and with the first row being 0 value for (x,y) (sort of like the axis if it was a coordinate grid)
@@ -166,16 +168,17 @@ def checkZeroes():
 							if zerosRevealed[j][1] == zerosDone[i][1] and zerosRevealed[j][0] == zerosDone[i][0]:
 								print(6)
 								zerosRevealed.remove([x,y])
-				print(3)
-				userField[y][x] = field[y][x]
-				zerosRevealed.remove([x,y])
-				# append zeros here because this when you remove it from zeros revealed
-				zerosDone.append([x,y])
-				if field[y][x] == 0:
-					print(4)
-					if y > 0 and y < h and x > 0 and x < w:
-						print(5)
-						zerosRevealed.append([x,y])
+				for [x,y] in zerosRevealed:
+					print(3)
+					userField[y][x] = field[y][x]
+					del zerosRevealed[0]
+					# append zeros here because this when you remove it from zeros revealed
+					zerosDone.append([x,y])
+					if field[y][x] == 0:
+						print(4)
+						if y > 0 and y < h and x > 0 and x < w:
+							print(5)
+							zerosRevealed.append([x,y])
 								# where do i append to zeros done???
 #while flagCount + numRevealed < w*h:
 printUserField()
