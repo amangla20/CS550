@@ -37,11 +37,15 @@ def start():
 	for number in range(b):
 		x = r.randrange(1,w-1)
 		y = r.randrange(1,h-1)
+		# giving another chance to randomize in case the x,y are the same position
+		for a in range(len(bombs)):
+			if x == bombs[a][0] and y == bombs[a][1]:
+				x = r.randrange(1,w-1)
+				y = r.randrange(1,h-1)
 		# array keeps track of bomb positions
 		bombs.append([x,y])
-		#print(x)
-		#print(y)
 		field[y][x] = "*"
+		print(bombs)
 	# check around the bomb and add numbers
 	for y in range(1,h-1):
 		for x in range(1,w-1):
@@ -66,18 +70,17 @@ def start():
 					field[y+1][x-1] += 1
 				if field[y-1][x-1] != "*":
 					field[y-1][x-1] += 1
-	print("Welcome to Minesweeper! The top left corner of the board is (1,1) and going to the right adds to the x-value and down adds to the y-value. Make sure you flag all the bombs and show us your mastery of mine sweeping!")
-	printUserField()	
-	choose()
-	# print at the end with 0s turning into the right number
-	# is there a way to "hide" a board or solution?
-	# this is my "hidden solution" field
-"""
+	print("Welcome to Minesweeper! You must flag all of the bombs in order to win the game. The top left corner of the board is (1,1) and going to the right adds to the x-value and down adds to the y-value. Make sure you flag all the bombs and show us your mastery of mine sweeping!")	
 	for y in range(1,h-1):
 		for x in range(1,w-1):
 			print(field[y][x],end=" ")
 		print("")
-"""
+	printUserField()	
+	choose()
+	# print at the end with 0s turning into the right number
+	# this is my "hidden solution" field
+
+
 # choose the space, c or f
 def choose():
 	global w
