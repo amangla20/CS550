@@ -99,9 +99,9 @@ def choose():
 		if field[y][x] == "*":
 			gameOver()
 		else:
-			if field[y][x] == "f":
+			if userField[y][x] == "f":
 				flags.remove([x,y])
-			if field[y][x] == 0:
+			elif field[y][x] == 0:
 				# reveal contiguous spaces
 				zerosRevealed.append([x,y])
 				checkZeroes()
@@ -149,10 +149,15 @@ def win():
 
 def checkZeroes():
 	while zerosRevealed:
-		y = zerosRevealed[0][1]
-		x = zerosRevealed[0][0]
-		for y in range(y-1,y+2):
-			for x in range(x-1,x+2):
+		originaly = zerosRevealed[0][1]
+		originalx = zerosRevealed[0][0]
+		print(originaly)
+		print(originalx)
+		zerosRevealed.remove(zerosRevealed[0])
+		for y in range(originaly-1,originaly+2):
+			for x in range(originalx-1,originalx+2):
+				print([x,y])
+				print(zerosRevealed)
 				print(1)
 				# Intersect both lists with list comprehension
 				# remove zeros that have already been included and checked
@@ -161,25 +166,16 @@ def checkZeroes():
 				# if intersection != []:
 					# zerosRevealed.remove(intersection)					
 				print(2)
-				print(field[y][x])
-				if len(zerosDone) > 0:
-					for i in range(len(zerosDone)):
-						for j in range(len(zerosRevealed)):
-							if zerosRevealed[j][1] == zerosDone[i][1] and zerosRevealed[j][0] == zerosDone[i][0]:
-								print(6)
-								zerosRevealed.remove([x,y])
-				for [x,y] in zerosRevealed:
-					print(3)
-					userField[y][x] = field[y][x]
-					del zerosRevealed[0]
-					# append zeros here because this when you remove it from zeros revealed
-					zerosDone.append([x,y])
-					if field[y][x] == 0:
-						print(4)
-						if y > 0 and y < h and x > 0 and x < w:
-							print(5)
-							zerosRevealed.append([x,y])
-								# where do i append to zeros done???
+				#print(field[y][x])
+				print(3)
+				if field[y][x] == 0 and userField[y][x] == "X":
+					print(4)
+					if y > 0 and y < h-1 and x > 0 and x < w-1:
+						print(5)
+						zerosRevealed.append([x,y])
+				userField[y][x] = field[y][x]
+		
+
 #while flagCount + numRevealed < w*h:
 printUserField()
 choose()
