@@ -70,10 +70,12 @@ def start():
 				if field[y-1][x-1] != "*":
 					field[y-1][x-1] += 1
 	print("Welcome to Minesweeper! You must flag all of the bombs in order to win the game. The top left corner of the board is (1,1) and going to the right adds to the x-value and down adds to the y-value. Make sure you flag all the bombs and show us your mastery of mine sweeping!")	
+	"""
 	for y in range(1,h-1):
 		for x in range(1,w-1):
 			print(field[y][x],end=" ")
 		print("")
+	"""
 	printUserField()	
 	choose()
 	# print at the end with 0s turning into the right number
