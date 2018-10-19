@@ -1,8 +1,8 @@
 import random as r
 import math
 from PIL import Image
-imgx = 9
-imgy = 9
+imgx = 512
+imgy = 512
 image = Image.new("RGB",(imgx,imgy))
 
 def mandelbrot():
@@ -17,8 +17,8 @@ def mandelbrot():
 				# z = zsqr + (-2+1*c/2,-2+1*d/2)
 				# each c increases by 1/2 so it goes from -2 to 2
 				# 1 try = red, 2 tries = green, and does not escape = blue
-				a = ((a**2)-(b**2))+(-2+(c/2))
-				b = (2*a*b)+(2-(d/2))
+				a = ((a**2)-(b**2))+(-2+(c/(imgx/4)))
+				b = (2*a*b)+(2-(d/(imgx/4)))
 				if x == 0:
 					if math.sqrt(a**2 + b**2) >= 2:
 						image.putpixel((c,d),(255,0,0))
