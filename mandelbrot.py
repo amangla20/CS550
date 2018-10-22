@@ -31,6 +31,5 @@ def mandelbrot():
 				image.putpixel((c,d),(0,0,255))
 				
 
-
 mandelbrot()
 image.save("mandelbrot.png", "PNG")

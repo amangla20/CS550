@@ -21,10 +21,11 @@ for y in range(imgy):
 			if abs(z) >= 2.0:
 				break
 			z = z**2 + c
-		r = int(256 - i)
-		g = int(r%i)
-		b = int((i*50)%256)
-		image.putpixel((x,y),(r,g,b))
+		r = (i*-ya)/200
+		g = i/256
+		b = (i*yb)/100
+		r,g,b = colorsys.hsv_to_rgb(r,g,b)
+		image.putpixel((x,y),(int((r*5000)%256),int(g*256),int((b*10000)%256)))
 
 image.show()
-image.save("mandelbrotsol.png")
+image.save("mandelbrotsol.png", "PNG")
