@@ -1,8 +1,8 @@
 from PIL import Image
 import colorsys
 
-xa, xb = -0.5435, -0.541
-ya, yb = 0.6135, 0.616
+xa, xb = -0.5437, -0.5412
+ya, yb = 0.6137, 0.6162
 
 imgx, imgy = 512,512
 
@@ -22,7 +22,7 @@ for y in range(imgy):
 				break
 			z = z**2 + c
 		r = (i*-ya)/200
-		g = i/256
+		g = i/128
 		b = (i*yb)/100
 		r,g,b = colorsys.hsv_to_rgb(r,g,b)
 		image.putpixel((x,y),(int((r*5000)%256),int(g*256),int((b*10000)%256)))
