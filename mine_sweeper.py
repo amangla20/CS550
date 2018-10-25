@@ -145,13 +145,25 @@ def checkFlags():
 	global h
 	global b
 	# tell the user if they have revealed the entire board, but have too many flags, that they need to keep going
+	if len(flags) > b:
+		for y in range(1,h-1):
+			for x in range(1,w-1):
+				if userField[y][x] != "X":
+					numRevealed += 1
+		if numRevealed == (w-2)*(h-2):
+			print("Uh oh! Looks like you flagged some spaces that aren't bombs. Keep going!")
+	# reset the number revealed variable
+	numRevealed = 0
 	for y in range(1,h-1):
 		for x in range(1,w-1):
 			if userField[y][x] != "X":
+				if userField[y][x] == "f" and field[y][x] != "*":
+					break
 				numRevealed += 1
-	if numRevealed == (w-2)*(h-2):
-		print("Uh oh! Looks like you flagged some spaces that aren't bombs. Keep going!")
-	# reset the number revealed variable
+				if userField[y][x] == "f":
+					numRevealed -= 1
+	if numRevealed == (w-2)*(h-2) - b:
+		win()
 	numRevealed = 0
 	# only useful to check if flags are in the right place if the number of flags = bombs
 	if len(flags) == b:
