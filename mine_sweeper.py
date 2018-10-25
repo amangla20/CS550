@@ -89,7 +89,7 @@ def choose():
 	global b
 	space = input("Choose a space to either clear or flag. Provide the x and y coordinates, and type 'f' for flag and 'c' for clear. Enter your answer in the following format: x, y, [f or c] ") # can command line arguments work outside first python file calling
 	# if flag, else (else if clear)
-	userChoice = space.split(', ')
+	userChoice = space.split(',')
 	y = int(userChoice[1])
 	x = int(userChoice[0])
 	if userChoice[2] == "f":
