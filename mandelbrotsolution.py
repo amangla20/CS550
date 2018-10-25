@@ -5,7 +5,14 @@ xa = 0
 xb = 0
 ya = 0
 yb = 0
-imgx, imgy = 512,512
+
+while True:
+	try:
+		imgx = int(input("What width would you like the following three images to have? "))
+		imgy = int(input("What height would you like the following three images to have? "))
+		break
+	except ValueError:
+		print("That's not a number. Try again.")
 image = Image.new("RGB", (imgx,imgy))
 def mandelbrot_1():
 	xa, xb = -0.5437, -0.5412
@@ -155,8 +162,8 @@ image3 = Image.new("RGB", (imgx, imgy))
 # https://en.wikipedia.org/wiki/Julia_set
 
 def julia_1():
-	xa, xb = -0.5, 0.5
-	ya, yb = -0.5, 0.5
+	xa, xb = -0.07, -0.03
+	ya, yb = -0.19, -0.15
 
 	maxIt = 256 # max iteration
 	c = complex(-0.4, 0.6)
@@ -170,11 +177,11 @@ def julia_1():
 				if abs(z) >= 2.0:
 					break
 				z = z**2 + c
-			r = (i/512)**0.5
-			g = (i*zy)/128
-			b = i/256
+			r = (i/512)**2
+			g = ((i*zy)/128)**0.5
+			b = i/500
 			r,g,b = colorsys.hsv_to_rgb(r,g,b)
-			image3.putpixel((x,y),(int(r*256),int(g*256),int(b*256)))
+			image3.putpixel((x,y),(int((r*1000)%256),int(g*256),int(b*256)))
 	image3.save("image3.png", "PNG")
 	image3.show()
 
