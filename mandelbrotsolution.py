@@ -152,12 +152,14 @@ def mandelbrot_2():
 
 mandelbrot_2()
 image3 = Image.new("RGB", (imgx, imgy))
+# https://en.wikipedia.org/wiki/Julia_set
+
 def julia_1():
-	xa, xb = -2.0, 2.0
-	ya, yb = -2.0, 2.0
+	xa, xb = -0.5, 0.5
+	ya, yb = -0.5, 0.5
 
 	maxIt = 256 # max iteration
-	c = complex(-0.221, -0.713)
+	c = complex(-0.4, 0.6)
 	for y in range(imgy):
 		zy = y*(yb-ya)/(imgy-1) + ya
 		for x in range(imgx):
@@ -168,11 +170,11 @@ def julia_1():
 				if abs(z) >= 2.0:
 					break
 				z = z**2 + c
-			r = i
-			g = 0
-			b = 0
-			#r,g,b = colorsys.hsv_to_rgb(r,g,b)
-			image3.putpixel((x,y),(r,g,b))
+			r = (i/512)**0.5
+			g = (i*zy)/128
+			b = i/256
+			r,g,b = colorsys.hsv_to_rgb(r,g,b)
+			image3.putpixel((x,y),(int(r*256),int(g*256),int(b*256)))
 	image3.save("image3.png", "PNG")
 	image3.show()
 
