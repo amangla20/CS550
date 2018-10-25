@@ -59,7 +59,7 @@ mandelbrot_1()
 image2 = Image.new("RGB", (imgx, imgy))
 # A Mandelbrot with a Sobel filter found from code from this website: https://medium.com/@enzoftware/how-to-build-amazing-images-filters-with-python-median-filter-sobel-filter-%EF%B8%8F-%EF%B8%8F-22aeb8e2f540
 # I didn't copy the code exactly, as the original makes the outlines very grayish and dark, so I tweaked the code to make it my own and have a blue gradient by changing the number the length divided by at the end and experimenting with the r, g, b coordinates entered into the gradient color. It works by showing the edges of the fractal with blue and yellow! The original code would show a gradient of gray, and at first, for a long time I changed that to a white-ish color. I thought this black and white would be a very cool juxtaposition but I realized that I should still have a pop of color in the picture. This was the result.
-# The second mandelbrot image is a zoom in on one of the sort of "stars" that accompany certain "nibs" of the mandelbrot design, and it is very zoomed in. The way the code works is that it is sort of the opposite of normal coloring of the mandelbrot set as it 
+# The second mandelbrot image is a zoom in on one of the sort of "stars" that accompany certain "nibs" of the mandelbrot design, and it is very zoomed in. The way the code works is that it is sort of the opposite of normal coloring of the mandelbrot set as it outlines the edges of the set in color and sets what the components of the fractal imaging are in black. I really love this fractal, it could be my favorite and its use of the filter is really fun. It is very aesthetically pleasing.
 def mandelbrot_2():
 	xa, xb = -0.5476, -0.5468
 	ya, yb = -0.5005, -0.4997
@@ -177,7 +177,8 @@ mandelbrot_2()
 image3 = Image.new("RGB", (imgx, imgy))
 
 # https://en.wikipedia.org/wiki/Julia_set
-# Wikipedia i
+# Wikipedia was used to get some good complex c coordinates to generate a nice image.
+# My Julia set image looks at a small cluster of "pixels" outside of the main two clusters in the full screen version of the set. I used HSV and a filter, both, to create this image. First, I used HSV and multiplication to garner the color scheme I wanted as well as use the SMOOTH filter to smooth out the edges. It reminds me of watercolor paint, which is very soothing. Instead of the sharp contrast between edges with multiplication like in image 1 mandelbrot, I used smooth to create an opposition to that image. That is why I think all the images I created really go together.
 
 def julia_1():
 	xa, xb = -0.062, -0.042
@@ -206,6 +207,8 @@ def julia_1():
 julia_1()
 
 image4 = Image.new("RGB", (imgx, imgy))
+
+# I had created this earlier but did not think the zoom was enough, even though I loved the look of two galaxies colliding together. In this, I just used HSV to try to make the "stars" or hearts of the galaxies bright and different colors, depending on where in the image they were (depending on zx or zy). I really love this image and wanted to include it in the end even if the zoom was a little far because it reminds me of the starry night.
 
 def julia_2():
 	xa, xb = -0.5, 0.5
