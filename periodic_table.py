@@ -16,5 +16,13 @@ class PeriodicTable:
             result += str(i) + "\n"
         return result
 
+    def weight(self):
+        # be able to divide the molecular formula into elements and add their weights by that and multiplying by the number after it
+
+
 table1 = PeriodicTable()
 print(str(table1))
+
+while True:
+    print("Welcome to the Periodic Table Mastery Chart! This program is designed to help the user with chemistry homework and become well-equipped with the elements.\n")
+    user = input("Enter a molecular formula or element to find its molecular weight: ")
