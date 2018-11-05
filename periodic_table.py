@@ -16,13 +16,21 @@ class PeriodicTable:
             result += str(i) + "\n"
         return result
 
+    def elchoice(self, elchoice):
+        for elementdata in self.elements:
+            if elementdata.element.upper() == elchoice.upper():
+                return elementdata
+
     def weight(self):
         # be able to divide the molecular formula into elements and add their weights by that and multiplying by the number after it
+        pass
 
 
 table1 = PeriodicTable()
-print(str(table1))
+# print(str(table1))
 
-while True:
-    print("Welcome to the Periodic Table Mastery Chart! This program is designed to help the user with chemistry homework and become well-equipped with the elements.\n")
-    user = input("Enter a molecular formula or element to find its molecular weight: ")
+
+print("Welcome to the Periodic Table Mastery Chart! This program is designed to help the user with chemistry homework and become well-equipped with the elements.\n")
+elchoice = input("Enter an element name to get its data: ")
+
+print(table1.elchoice(elchoice))
