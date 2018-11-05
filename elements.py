@@ -15,5 +15,5 @@ class Element:
 		return info
 
 
-element1 = Element("Hydrogen", 1, "H", 1.01)
-print(element1)
+# element1 = Element("Hydrogen", 1, "H", 1.01)
+# print(element1)
