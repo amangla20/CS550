@@ -1,6 +1,7 @@
 # https://realpython.com/python-csv/
 import csv
 from elements import Element
+import re
 
 class PeriodicTable:
     def __init__(self):
@@ -20,10 +21,13 @@ class PeriodicTable:
         for elementdata in self.elements:
             if elementdata.element.upper() == elchoice.upper():
                 return elementdata
+        noelement = "There is no element by that name."
+        return noelement
 
-    def weight(self):
+    def weight(self, formula):
         # be able to divide the molecular formula into elements and add their weights by that and multiplying by the number after it
-        pass
+        return re.findall('[A-Z][^A-Z]*', formula)
+
 
 
 table1 = PeriodicTable()
@@ -32,5 +36,7 @@ table1 = PeriodicTable()
 
 print("Welcome to the Periodic Table Mastery Chart! This program is designed to help the user with chemistry homework and become well-equipped with the elements.\n")
 elchoice = input("Enter an element name to get its data: ")
-
 print(table1.elchoice(elchoice))
+formula = input("Enter a molecular formula to get its weight: ")
+print(table1.weight(formula))
+
