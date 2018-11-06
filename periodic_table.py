@@ -32,6 +32,10 @@ class PeriodicTable:
             for elementdata in self.elements:
                 if elementdata.symbol == split_formula[i]:
                     formula_weight += float(elementdata.weight)
+        for x in split_formula:
+            for letter in x:
+                if letter.isdigit():
+                    formula_weight*=int(letter)
         return formula_weight
 
 
