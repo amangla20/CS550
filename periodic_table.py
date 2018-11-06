@@ -26,16 +26,22 @@ class PeriodicTable:
 
     def weight(self, formula):
         # be able to divide the molecular formula into elements and add their weights by that and multiplying by the number after it
+        multiplier = 1
         formula_weight = 0
         split_formula = re.findall('[A-Z][^A-Z]*', formula)
         for i in range(len(split_formula)):
             for elementdata in self.elements:
+                for letter in split_formula[i]:
+                    if letter.isdigit():
+                        multiplier = int(letter)
+                        split_formula[i].remove(letter)
                 if elementdata.symbol == split_formula[i]:
-                    formula_weight += float(elementdata.weight)
-        for x in split_formula:
-            for letter in x:
-                if letter.isdigit():
-                    formula_weight*=int(letter)
+                    formula_weight += float(elementdata.weight)*multiplier
+                    multiplier = 1
+        # for x in split_formula:
+        #     for letter in x:
+        #         if letter.isdigit():
+        #             formula_weight*=int(letter)
         return formula_weight
 
 
