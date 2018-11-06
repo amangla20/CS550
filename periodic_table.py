@@ -34,7 +34,8 @@ class PeriodicTable:
                 for letter in split_formula[i]:
                     if letter.isdigit():
                         multiplier = int(letter)
-                        split_formula[i].remove(letter)
+                        split_formula[i] = split_formula[i].replace(letter, "")
+                        #split_formula[i].remove(letter)
                 if elementdata.symbol == split_formula[i]:
                     formula_weight += float(elementdata.weight)*multiplier
                     multiplier = 1
