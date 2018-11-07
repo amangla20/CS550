@@ -41,7 +41,7 @@ class PeriodicTable:
                         # AM: Still not working for two-digit numbers
                         multiplier = int(split_formula[i][pos:])
                         print(letter,pos, multiplier)
-                        split_formula[i] = split_formula[i].replace(letter, "")
+                        split_formula[i] = split_formula[i].replace(split_formula[i][pos:], "")
                         break
                     pos += 1
                         #split_formula[i].remove(letter)
