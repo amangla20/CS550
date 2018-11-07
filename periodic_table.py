@@ -47,7 +47,7 @@ class PeriodicTable:
                     multiplier = 1
                     result = str(formula_weight)
                     if i == len(split_formula)-1:
-                        return result
+                        return result + " g/mol"
         # for x in split_formula:
         #     for letter in x:
         #         if letter.isdigit():
