@@ -1,6 +1,3 @@
-# Things to work on:
-# The result of HE2 (need to make else statement?)
-# The molecular weight if there are two or more digits
 import csv
 from elements import Element
 import re
@@ -38,9 +35,8 @@ class PeriodicTable:
                 pos = 0
                 for letter in split_formula[i]:
                     if letter.isdigit():
-                        # AM: Still not working for two-digit numbers
                         multiplier = int(split_formula[i][pos:])
-                        print(letter,pos, multiplier)
+                        #print(letter,pos, multiplier)
                         split_formula[i] = split_formula[i].replace(split_formula[i][pos:], "")
                         break
                     pos += 1
