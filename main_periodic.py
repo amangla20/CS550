@@ -2,16 +2,20 @@ from elements import Element
 from periodic_table import PeriodicTable
 import csv
 import re
+from PIL import Image
 
 def main():
     table1 = PeriodicTable()
     print("Welcome to the Periodic Table Mastery Chart! This program is designed to help the user with chemistry homework and become well-equipped with the elements.\n")
     while True:
-        actionchoice = input("\n\nEnter an element name, symbol, or molecular formula to access information. \n(enter Q to quit)\n>> ")
+        actionchoice = input("\n\nEnter an element name, symbol, or molecular formula to access information.\nEnter 'table' to see an image of the periodic table. \n(enter Q to quit)\n>> ")
         
         if actionchoice.upper() == 'Q':
         	print("Bye!")
         	quit()
+
+        if actionchoice.upper() == 'TABLE':
+        	table1.image()
 
         identify = table1.recognize(actionchoice)
         if identify == True:

@@ -3,6 +3,7 @@
 import csv
 from elements import Element
 import re
+from PIL import Image
 
 class PeriodicTable:
     # set up elements in PT
@@ -25,7 +26,10 @@ class PeriodicTable:
         for elementdata in self.elements:
             if elementdata.getElement().upper() == elchoice.upper() or elementdata.getSymbol().upper() == elchoice.upper():
                 return elementdata
-
+    def image(self):
+        path = "periodictable.png"
+        image = Image.open(path)
+        image.show()
     # comment here
     def weight(self, formula):
         # be able to divide the molecular formula into elements and add their weights by that and multiplying by the number after it
@@ -33,7 +37,7 @@ class PeriodicTable:
         formula_weight = 0
         result = ""
         split_formula = re.findall('[A-Z][^A-Z]*', formula)
-        result = "\nThat is not a valid molecular formula."
+        result = "\nThat is not a valid element or formula."
         for i in range(len(split_formula)):
             for elementdata in self.elements:
                 pos = 0
