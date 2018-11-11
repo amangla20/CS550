@@ -50,7 +50,6 @@ class PeriodicTable:
     # Source to split a string at capital letters: https://stackoverflow.com/questions/2277352/split-a-string-at-uppercase-letters
 
     def weight(self, formula):
-        # be able to divide the molecular formula into elements and add their weights by that and multiplying by the number after it
         # this sets the multiplier default to 1 if there is no digit (i.e. SiO2 would have just Si, not Si1)
         multiplier = 1
         formula_weight = 0
