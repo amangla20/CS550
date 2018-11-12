@@ -50,6 +50,7 @@ class PeriodicTable:
     # Source to split a string at capital letters: https://stackoverflow.com/questions/2277352/split-a-string-at-uppercase-letters
 
     def weight(self, formula):
+      
         # this sets the multiplier default to 1 if there is no digit (i.e. SiO2 would have just Si, not Si1)
         multiplier = 1
         formula_weight = 0
@@ -106,4 +107,3 @@ class PeriodicTable:
         return identify
 
 # main function with action lines is in separate file
-

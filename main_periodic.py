@@ -1,8 +1,5 @@
 # Sonali Singh and Anjali Mangla
 # November 12, 2018
-# Sources:
-# http://ozzmaker.com/add-colour-to-text-in-python/
-# Source of elements data: https://introcs.cs.princeton.edu/python/32class/
 # OMH: I have neither given nor received any unauthorized aid.
 
 # importing periodic_table and element classes from separate files
