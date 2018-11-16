@@ -1,3 +1,6 @@
+# Anjali Mangla
+# Image Filter Class Activity
+# Sources: https://pythontic.com/image-processing/pillow/blend (blending)
 from PIL import Image
 import math
 import colorsys
