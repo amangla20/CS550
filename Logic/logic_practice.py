@@ -149,7 +149,15 @@ if tax:
    -ly: adverb; -ing; gerund; -s: plural; something else: error   
 '''
 word = "lovely"
-typeofword = "great"
+typeofword = "error"
+if word[(len(word) - 2):] == "ly":
+  typeofword = "adverb"
+elif word[(len(word) - 3):] == "ing":
+  typeofword = "gerund"
+elif word[(len(word) - 1):] == "s":
+  typeofword = "plural"
+else:
+  typeofword = "error"
 
  
  
