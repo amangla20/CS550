@@ -149,53 +149,67 @@ if tax:
    -ly: adverb; -ing; gerund; -s: plural; something else: error   
 '''
 word = "lovely"
-typeofword = "error"
-if word[(len(word) - 2):] == "ly":
-  typeofword = "adverb"
-elif word[(len(word) - 3):] == "ing":
-  typeofword = "gerund"
-elif word[(len(word) - 1):] == "s":
-  typeofword = "plural"
-else:
-  typeofword = "error"
+wordtype = "adjective"
 
- 
+if word[(len(word) - 2):] == "ly":
+  wordtype = "adverb"
+elif word[(len(word) - 3):] == "ing":
+  wordtype = "gerund"
+elif word[(len(word) - 1):] == "s":
+  wordtype = "plural"
+
+print(wordtype)
+
  
 ''' 14. 
    If integer variable currentNumber is odd, change its value so that it is now 3 times currentNumber plus 1, otherwise change its value so that it is now half of currentNumber (rounded down when currentNumber is odd). 
 '''
 currentNumber = 10
-if curre
+if currentNumber % 2 > 0:
+   currentNumber = 3*currentNumber + 1
+else:
+   currentNumber == currentNumber//2
+print(currentNumber)
  
 ''' 15. 
    Assign true to the boolean variable leapYear if the integer variable year is a leap year. (A leap year is a multiple of 4, and if it is a multiple of 100, it must also be a multiple of 400.) 
 '''
 leapYear = False
-if leapYear%4 == 0:
-   if leapYear%100 == 0:
-      if leapYear%400 == 0:
-         leapYear = True
-      else:
-         leapYear = False
-   else:
+year = 2018
+if year%4 == 0:
+  if year%100 == 0:
+    if year%400 == 0:
       leapYear = True
+    else:
+      leapYear = False
+  else:
+    leapYear = True
 else:
-   leapYear = False
+  leapYear = False
  
  
 ''' 16. 
    Determine the smallest of three ints, a, b and c. Store the smallest one of the three in int result. 
 '''
- 
+a = 1
+b = 2
+c = 3
+if a < b and a < c:
+   result = a
+elif b < a and b < c:
+   result = b
+else:
+   result = c
+print(result)
  
  
 ''' 17. 
    If an int, number, is even, a muliple of 5, and in the range of -100 to 100, then it is a special number. Store whether a number is special or not in the boolean variable special. 
 '''
-n = 10
+number = 10
 special = False
 
-if n%2 == 0 and n%5 == 0 and n > -100 and n < 100:
+if number%2 == 0 and number%5 == 0 and number > -100 and number < -100:
   special = True
 else:
   special = False
@@ -205,28 +219,53 @@ else:
    Variable letter is a char. Determine if the character is a vowel or not by storing a letter code in the int variable code.
    a/e/o/u/i: 1; y: -1; everything else: 0
 '''
- 
+letter = 'a'
+vowels = ['a','e','i','o','u']
+if letter in vowels:
+   intcode = 1
+elif letter == 'y':
+   intcode = -1
+else:
+   intcode = 0
+
+print("Code:",intcode)
+
  
  
 ''' 19. 
    Given a string dayOfWeek, determine if it is the weekend. Store the result in boolean isWeekend.
 '''
+weekend = ["Saturday", "Sunday"]
+dayofWeek = "Monday"
+if dayofWeek in weekend:
+   isWeekend = True
+else:
+   isWeekend = False
 
- 
+print("It is the weekend, T or F?",isWeekend)
  
 ''' 20. 
    Given a String variable month, store the number of days in the given month in integer variable numDays. 
 '''
-
+month = "January"
+numDays = 30
+thirtydays = ["September, April, June, November"]
+if month in thirtydays:
+   numDays = 30
+elif month == "February":
+   numDays = 28
+else:
+   numDays = 31
+print("The month", month, "has", numDays, "days.")
  
  
 ''' 21. 
    Three integers, angle1, angle2, and angle3, supposedly made a triangle. Store whether the three given angles make a valid triangle in boolean variable validTriangle.
 '''
-angle1 = 40
-angle2 = 80
-angle3 = 37
-validTriangle = False
+angle1 = 27
+angle2 = 89
+angle3 = 73
+validTriangle = True
 if angle1 + angle2 + angle3 == 180:
   validTriangle = True
 else:
@@ -240,20 +279,35 @@ else:
    Next 100 units: 1.20/unit
    For units above 250: 1.50/unit, plus an additional 20% surcharge.
 '''
- 
+electricity = 100
+if electricity <= 50:
+   payment = 0.50*electricity
+elif electricity <= 150:
+   payment = 25.00 + 0.75*(electricity-50)
+elif electricity <= 250:
+   payment = 100.000 + 1.20*(electricity-150)
+else:
+   payment = 1.2*(220.00 + 1.50*(electricity-250))
+print("Your electricity payment is", payment, "dollars!")
+
+
  
  
 ''' 23.
    String, greeting, stores a greeting. String language stores the language. If the language is English, greeting is Hello. If the language is French, the greeting is Bonjour. If the language is Spanish, the greeting is Hola. If the language is something else, the greeting is something of your choice.
 '''
-greeting = "Hello"
+greeting = "Shalom"
 language = "English"
+ 
 if language == "English":
   greeting = "Hello"
 elif language == "French":
   greeting = "Bonjour"
-elif language == "Spanish"
+elif language == "Spanish":
   greeting = "Hola"
+else:
+  greeting = "Namaste"
+ 
  
 ''' 24. 
    Generate a phrase and store it in String phrase, given an int number and a String noun. Here are some sample phrases:
@@ -263,31 +317,60 @@ elif language == "Spanish"
    number: 3; noun: human; phrase: 3 humans
    number: 1; noun: home; phrase: 3 homes
 '''
- 
+number = 1
+noun = "Computer"
+if number == 1:
+   phrase = str(number) + " " + noun
+else:
+   phrase = str(number) + " " + noun + "s"
+print(phrase)
   
  
 ''' 25. 
    If a string, userInput, is bacon, print out, "Why did you type bacon?". If it is not bacon, print out, "I like bacon." 
 '''
 userInput = "bacon"
+
 if userInput == "bacon":
   print("Why did you type bacon?")
 else:
-  print("I like bacon")
+  print("I like bacon.")
  
 ''' 26.
    Come up with your own creative tasks someone could complete to practice if-statements. Also provide solutions.
 '''
  
 ''' Task 1:
- 
+   String variable, month, stores a month. Int variable, day, stores a day. Generate a date and then use if-statements to figure out what season it is. Store the season in string variable, season. Assume that each new season begins on the 21st of the previous season's last month. (Ex; spring would begin on March 21st.)
 '''
  
 # solution
- 
- 
+month = "January"
+day = 1
+fall = []
+if month in ("January, February, March"):
+   season = "Winter"
+elif month in ("April, May, June"):
+   season = "Spring"
+elif month in ("July, August, September"):
+   season = "Summer"
+elif month in ("October, November, December"):
+   season = "Fall"
+
+if month == "March" and day>=21:
+   season = "Spring"
+if month == "June" and day>=21:
+   season = "Summer"
+if month == "September" and day>=21:
+   season = "Fall"
+if month == "December" and day>=21:
+   season = "Winter"
+
+print(season)
+
  
 ''' Task 2:
+  Keep track of textbooks you have bought in the school store. Integer textbooks keeps track of the number of textbooks bought. Float price shows the price of the textbook. Boolean buy keeps track of if you are buying textbooks. Every time you buy a textbook, the number of textbooks go up by 1 and the price is added to the total. 
  
 '''
  
