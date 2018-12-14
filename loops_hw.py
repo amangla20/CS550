@@ -1,7 +1,7 @@
 ''' Instructions:
    Work with a partner to complete these tasks. Assume that all variables mentioned in the description are declared and initialized; however, feel free to use additional variable as necessary (please avoid extra variables, though; don't use them unless you must to store a required value or simplify your code.) Write your solution below the commented description.
 '''
- 
+import string
 ''' 1. 
    Write a for loop that will print out all the integers from 0-4 in ascending order. 
 '''
@@ -11,7 +11,8 @@ for i in range(5):
 ''' 2. 
    Write a for loop that will print out all the integers from 0-4 in descending order.
 '''
- 
+for i in range(5):
+  print()
  
  
 ''' 3. 
@@ -29,7 +30,17 @@ for i in range(5):
 ''' 5. 
    Write two for loops that will both print out odd numbers from 25 to 49. The loops themselves must be different, but they will have the same output.
 '''
- 
+for i in range(24,50,1):
+  if i%2 == 1:
+    print(i)
+  else:
+    pass
+
+for i in range(25):
+  if (i + 25)%2 == 1:
+    print(i + 25)
+  else:
+    pass
  
  
 ''' 6. 
@@ -42,22 +53,41 @@ for i in range(5):
    Write while loops that do the same thing as numbers 1-6.
 '''
 # 1
- 
+i = 0
+while i < 5:
+  print(i)
+  i+=1 
  
 # 2
- 
+i = 4
+while i >= 0:
+  print(i)
+  i -= 1
  
 # 3 
- 
+i = 15
+while i >= 5:
+  print(i)
+  i-=1
  
 # 4
- 
+i = -5
+while i <=5:
+  print(i)
+  i += 1 
   
 # 5
- 
+i = 25
+while i < 50:
+  if i%2 == 1:
+    print(i)
+  i += 1
  
 # 6
- 
+i = 1
+while i <= 10:
+  print(i**2)
+  i += 1 
  
  
 ''' 8. 
@@ -69,7 +99,14 @@ for i in range(5):
 ''' 9. 
    A girl in your class has jellybeans in a jar. The number of jellybeans is stored in int beans. Every day she shares one jellybean with every student in the class, and she herself takes two. The number of students in the class is held in variable students (int). Write a loop that determines how many days it will take for her to run out of jellybeans. You can store the result in variable numDays (int).
 '''
- 
+beans = 30
+students = 14
+numDays = 0
+while beans > 0:
+  beans -= students
+  beans += 2
+  numDays += 1
+print("Number of days it took to run out of jellybeans: ", numDays)
  
  
 ''' 10. 
@@ -81,8 +118,13 @@ for i in range(5):
 ''' 11. 
    Write a loop that will calculate n factorial. The sum should be stored in result (int).
 '''
- 
- 
+n = 5
+result = n
+while n > 1:
+  result *= (n-1)
+  #print(result)
+  n -= 1
+print(result)
  
 ''' 12. 
    A flying car can travel an average of 96mph. Write a loop that will determine how long it will take you (to the nearest quarter hour) to get to your destination if you were to travel by flying car. The distance to your destination is stored in distance (int).
@@ -93,7 +135,12 @@ for i in range(5):
 ''' 13.  
    Write a loop that, given a number, n, will determine the value of n to the power of b. Store the result in variable exponent (int). 
 '''
- 
+n = 3
+b = 4
+exponent = n
+for i in range(b-1):
+  exponent *= n
+print(exponent)
  
  
 ''' 14. 
@@ -104,8 +151,13 @@ for i in range(5):
 ''' 15. 
    Now write a loop that will print out "A is a vowel." "B is a consonant." "C is a consonant." and so on. 
 '''
- 
- 
+letters = list(string.ascii_uppercase)
+vowels = ["A", "E", "I", "O", "U"]
+for i in range(26):
+  if letters[i] in vowels:
+    print(letters[i] + " is a vowel.")
+  else:
+    print(letters[i] + " is a consonant.")
  
 ''' 16. 
    Write code that will produce the following output: 
@@ -118,7 +170,10 @@ for i in range(5):
    Write a loop that will print out the decimal equivalents of 1/2, 1/3, 1/4, 1/5, 1/6, ... 1/20. The output for each iteration should look like:
    "1/2 = .5" "1/3 = .666666666667" etc.
 '''
- 
+i = 2
+while i <= 20:
+  print(1/i)
+  i += 1
  
  
 ''' 18. 
@@ -129,10 +184,17 @@ for i in range(5):
  
 ''' 19. 
    A friend tells you that PI can be computed with the following equation:
-   PI = 4 + (1-1/3+1/5-1/7+1/9-1/11+1/13-1/15...)
+   PI = 4 * (1-1/3+1/5-1/7+1/9-1/11+1/13-1/15...)
    Write a loop that will calculate this output for n-iterations of the pattern (n being an int), that could help you determine if your friend is right or wrong.
 '''
- 
+n = 15
+while n > 0:
+  if n%2 == 1:
+    multiplier += ((-1)**(n-1)) * (1/n)
+  else:
+    pass
+pi = 4 * multiplier
+print(pi)
  
  
 ''' 20. 
@@ -197,4 +259,5 @@ for i in range(5):
 ''' Sources
    http://www.bowdoin.edu/~ltoma/teaching/cs107/fall05/Lectures-Handouts/for.pdf
    http://www.ntu.edu.sg/home/ehchua/programming/java/j2a_basicsexercises.html
+   For uppercase letters list: https://stackoverflow.com/questions/16060899/alphabet-range-python
 '''
