@@ -370,22 +370,43 @@ print(season)
 
  
 ''' Task 2:
-  Keep track of textbooks you have bought in the school store. Integer textbooks keeps track of the number of textbooks bought. Float price shows the price of the textbook. Boolean buy keeps track of if you are buying textbooks. Every time you buy a textbook, the number of textbooks go up by 1 and the price is added to the total. 
+  Keep track of textbooks you have bought in the school store. Integer textbooks keeps track of the number of textbooks bought. Float money shows the number of dollars in your Choate account. Boolean textbook keeps track of if you are buying textbooks. Every time you buy a textbook, the number of textbooks go up by 1 and the amount of money in your account goes down by $100. 
+'''
+
+# solution
+textbooks = 5
+money = 1000
+while True:
+  user = input("Would you like to buy a textbook? Enter yes, no, or quit.\n>>")
+  if user.lower() == "yes":
+    textbook = True
+  elif user.lower() == "no":
+    textbook = False
+  else:
+    quit()
+  if textbook and money>=100:
+    print("You bought a textbook!")
+    textbooks +=1
+    money -=100
+    print("You now have", textbooks, "textbook(s). The amount of money left in your bank account is:", money, "dollars.")
+  else:
+    print("You didn't buy a textbook. You have", money,"dollars in your bank account.")
+
+ 
+ 
+ 
+''' Task 3: Make sure you are driving safe. Integer speedLimit stores the speed limit. integer carSpeed stores your car's speed. If your car is driving unsafely print "You are driving unsafely. Please slow down". If your car is driving safely print "You are driving safely."
  
 '''
  
 # solution
- 
- 
- 
-''' Task 3:
- 
-'''
- 
-# solution
- 
- 
- 
+speedLimit = 50
+carSpeed = 51
+if carSpeed > speedLimit:
+  print("You are driving unsafely. Please slow down.")
+else:
+  print("You are driving safely.")
+
 ''' Sources
  http://www.bowdoin.edu/~ltoma/teaching/cs107/spring05/Lectures/allif.pdf
  http://www.codeforwin.in/2015/05/if-else-programming-practice.html
