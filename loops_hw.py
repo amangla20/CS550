@@ -189,12 +189,10 @@ while i <= 20:
 '''
 n = 15
 multiplier = 0
-while n > 0:
-  if n%2 == 1:
-    multiplier += ((-1)**(n-1)) * (1/n)
-  else:
-    pass
-  n -= 1
+for i in range(n):
+  inew = 1 + 2*i
+  multiplier += ((-1)**(i)) * (1/inew)
+
 pi = 4 * multiplier
 print(pi)
  
@@ -208,7 +206,7 @@ print(pi)
 ''' 21. 
    Write some code that will run the rabbit simulation above 1000 times, to help determine what we can expect on average.
 '''
- 
+
  
  
 ''' 22. 
