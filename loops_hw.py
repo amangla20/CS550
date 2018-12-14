@@ -188,11 +188,13 @@ while i <= 20:
    Write a loop that will calculate this output for n-iterations of the pattern (n being an int), that could help you determine if your friend is right or wrong.
 '''
 n = 15
+multiplier = 0
 while n > 0:
   if n%2 == 1:
     multiplier += ((-1)**(n-1)) * (1/n)
   else:
     pass
+  n -= 1
 pi = 4 * multiplier
 print(pi)
  
