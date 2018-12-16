@@ -234,18 +234,17 @@ print(pi)
     9 |  9 18 27 36 45 54 63 72 81
 '''
 print("* |", end="  ")
-for i in range(9):
-  print(i + 1, end="  ") 
+for i in range(1,10):
+  print(i, end="  ") 
 print("")
 print("-------------------------------")
-for i in range(9):
-  i = i + 1
+for i in range(1,10):
   print(i, "|", end="  ")
-  for j in range(9):
+  for j in range(1,10):
     if (j + 1) * i < 10:
-      print((j + 1) * i, end="  ")
+      print(j * i, end="  ")
     else:
-      print((j + 1) * i, end=" ")
+      print(j * i, end=" ")
   print("")
  
  
