@@ -266,7 +266,12 @@ for i in range(9):
    Write code that will extract each digit from an int, in the reverse order. For example, if the int is 15423, the output shall be "3 2 4 5 1", with a space separating the digits.
    Hint: Use n % 10 to extract the least-significant digit; and n = n / 10 to discard the least-significant digit.
 '''
- 
+n = 15423
+for i in range(len(str(n))):
+  print(int(n % 10), end=" ")
+  n = n / 10
+print("")
+
  
  
 ''' Sources
