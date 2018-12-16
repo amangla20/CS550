@@ -11,21 +11,24 @@ for i in range(5):
 ''' 2. 
    Write a for loop that will print out all the integers from 0-4 in descending order.
 '''
+x = 4
 for i in range(5):
-  print()
- 
+  print(x)
+  x -= 1
  
 ''' 3. 
    Write a for loop that will print out all the integers from 5-15 in descending order.
 '''
- 
- 
- 
+x = 15
+for i in range(11):
+  print(x)
+  x -= 1 
+
 ''' 4. 
    Write a for loop that will print out all the integers from -5 to 5 in ascending order.
 '''
- 
- 
+for i in range(11):
+  print(i - 5)
  
 ''' 5. 
    Write two for loops that will both print out odd numbers from 25 to 49. The loops themselves must be different, but they will have the same output.
@@ -46,8 +49,11 @@ for i in range(25):
 ''' 6. 
    Write a for loop that prints out the squares of the numbers from 1 to 10. ie 1, 4, 9, 16, ... 100
 '''
- 
- 
+x = 1
+for i in range(10):
+  y = x**2
+  print(y)
+  x += 1
  
 ''' 7. 
    Write while loops that do the same thing as numbers 1-6.
@@ -93,8 +99,12 @@ while i <= 10:
 ''' 8. 
    A number starts at 4 and increases by one every day after the day it was created. Write a loop and use the variable days (int) that will print out how many days it will take for number to reach 57. 
 '''
- 
- 
+x = 4
+days = 0
+while x < 57:
+  x += 1
+  days += 1
+print(days)
  
 ''' 9. 
    A girl in your class has jellybeans in a jar. The number of jellybeans is stored in int beans. Every day she shares one jellybean with every student in the class, and she herself takes two. The number of students in the class is held in variable students (int). Write a loop that determines how many days it will take for her to run out of jellybeans. You can store the result in variable numDays (int).
@@ -112,9 +122,17 @@ print("Number of days it took to run out of jellybeans: ", numDays)
 ''' 10. 
    Today is the 14th of December. Vacation starts on firstDayOfVacation (int). Assuming your vacation starts in December, write a loop that will count down the number of days until your vacation starts. It's output should be something like: "10 days until vacation!" "9 days until vacation!" ... "1 day until vacation!" "Vacation has arrived!"
 '''
- 
- 
- 
+firstDayofVacation = 20
+today = 14
+while today < firstDayofVacation:
+  days = firstDayofVacation - today
+  if days > 1:
+    print(days, " days until vacation!")
+  else:
+    print(days, " day until vacation!")
+  today += 1
+print("Vacation has arrived!")
+
 ''' 11. 
    Write a loop that will calculate n factorial. The sum should be stored in result (int).
 '''
@@ -129,8 +147,28 @@ print(result)
 ''' 12. 
    A flying car can travel an average of 96mph. Write a loop that will determine how long it will take you (to the nearest quarter hour) to get to your destination if you were to travel by flying car. The distance to your destination is stored in distance (int).
 '''
- 
- 
+speed = 96
+distance = 150
+# time = distance/speed
+while (distance > 0):
+  time = distance/speed
+  print(time)
+  time_decimal = time - int(time)
+  print(time_decimal)
+  if time_decimal < 0.125:
+    time_decimal = 0
+  elif time_decimal > 0.125 and time_decimal < 0.375:
+    time_decimal = 0.25
+  elif time_decimal > 0.375 and time_decimal < 0.625:
+    time_decimal = 0.5
+  elif time_decimal > 0.625 and time_decimal < 0.875:
+    time_decimal = 0.75
+  else:
+    time_decimal = 1
+  time = time_decimal + int(time)
+  print(time, "hours.")
+  distance = 0
+
  
 ''' 13.  
    Write a loop that, given a number, n, will determine the value of n to the power of b. Store the result in variable exponent (int). 
@@ -146,7 +184,9 @@ print(exponent)
 ''' 14. 
    Write a loop that will print out all the letters of the alphabet.
 '''
- 
+alphabet = list(string.ascii_uppercase)
+for i in range(26):
+  print(alphabet[i]) 
  
 ''' 15. 
    Now write a loop that will print out "A is a vowel." "B is a consonant." "C is a consonant." and so on. 
@@ -163,7 +203,10 @@ for i in range(26):
    Write code that will produce the following output: 
    122333444455555666666777777788888888999999999
 '''
- 
+for x in range(1,10):
+  for y in range(x):
+    print(x, end="")
+print("")
  
  
 ''' 17. 
@@ -179,8 +222,10 @@ while i <= 20:
 ''' 18. 
    Write a loop that determines the sum of all the numbers from 1-100, as well as the average. Store the sum in variable total (int) and the average in variable avg (float).
 '''
- 
- 
+for i in range(100):
+  x = i+1
+  total += x
+  average = total/x
  
 ''' 19. 
    A friend tells you that PI can be computed with the following equation:
