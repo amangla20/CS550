@@ -2,6 +2,7 @@
    Work with a partner to complete these tasks. Assume that all variables mentioned in the description are declared and initialized; however, feel free to use additional variable as necessary (please avoid extra variables, though; don't use them unless you must to store a required value or simplify your code.) Write your solution below the commented description.
 '''
 import string
+import random
 ''' 1. 
    Write a for loop that will print out all the integers from 0-4 in ascending order. 
 '''
@@ -222,10 +223,10 @@ while i <= 20:
 ''' 18. 
    Write a loop that determines the sum of all the numbers from 1-100, as well as the average. Store the sum in variable total (int) and the average in variable avg (float).
 '''
-for i in range(100):
-  x = i+1
-  total += x
-  average = total/x
+total = 0
+for i in range(1,101):
+  total += i
+  average = total/i
  
 ''' 19. 
    A friend tells you that PI can be computed with the following equation:
@@ -245,8 +246,21 @@ print(pi)
 ''' 20. 
    A mother rabbit can have a litter of rabbits every month. In the litter, the number of rabbits can vary from 1 to 14 babies per litter, half of which are females. Rabbits can start reproducing at 6 months, so let's add all the new rabbits from the year to the reproductive pool at the end of each year (when their average age is 6 months). Write a simulation that will show how many rabbits will exist at the end of 5 years, starting with just one mother rabbit. 
 '''
- 
- 
+rabbitsf = 1
+rabbits = 1
+total = 1
+timer = []
+while (time < 60):
+  for i in range(rabbitsf):
+    babies = random.randint(1,14)
+    total += babies
+    newf = babies//2
+    timer.append(time)
+    for y in range(len(timer)):
+      if (timer[y] == time-6):
+        rabbitsf += newf
+  time += 1
+print(total)
  
 ''' 21. 
    Write some code that will run the rabbit simulation above 1000 times, to help determine what we can expect on average.
@@ -261,9 +275,30 @@ print(pi)
    23 Coza Loza 26 Coza Woza 29 CozaLoza 31 32 Coza
    ......
 '''
- 
- 
- 
+width = 11
+height = 10
+
+board = [["0"]*width for x in range(height)]
+
+for i in range(height):
+  for j in range(width):
+    if (board[i][j]%3 == 0) and (board[i][j]%5 == 0):
+      board[i][j] == "CozaLoza"
+    elif (board[i][j]%3 == 0) and (board[i][j]%7 == 0):
+      board[i][j] == "CozaWoza"
+    elif (board[i][j]%5 == 0) and (board[i][j]%7 == 0):
+      board[i][j] == "LocaWoza"
+    elif (board[i][j]%3 == 0):
+      board[i][j] == "Coza"
+    elif (board[i][j]%5 == 0):
+      board[i][j] == "Loza"
+    elif (board[i][j]%7 == 0):
+      board[i][j] == "Woza"
+
+for y in range (1, height+1):
+  for x in range (1, width+1):
+    print(board[y][x]) 
+
 ''' 23.
    Write code that will print out a times-table for practice and reference. It should look like this:
     * |  1  2  3  4  5  6  7  8  9
