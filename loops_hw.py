@@ -246,7 +246,6 @@ print(pi)
 ''' 20. 
    A mother rabbit can have a litter of rabbits every month. In the litter, the number of rabbits can vary from 1 to 14 babies per litter, half of which are females. Rabbits can start reproducing at 6 months, so let's add all the new rabbits from the year to the reproductive pool at the end of each year (when their average age is 6 months). Write a simulation that will show how many rabbits will exist at the end of 5 years, starting with just one mother rabbit. 
 '''
-"""
 rabbitsf = 1
 rabbits = 1
 total = 1
@@ -264,12 +263,11 @@ while (months < 60):
     rabbitsf += newf
     newf = 0
 #print(total)
-"""
  
 ''' 21. 
    Write some code that will run the rabbit simulation above 1000 times, to help determine what we can expect on average.
 '''
-"""
+
 counter = 1
 while counter < 1001:
   rabbitsf = 1
@@ -291,9 +289,6 @@ while counter < 1001:
         newf = 0
   #print(total)
   counter += 1
-
-
-"""
  
 ''' 22. 
    Write a loop which prints the numbers 1 to 110, 11 numbers per line. The program shall print "Coza" in place of the numbers which are multiples of 3, "Loza" for multiples of 5, "Woza" for multiples of 7, "CozaLoza" for multiples of 3 and 5, and so on. Sample output:
