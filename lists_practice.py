@@ -107,7 +107,13 @@ print(deck)
    In a list, specials are numbers in a list that have an even number before them, an odd number behind them, and they themselves are divisible by 3. Given a list of ints called numbers, print out the location in the list of the specials, as well as the value in front of them, their value, and the value behind them. For example:
    position 4: 14, 9, 25
 '''
- 
+numbers = [4, 6, 9, 19, 10, 3, 46, 27, 87]
+for n in range(len(numbers)):
+   if numbers[n]%3 == 0:
+      if numbers[n-1]%2 == 0:
+         if numbers[n+1]%2 == 1:
+            print("position " + str(n) + ": " + str(numbers[n-1]) + ", " + str(numbers[n]) + ", " + str(numbers[n+1]))
+
  
  
 ''' 16. 
