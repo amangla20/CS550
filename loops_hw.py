@@ -270,24 +270,29 @@ while (months < 60):
    Write some code that will run the rabbit simulation above 1000 times, to help determine what we can expect on average.
 '''
 """
-rabbitsf = 1
-rabbits = 1
-newf = 0
-total = 1
-months = 0
-for i in range(1000):
-  while (months < 60):
-    for i in range(rabbitsf):
-      babies = random.randint(1,14)
-      total += babies
-      tempf = babies//2
-      newf += tempf
-      # timer.append(time)
-    months += 1
-    if months%6 == 0:
-      rabbitsf += newf
-      newf = 0
-#print(total)
+counter = 1
+while counter < 1001:
+  rabbitsf = 1
+  rabbits = 1
+  newf = 0
+  total = 1
+  months = 0
+  for i in range(1000):
+    while (months < 60):
+      for i in range(rabbitsf):
+        babies = random.randint(1,14)
+        total += babies
+        tempf = babies//2
+        newf += tempf
+        # timer.append(time)
+      months += 1
+      if months%6 == 0:
+        rabbitsf += newf
+        newf = 0
+  #print(total)
+  counter += 1
+
+
 """
  
 ''' 22. 
@@ -366,61 +371,118 @@ width = 7
 height = 7
 
 for i in range (width):
-  print("#", end = "")
+  print("#", end = " ")
 
-print("\n")
+print("")
 
 for i in range (width-2):
-  print("#     #")
+  print("#           #")
 
 for i in range (width):
-  print("#", end = "")
+  print("#", end = " ")
+
+print("")
+#--------------------------------
+
+for i in range (width):
+  print("#", end = " ")
+
+print("")
+
+for i in range(width):
+  if i == 1 or i == width - 2:
+    print("#", end=" ")
+  else:
+    print(" ", end=" ")
+
+print("")
+
+for i in range(width):
+  if i == 2 or i == width - 3:
+    print("#", end=" ")
+  else:
+    print(" ", end=" ")
+
+print("")
+
+for i in range(width):
+  if i == 3:
+    print("#", end = " ")
+  else:
+    print(" ", end = " ")
+
+print("")
+
+for i in range(width):
+  if i == 2 or i == width - 3:
+    print("#", end=" ")
+  else:
+    print(" ", end=" ")
+
+print("")
+
+for i in range(width):
+  if i == 1 or i == width - 2:
+    print("#", end=" ")
+  else:
+    print(" ", end=" ")
+
+print("")
+
+for i in range (width):
+  print("#", end = " ")
+
+print("")
 
 #--------------------------------
 
 for i in range (width):
-  print("#", end = "")
+  print("#", end = " ")
 
-print("\n")
+print("")
 
-print(" #   # ")
+for i in range(width):
+  if i == 0 or i == 1 or i == width - 2 or i == width - 1:
+    print("#", end=" ")
+  else:
+    print(" ", end = " ")
 
-print("  # #  ")
+print("")
 
+for i in range(width):
+  if i == 0 or i == 2 or i == width - 3 or i == width - 1:
+    print("#", end=" ")
+  else:
+    print(" ", end = " ")
 
-print("   #   ")
+print("")
 
+for i in range(width):
+  if i == 0 or i == 3 or i == width - 1:
+    print("#", end=" ")
+  else:
+    print(" ", end = " ")
 
-print("  # #  ")
+print("")
 
+for i in range(width):
+  if i == 0 or i == 2 or i == width - 3 or i == width - 1:
+    print("#", end=" ")
+  else:
+    print(" ", end = " ")
 
-print(" #   # ")
+print("")
+
+for i in range(width):
+  if i == 0 or i == 1 or i == width - 2 or i == width - 1:
+    print("#", end=" ")
+  else:
+    print(" ", end = " ")
+
+print("")
 
 for i in range (width):
-  print("#", end = "")
-
-#--------------------------------
-
-for i in range (width):
-  print("#", end = "")
-
-print("\n")
-
-print("##   ##")
-
-print("# # # #")
-
-
-print("#  #  #")
-
-
-print("# # # #")
-
-
-print("##   ##")
-
-for i in range (width):
-  print("#", end = "")
+  print("#", end = " ")
  
 print("") 
  
