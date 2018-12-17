@@ -249,24 +249,44 @@ print(pi)
 rabbitsf = 1
 rabbits = 1
 total = 1
-timer = []
-while (time < 60):
+months = 0
+newf = 0
+while (months < 60):
   for i in range(rabbitsf):
     babies = random.randint(1,14)
     total += babies
-    newf = babies//2
-    timer.append(time)
-    for y in range(len(timer)):
-      if (timer[y] == time-6):
-        rabbitsf += newf
-  time += 1
+    tempf = babies//2
+    newf += tempf
+    # timer.append(time)
+  months += 1
+  if months%6 == 0:
+    rabbitsf += newf
+    newf = 0
 print(total)
+
  
 ''' 21. 
    Write some code that will run the rabbit simulation above 1000 times, to help determine what we can expect on average.
 '''
+rabbitsf = 1
+rabbits = 1
+newf = 0
+total = 1
+months = 0
+for i in range(1000):
+  while (months < 60):
+    for i in range(rabbitsf):
+      babies = random.randint(1,14)
+      total += babies
+      tempf = babies//2
+      newf += tempf
+      # timer.append(time)
+    months += 1
+    if months%6 == 0:
+      rabbitsf += newf
+      newf = 0
+print(total)
 
- 
  
 ''' 22. 
    Write a loop which prints the numbers 1 to 110, 11 numbers per line. The program shall print "Coza" in place of the numbers which are multiples of 3, "Loza" for multiples of 5, "Woza" for multiples of 7, "CozaLoza" for multiples of 3 and 5, and so on. Sample output:
@@ -278,10 +298,9 @@ print(total)
 width = 11
 height = 10
 
-board = [["0"]*width for x in range(height)]
-
 for i in range(height):
   for j in range(width):
+    board = [[j+1]*width for x in range(height)]
     if (board[i][j]%3 == 0) and (board[i][j]%5 == 0):
       board[i][j] == "CozaLoza"
     elif (board[i][j]%3 == 0) and (board[i][j]%7 == 0):
@@ -338,6 +357,65 @@ for i in range(1,10):
    #           #      #       #      # #       # #
    # # # # # # #    # # # # # # #    # # # # # # #
 '''
+width = 7
+height = 7
+
+for i in range (width):
+  print("#", end = "")
+
+print("\n")
+
+for i in range (width-2):
+  print("#     #")
+
+for i in range (width):
+  print("#", end = "")
+
+#--------------------------------
+
+for i in range (width):
+  print("#", end = "")
+
+print("\n")
+
+print(" #   # ")
+
+print("  # #  ")
+
+
+print("   #   ")
+
+
+print("  # #  ")
+
+
+print(" #   # ")
+
+for i in range (width):
+  print("#", end = "")
+
+#--------------------------------
+
+for i in range (width):
+  print("#", end = "")
+
+print("\n")
+
+print("##   ##")
+
+print("# # # #")
+
+
+print("#  #  #")
+
+
+print("# # # #")
+
+
+print("##   ##")
+
+for i in range (width):
+  print("#", end = "")
  
   
  
