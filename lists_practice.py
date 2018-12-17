@@ -137,7 +137,11 @@ for n in range(len(numbers)):
 ''' 19. 
    Given a list, doorknobs, that holds strings, swap the elements at positions 1 and 3, if possible.
 '''
- 
+doorknobs = ["string", "string2", "hi", "world", "what"]
+
+doorknobs[1], doorknobs[3] = doorknobs[3], doorknobs[1]
+
+print(doorknobs)
  
  
 ''' 20. 
