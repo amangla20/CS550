@@ -246,6 +246,7 @@ print(pi)
 ''' 20. 
    A mother rabbit can have a litter of rabbits every month. In the litter, the number of rabbits can vary from 1 to 14 babies per litter, half of which are females. Rabbits can start reproducing at 6 months, so let's add all the new rabbits from the year to the reproductive pool at the end of each year (when their average age is 6 months). Write a simulation that will show how many rabbits will exist at the end of 5 years, starting with just one mother rabbit. 
 '''
+"""
 rabbitsf = 1
 rabbits = 1
 total = 1
@@ -262,12 +263,13 @@ while (months < 60):
   if months%6 == 0:
     rabbitsf += newf
     newf = 0
-print(total)
-
+#print(total)
+"""
  
 ''' 21. 
    Write some code that will run the rabbit simulation above 1000 times, to help determine what we can expect on average.
 '''
+"""
 rabbitsf = 1
 rabbits = 1
 newf = 0
@@ -285,8 +287,8 @@ for i in range(1000):
     if months%6 == 0:
       rabbitsf += newf
       newf = 0
-print(total)
-
+#print(total)
+"""
  
 ''' 22. 
    Write a loop which prints the numbers 1 to 110, 11 numbers per line. The program shall print "Coza" in place of the numbers which are multiples of 3, "Loza" for multiples of 5, "Woza" for multiples of 7, "CozaLoza" for multiples of 3 and 5, and so on. Sample output:
@@ -297,26 +299,29 @@ print(total)
 '''
 width = 11
 height = 10
-
+space = 1
+board = [[0]*width for x in range(height)]
 for i in range(height):
   for j in range(width):
-    board = [[j+1]*width for x in range(height)]
+    board[i][j] = space
+    space += 1
     if (board[i][j]%3 == 0) and (board[i][j]%5 == 0):
-      board[i][j] == "CozaLoza"
+      board[i][j] = "CozaLoza"
     elif (board[i][j]%3 == 0) and (board[i][j]%7 == 0):
-      board[i][j] == "CozaWoza"
+      board[i][j] = "CozaWoza"
     elif (board[i][j]%5 == 0) and (board[i][j]%7 == 0):
-      board[i][j] == "LocaWoza"
+      board[i][j] = "LocaWoza"
     elif (board[i][j]%3 == 0):
-      board[i][j] == "Coza"
+      board[i][j] = "Coza"
     elif (board[i][j]%5 == 0):
-      board[i][j] == "Loza"
+      board[i][j] = "Loza"
     elif (board[i][j]%7 == 0):
-      board[i][j] == "Woza"
+      board[i][j] = "Woza"
 
-for y in range (1, height+1):
-  for x in range (1, width+1):
-    print(board[y][x]) 
+for y in range(height):
+    for x in range(width):
+      print(board[y][x],end=" ")
+    print("")
 
 ''' 23.
    Write code that will print out a times-table for practice and reference. It should look like this:
@@ -417,7 +422,7 @@ print("##   ##")
 for i in range (width):
   print("#", end = "")
  
-  
+print("") 
  
 ''' 25. 
    Write code that will extract each digit from an int, in the reverse order. For example, if the int is 15423, the output shall be "3 2 4 5 1", with a space separating the digits.
