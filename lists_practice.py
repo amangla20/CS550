@@ -88,20 +88,13 @@ dorms = ["Memorial House", "Nichols", "Pitman", "Squire"]
 ''' 13. 
    Create a list that will represent a deck of cards. Some example data for cards would be AS (ace of spades), 5H (5 of hearts), JC (jack of clubs), 9D (9 diamonds). (Loop required.) 
 '''
-cards = []
-
-for i in range(1,14):
-   for j in range(4):
-      if i == 1:
-         cards.append("A")
-      elif i == 11:
-         cards.append("J")
-      elif i == 12:
-         cards.append("Q")
-      elif i == 13:
-         cards.append("K")
-      cards.append(i)
-print(cards)
+cards = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+suits = ['S', 'H', 'C', 'D']
+deck = []
+for c in cards:
+   for s in suits:
+      deck.append(c+s)
+print(deck)
  
  
 ''' 14. 
