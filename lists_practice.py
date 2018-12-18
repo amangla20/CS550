@@ -272,8 +272,12 @@ print(shifters)
 ''' 24. 
    Given an N-by-N grid of elevation values (in meters), a peak is a grid point for which all four neighboring cells are strictly lower. Write a code fragment that counts the number of peaks in a given N-by-N grid.
 '''
- 
-  
+peaks = 0 
+grid = []
+for x in range (N):
+   for y in range (N):
+      if grid[x][y] > grid[x+1][y] and grid[x][y] > grid[x+1][y+1] and grid[x][y] > grid[x+1][y-1] and grid[x][y] > grid[x][y] and grid[x][y] > grid[x][y+1] and grid[x][y] > grid[x][y-1]grid[x][y] > grid[x-1][y] and grid[x][y] > grid[x-1][y+1] and grid[x][y] > grid[x-1][y-1]:
+         peaks = peaks + 1
  
 ''' 25. 
    90% of incoming college students rate themselves as above average. Write some code that, given a list of student rankings (stored in integer list rankings), prints the fraction of values that are strictly above the average value.
