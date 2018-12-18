@@ -7,7 +7,7 @@
 import numpy
 from sympy import *
 from sympy.geometry import *
- 
+from turtle import *
  
 ''' 1.
     Create a class, Point, that keeps track of two properties: x and y
@@ -21,9 +21,37 @@ from sympy.geometry import *
     flip_horizontally: flip the point on the x-axis
     flip_vertically: flip the point on the y-axis
 '''
- 
- 
- 
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def rotaten90(self):
+        tempx = self.x
+        tempy = self.y
+        self.y = -1*tempx
+        self.x = tempy
+
+    def rotate180(self):
+        self.x *= -1
+        self.y *= -1
+
+    def rotate90(self):
+        tempx = self.x
+        tempy = self.y
+        self.y = tempx
+        self.x = -1*tempy   
+
+    def translate(self, orx, ory):
+        self.x += orx
+        self.y += ory
+
+    def flip_vertically(self):
+        self.y *= -1
+
+    def flip_horizontally(self):
+        self.x *= -1
+
  
  
 ''' 2.
@@ -92,8 +120,20 @@ print(nsum)
 ''' 5.
     Use turtle to draw a star.
 '''
- 
- 
+color('orange', 'green')
+begin_fill()
+left(60)
+forward(100)
+right(120)
+forward(100)
+right(150)
+forward(120)
+right(150)
+forward(100)
+right(150)
+forward(120)
+end_fill()
+done()
  
  
  
@@ -120,4 +160,6 @@ print(abs(t.area))
 ''' Sources:
     https://docs.oracle.com/javase/tutorial/java/javaOO/classes.html
     https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.arange.html
+    https://docs.sympy.org/latest/modules/geometry/index.html
+    https://docs.python.org/3/library/turtle.html
 '''
