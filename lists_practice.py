@@ -174,13 +174,14 @@ print(doorknobs)
 ''' 20. 
    In a list of ints called numbers, find the largest number in the list and place it at the end of the list.
 '''
-numbers = []
+numbers = [3, 6, 9, 7]
 greatest = numbers[0]
 for i in range(len(numbers)):
    if greatest < numbers[i]:
       greatest = numbers[i]
 numbers.remove(greatest)
 numbers.append(greatest)
+print(numbers)
  
  
  
