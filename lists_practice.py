@@ -1,7 +1,7 @@
 ''' Instructions:
    Work with a partner to complete these tasks. You may assume that all variables/lists are declared and initialized (unless you are specifically asked to create/initialize a list); you need only write the code using the variables/lists indicated in the description. Write your solution below the commented description.
 '''
- 
+import random
 ''' 1. 
    Create a list of ints, faveNums, that holds 3 integers.
 '''
@@ -153,7 +153,28 @@ print(doorknobs)
 ''' 21. 
    In a 2D list with dimensions w by h, filled with random numbers from from 1 to 100, replace every odd number with either 2 or 22; 2 if the number was a single digit number, 22 if the number was a 2-digit number. 
 '''
- 
+w = 10
+h = 10
+
+board = [[0]*w for x in range(h)]
+for y in range(h):
+   for x in range(w):
+      board[y][x] = random.randint(1,100)
+
+for y in range(h):
+   for x in range(w):
+      if board[y][x]%2 == 1:
+         if board[y][x] < 10:
+            board[y][x] = 2
+         else:
+            board[y][x] = 22
+      if board[y][x] < 10:
+         print(board[y][x],end="  ")
+      elif board[y][x] > 99:
+         print(board[y][x],end="")
+      else:
+         print(board[y][x],end=" ")
+   print("")
  
  
 ''' 22. 
@@ -165,7 +186,7 @@ print(doorknobs)
 ''' 23.
    In a list, shifters, holding ints, shift all elements forward 1 position. For example, position 2 should move to position 1, position 1 to position 0, and position 0 to the end of the list (etc.)
 '''
- 
+
  
  
 ''' 24. 
@@ -177,7 +198,19 @@ print(doorknobs)
 ''' 25. 
    90% of incoming college students rate themselves as above average. Write some code that, given a list of student rankings (stored in integer list rankings), prints the fraction of values that are strictly above the average value.
 '''
- 
+rankings = [80, 30, 29, 18, 1, 99, 38, 50, 26, 67]
+above_average = []
+total = len(rankings)
+rsum = 0
+for r in rankings:
+   rsum += r
+average = rsum/total
+for r in rankings:
+   # in this case, the lower the ranking is, the better (so number 1 means you are the best in the school)
+   if r < average:
+      above_average.append(r)
+
+print(len(above_average)/total)
  
  
 ''' 26. 
