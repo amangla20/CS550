@@ -273,7 +273,8 @@ print(shifters)
    Given an N-by-N grid of elevation values (in meters), a peak is a grid point for which all four neighboring cells are strictly lower. Write a code fragment that counts the number of peaks in a given N-by-N grid.
 '''
 peaks = 0 
-grid = []
+N = 10
+grid = [[random.randint(1,100)]*N for x in N]
 for x in range (N):
    for y in range (N):
       if grid[x][y] > grid[x+1][y] and grid[x][y] > grid[x+1][y+1] and grid[x][y] > grid[x+1][y-1] and grid[x][y] > grid[x][y] and grid[x][y] > grid[x][y+1] and grid[x][y] > grid[x][y-1]grid[x][y] > grid[x-1][y] and grid[x][y] > grid[x-1][y+1] and grid[x][y] > grid[x-1][y-1]:
