@@ -186,7 +186,17 @@ for y in range(h):
 ''' 23.
    In a list, shifters, holding ints, shift all elements forward 1 position. For example, position 2 should move to position 1, position 1 to position 0, and position 0 to the end of the list (etc.)
 '''
-
+shifters = [1, 2, 3, 4, 5]
+x = shifters[0]
+for i in range(len(shifters)):
+   if i < len(shifters) - 1:
+      shifters.append(shifters[1])
+   else:
+      pass  
+   shifters.remove(shifters[0])
+   
+shifters.append(x)
+print(shifters)
  
  
 ''' 24. 
