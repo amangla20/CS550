@@ -296,9 +296,18 @@ print(len(above_average)/total)
 ''' 26. 
    Given a 9-by-9 list of integers between 1 and 9, check if it is a valid solution to a Sudoku puzzle: each row, column, and block should contain the 9 integers exactly once.
 '''
- 
- 
- 
+board=[[random.randint(1,9), random.randint(1,9), random.randint(1,9), random.randint(1,9), random.randint(1,9),  random.randint(1,9), random.randint(1,9), random.randint(1,9), random.randint(1,9)] for i in range(9)]
+correct = 0
+for i in range (9):
+   if board[i][0] + board[i][2] + board[i][3] + board[i][4] + board[i][5] + board[i][6] + board[i][7] + board[i][8] == 45:
+      correct = correct+1
+for i in range (9):
+   if board[0][i] + board[2][i] + board[3][i] + board[4][i] + board[5][i] + board[6][i] + board[7][i] + board[8][i] == 45:
+      correct = correct+1
+if correct == 18:
+   Sudoku = True
+   print(*board)
+
 '''
     27. Create a list of 100 numbers between 1 and 10 (inclusive), create a new list whose first value is the number of 1s in the original list, whose 2nd value is the number of 2s in the original list, and so on. Average the number of occurences of each number in the list over 100 repetitions. Average the averages. Print the result to the screen.
 '''
