@@ -133,7 +133,17 @@ for n in range(len(numbers)):
 ''' 16. 
    Write a program to search for the "saddle points" in a 5 by 5 list of integers. A saddle point is a cell whose value is greater than or equal to any in its row, and less than or equal to any in its column. There may be more than one saddle point in the list. Print out the coordinates of any saddle points your program finds. Print out "No saddle points" if there are none.
 '''
- 
+saddlepoint = ["No saddlepoint"]
+board=[[random.randint(1,10), random.randint(1,10), random.randint(1,10), random.randint(1,10), random.randint(1,10)] for i in range(5)]
+for i in range(5):
+   print(*board[i])
+for x in range(5):
+   for y in range(5):
+      if board[x][0] <= board[x][y] and board[x][1] <= board[x][y] and board[x][2] <= board[x][y] and board[x][3] <= board[x][y] and board[x][4] <= board[x][y]:
+         if board[x][y] <= board[0][y] and board[x][y] <= board[1][y] and board[x][y] <= board[2][y] and board[x][y] <= board[3][y] and board[x][y] <= board[4][y]:
+            saddlepoint.append(board[x][y])
+            saddlepoint.remove("No saddlepoint")
+print(saddlepoint)
  
  
 ''' 17. 
@@ -147,8 +157,9 @@ board = [[0]*8 for x in range(8)]
 ''' 18. 
    Given a list, write code that will reverse the order of the elements in the list. For example, dog, cat, bunny should become bunny, cat, dog.
 '''
- 
- 
+mylist = [3, 5, 9]
+mylist.reverse()
+print(mylist) 
  
 ''' 19. 
    Given a list, doorknobs, that holds strings, swap the elements at positions 1 and 3, if possible.
@@ -163,6 +174,13 @@ print(doorknobs)
 ''' 20. 
    In a list of ints called numbers, find the largest number in the list and place it at the end of the list.
 '''
+numbers = []
+greatest = numbers[0]
+for i in range(len(numbers)):
+   if greatest < numbers[i]:
+      greatest = numbers[i]
+numbers.remove(greatest)
+numbers.append(greatest)
  
  
  
