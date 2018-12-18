@@ -222,8 +222,27 @@ print(len(above_average)/total)
 '''
     27. Create a list of 100 numbers between 1 and 10 (inclusive), create a new list whose first value is the number of 1s in the original list, whose 2nd value is the number of 2s in the original list, and so on. Average the number of occurences of each number in the list over 100 repetitions. Average the averages. Print the result to the screen.
 '''
- 
- 
+nums = []
+count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+avecount = []
+for y in range(100):
+   for i in range(100):
+      nums.append(random.randint(1,10))
+   for n in nums:
+      for x in range(1,11):
+         if n == x:
+            count[x - 1] += 1
+
+for c in count:
+   average = c/100
+   avecount.append(average)
+
+asum = 0
+for a in avecount:
+   asum += a
+average = asum/len(avecount)
+print(average)
+# keep getting 505.0
  
 ''' Sources
    http://users.csc.calpoly.edu/~jdalbey/103/Projects/ProgrammingPractice.html
