@@ -23,7 +23,9 @@ grades = ['A', 'B', 'C', 'D', 'F']
 ''' 4. 
    Create a list of booleans, funny, the can keep track of whether 18 things are funny or not. 
 '''
- 
+funny = []
+for i in range(18):
+   funny.append(True) 
  
  
 ''' 5. 
@@ -36,7 +38,11 @@ numEmployees = len(salaries)
 ''' 6. 
    A picture's dimensions are stored in integer variables x and y. Create a single list of integers that can store the grayscale value for each pixel in the list.
 '''
- 
+x = 100
+y = 100
+grayscale = []
+for i in range (x*y):
+   grayscale.append(random.randint(0,255)) 
  
  
 ''' 7. 
@@ -58,7 +64,7 @@ else:
 ''' 8. 
    Create a list that holds all the months in the year. (No loop.)
 '''
- 
+months = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
  
  
 ''' 9. 
@@ -70,21 +76,23 @@ weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", 
 ''' 10. 
    Create a list that holds all the possible values for boolean variables. (No loop.)
 '''
- 
- 
+booleanvariable = [True, False]
  
 ''' 11. 
    Create a list that holds the names of all the 3rd form dorms on campus. (No loop.)
 '''
 dorms = ["Memorial House", "Nichols", "Pitman", "Squire"]
  
- 
 ''' 12.  
    Create a list that holds 3 random numbers with values between 0 and 1. (Loop optional.)
 '''
- 
- 
- 
+randomnumbers = []
+
+for i in range(3):
+   randomnumbers.append(random.random())
+
+print(randomnumbers)
+
 ''' 13. 
    Create a list that will represent a deck of cards. Some example data for cards would be AS (ace of spades), 5H (5 of hearts), JC (jack of clubs), 9D (9 diamonds). (Loop required.) 
 '''
@@ -100,7 +108,13 @@ print(deck)
 ''' 14. 
    Write a Yahtzee program that simulates the rolling of five dice and prints "Yahtzee" if all five dice are the same; otherwise it should print "Try again."
 '''
- 
+Yahtzee = []
+for i in range(5):
+   Yahtzee.append(random.randint(0,6))
+if Yahtzee[0] ==  Yahtzee[1] and Yahtzee[0] ==  Yahtzee[2] and Yahtzee[0] ==  Yahtzee[3] and Yahtzee[0] ==  Yahtzee[4]:
+   print ("Yahtzee")
+else:
+   print("Try again.")
  
  
 ''' 15. 
@@ -125,7 +139,9 @@ for n in range(len(numbers)):
 ''' 17. 
    In the game of chess, a queen can attack pieces which are on the same row, column, or diagonal. A chessboard can be represented by an 8 by 8 list. A 1 in the list represents a queen on the corresponding square, and a O in the list represents an unoccupied square. Given the two locations for queens (row1, col1, row2, col2), place the queens in the 2D list, chessboard. Then process the board and indicate whether or not the two queens are positioned so that they attack each other. 
 '''
- 
+board = [[0]*8 for x in range(8)]
+
+
  
  
 ''' 18. 
