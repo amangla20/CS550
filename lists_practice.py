@@ -151,7 +151,15 @@ print(saddlepoint)
 '''
 board = [[0]*8 for x in range(8)]
 
+for i in range(2):
+   x = random.randint(0,7)
+   y = random.randint(0,7)
+   board[y][x] = 1
 
+for y in range(8):
+   for x in range(8):
+      print(board[y][x], end=" ")
+   print("")
  
  
 ''' 18. 
@@ -215,7 +223,7 @@ for y in range(h):
 ''' 22. 
    In a 2D list with dimensions w by h, holding grayscale values for an image, adjust the colors so the image is inverted. All light portions should be dark, all dark portions should be light. A value of 200 should be 5, a value of 100 should be 155, etc. Remember, there are 256 levels for color, including 0.
 '''
- 
+
  
  
 ''' 23.
