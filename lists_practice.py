@@ -150,17 +150,28 @@ print(saddlepoint)
    In the game of chess, a queen can attack pieces which are on the same row, column, or diagonal. A chessboard can be represented by an 8 by 8 list. A 1 in the list represents a queen on the corresponding square, and a O in the list represents an unoccupied square. Given the two locations for queens (row1, col1, row2, col2), place the queens in the 2D list, chessboard. Then process the board and indicate whether or not the two queens are positioned so that they attack each other. 
 '''
 board = [[0]*8 for x in range(8)]
-
+queens = []
 for i in range(2):
    x = random.randint(0,7)
    y = random.randint(0,7)
    board[y][x] = 1
+   queens.append(x)
+   queens.append(y)
 
 for y in range(8):
    for x in range(8):
       print(board[y][x], end=" ")
    print("")
- 
+# same column and row
+if queens[0] == queens[2]:
+   print("Same column: They can attack!")
+elif queens[1] == queens[3]:
+   print("Same row: They can attack!")
+# diagonal
+elif abs(queens[0] - queens[2]) == abs(queens[1] - queens[3]):
+   print("On the diagonal: They can attack!")
+else:
+   print("They can't attack.")
  
 ''' 18. 
    Given a list, write code that will reverse the order of the elements in the list. For example, dog, cat, bunny should become bunny, cat, dog.
@@ -223,8 +234,24 @@ for y in range(h):
 ''' 22. 
    In a 2D list with dimensions w by h, holding grayscale values for an image, adjust the colors so the image is inverted. All light portions should be dark, all dark portions should be light. A value of 200 should be 5, a value of 100 should be 155, etc. Remember, there are 256 levels for color, including 0.
 '''
+w = 10
+h = 10
+board = [[0]*w for x in range(h)]
+for y in range(h):
+   for x in range(w):
+      board[y][x] = random.randint(0,255)
+      board[y][x] = 255 - board[y][x]
 
- 
+for y in range(h):
+   for x in range(w):
+      if board[y][x] > 99:
+         print(board[y][x],end=" ")
+      elif board[y][x] > 9:
+         print(board[y][x],end="  ")
+      else:
+         print(board[y][x],end="   ")
+   print("")
+
  
 ''' 23.
    In a list, shifters, holding ints, shift all elements forward 1 position. For example, position 2 should move to position 1, position 1 to position 0, and position 0 to the end of the list (etc.)
