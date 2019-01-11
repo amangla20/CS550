@@ -69,15 +69,15 @@ trials = 100000
 circle = 0 # keeps count of how many lands in the circle
 # are the random values floats or integers? use randrange or uniform?
 for i in range(trials):
-	pos[0] = random.randrange(-2, 3)
-	pos[1] = random.randrange(-2, 3)
+	pos[0] = random.uniform(-1, 1)
+	pos[1] = random.uniform(-1, 1)
 	dart_dist = math.sqrt((pos[0])**2 + (pos[1])**2)
 	if dart_dist <= 1:
 		circle += 1
 
 print((circle * 4) / trials)
 
-# always gets around 0.8 (80%) with random.randrange and around 0.78 or 0.79 with random.uniform
+# always gets around 3.14 with random.uniform, which approximates pi
 
 
 
