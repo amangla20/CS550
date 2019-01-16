@@ -1,14 +1,13 @@
 # Anjali Mangla
+# 1/16/2019
+# Sources are given below.
+# On my honor, I have neither given nor received unauthorized aid.
 import random
 import math
 import matplotlib.pyplot as plt
 from collections import Counter
 
-# simulation WITH colorful graphs? combining options 1 and 2?
-
-# simulation ideas: what is the chance that based on how many times you travel and where you travel that you will catch a certain disease? and then also graph the data set really colorfully? or child slavery data set?
-
-# how much time would it take to lose 40 pounds for a female following a strict calorie counting diet?
+# How much time would it take to lose 40 pounds for a female following a strict calorie counting diet?
 
 # one pound is 3,500 calories, and you should be pacing yourself to lose about 1-2 pounds a week. This means you should burn 3,500 calories a week
 # using the formula online: https://www.google.com/search?q=calculating+bmr+formula&oq=calculating+bmr+formula&aqs=chrome..69i57j0l5.4805j0j1&sourceid=chrome&ie=UTF-8
@@ -32,6 +31,7 @@ for i in range(trials):
 	# weight loss of 40 pounds should only be happening in women of a substantial age, like a normal ten year-old wouldn't worry about nor probably be able to lose 40 pounds.
 	# women usually gain weight until age 65, and afterwards begin to lose weight (naturally) so the upper limit of age will be 65, and the younger limit be a teen.
 	age = random.randint(13, 65)
+	# different activity levels, randomized.
 	activity = random.randint(0, 4)
 	if activity == 0:
 		# sedentary
@@ -52,9 +52,10 @@ for i in range(trials):
 		# calculate bmr of current weight to get the number of calories needed to maintain your current weight
 		bmr = 655 + (4.35 * current_weight) + (4.7 * height) - (4.7 * age)
 		calories_maintaining = bmr * activity_factor
-		# assume the woman will go on a strict diet of eating only up to the calories needed to maintain the desired weight every day
+		# assume the woman will go on a strict diet of eating only up to the calories needed to maintain the desired weight every day (one way of doing)
 		bmr = 655 + (4.35 * desired_weight) + (4.7 * height) - (4.7 * age)
 		calories_desired = bmr * activity_factor
+		# randomly eat 500 to 1000 calories less than the calories needed to sustain at weight - but why is it even needed to be found out if the calories lost are randomized?
 		calories_per_day = calories_maintaining - random.randint(500, 1000)
 		calories_lost += random.randint(500, 1000)
 		#calories_cut_per_day = calories_maintaining - calories_desired
@@ -83,7 +84,7 @@ for tuples in results:
 	graph_data.append(tuples[1])
 	x_data.append(tuples[0])
 
-plt.plot(x_data, graph_data)
+plt.plot(x_data, graph_data, color="purple", linestyle = '--')
 plt.show()
 
 
