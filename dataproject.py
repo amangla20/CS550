@@ -84,7 +84,11 @@ for tuples in results:
 	graph_data.append(tuples[1])
 	x_data.append(tuples[0])
 
-plt.plot(x_data, graph_data, xlabel="Months", ylabel="Frequency", title="Number of Months Required For a Female to Lose 40 Pounds", color="purple", linestyle = '--')
+# Info on manipulating matplotlib: https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xlabel.html and Matplotlib documentation
+plt.plot(x_data, graph_data, color="purple", linestyle = '--')
+plt.xlabel("Months")
+plt.ylabel("Frequency")
+plt.title("Amount of Time in Months Required For a Woman to Lose 40 Pounds")
 plt.show()
 
 
