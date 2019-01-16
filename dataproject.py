@@ -56,10 +56,10 @@ for i in range(trials):
 		bmr = 655 + (4.35 * desired_weight) + (4.7 * height) - (4.7 * age)
 		calories_desired = bmr * activity_factor
 		# randomly eat 500 to 1000 calories less than the calories needed to sustain at weight - but why is it even needed to be found out if the calories lost are randomized?
-		#calories_per_day = calories_maintaining - random.randint(500, 1000)
-		#calories_lost += random.randint(500, 1000)
-		calories_cut_per_day = calories_maintaining - calories_desired
-		calories_lost += calories_cut_per_day
+		calories_per_day = calories_maintaining - random.randint(500, 1000)
+		calories_lost += random.randint(500, 1000)
+		#calories_cut_per_day = calories_maintaining - calories_desired
+		#calories_lost += calories_cut_per_day
 		days += 1
 		# 1 pound is 3500 calories. 
 		pounds = calories_lost / 3500
