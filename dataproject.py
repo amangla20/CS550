@@ -23,6 +23,7 @@ days = 0
 calories_lost = 0
 for i in range(trials):
 	days = 0
+	calories_cut_per_day = 0
 	# current weight can be between 130 pounds and 500 pounds
 	current_weight = random.randint(130, 500)
 	desired_weight = current_weight - 40
@@ -52,8 +53,12 @@ for i in range(trials):
 		bmr = 655 + (4.35 * current_weight) + (4.7 * height) - (4.7 * age)
 		calories_maintaining = bmr * activity_factor
 		# assume the woman will go on a strict diet of eating only up to the calories needed to maintain the desired weight every day
+		bmr = 655 + (4.35 * desired_weight) + (4.7 * height) - (4.7 * age)
+		calories_desired = bmr * activity_factor
 		calories_per_day = calories_maintaining - random.randint(500, 1000)
 		calories_lost += random.randint(500, 1000)
+		#calories_cut_per_day = calories_maintaining - calories_desired
+		#calories_lost += calories_cut_per_day
 		days += 1
 		# 1 pound is 3500 calories. 
 		pounds = calories_lost / 3500
