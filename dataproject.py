@@ -48,18 +48,18 @@ for i in range(trials):
 	elif activity == 4:
 		# extra active
 		activity_factor = 1.9
-	while current_weight > desired_weight:
+	bmr = 655 + (4.35 * desired_weight) + (4.7 * height) - (4.7 * age)
+	calories_desired = bmr * activity_factor
+	while current_weight > desired_weight + 5:
 		# calculate bmr of current weight to get the number of calories needed to maintain your current weight
 		bmr = 655 + (4.35 * current_weight) + (4.7 * height) - (4.7 * age)
 		calories_maintaining = bmr * activity_factor
 		# assume the woman will go on a strict diet of eating only up to the calories needed to maintain the desired weight every day (one way of doing)
-		bmr = 655 + (4.35 * desired_weight) + (4.7 * height) - (4.7 * age)
-		calories_desired = bmr * activity_factor
 		# randomly eat 500 to 1000 calories less than the calories needed to sustain at weight - but why is it even needed to be found out if the calories lost are randomized?
-		calories_per_day = calories_maintaining - random.randint(500, 1000)
-		calories_lost += random.randint(500, 1000)
-		#calories_cut_per_day = calories_maintaining - calories_desired
-		#calories_lost += calories_cut_per_day
+		#calories_per_day = calories_maintaining - random.randint(500, 1000)
+		#calories_lost += random.randint(500, 1000)
+		calories_cut_per_day = calories_maintaining - calories_desired
+		calories_lost += calories_cut_per_day
 		days += 1
 		# 1 pound is 3500 calories. 
 		pounds = calories_lost / 3500
