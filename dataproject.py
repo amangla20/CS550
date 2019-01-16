@@ -84,7 +84,7 @@ for tuples in results:
 	graph_data.append(tuples[1])
 	x_data.append(tuples[0])
 
-plt.plot(x_data, graph_data, color="purple", linestyle = '--')
+plt.plot(x_data, graph_data, xlabel="Months", ylabel="Frequency", title="Number of Months Required For a Female to Lose 40 Pounds", color="purple", linestyle = '--')
 plt.show()
 
 
