@@ -24,12 +24,48 @@ days = 0
 pound = 3500*cal
 week = 7*days
 month = 4 * week
-desired_weight = current_weight - 40
-bmr = 655 + (4.35 * current_weight) + (4.7 * height) - (4.7 * age)
+calories_less_per_day = 0
 for i in range(trials):
+	# current weight can be between 130 pounds and 500 pounds
+	current_weight = random.randint(130, 500)
+	desired_weight = current_weight - 40
+	# heights of 4 feet 8 inches to 6 feet 6 inches
+	height = random.randint(56, 78)
+	# weight loss of 40 pounds should only be happening in women of a substantial age, like a normal ten year-old wouldn't worry about nor probably be able to lose 40 pounds.
+	# women usually gain weight until age 65, and afterwards begin to lose weight (naturally) so the upper limit of age will be 65, and the younger limit be a teen.
+	age = random.randint(13, 65)
+	activity = random.randint(0, 4)
+	if activity == 0:
+		# sedentary
+		activity_factor = 1.2
+	elif activity == 1:
+		# lightly active
+		activity_factor = 1.375
+	elif activity == 2:
+		# moderately active
+		activity_factor = 1.55
+	elif activity == 3:
+		# very active
+		activity_factor = 1.725
+	elif activity == 4:
+		# extra active
+		activity_factor = 1.9
+	while current_weight > desired_weight:
+		bmr = 655 + (4.35 * current_weight) + (4.7 * height) - (4.7 * age)
+		calories_maintaining = bmr * activity_factor
 
 
 
+
+
+"""
+Multiply your BMR by the appropriate activity factor, as follows:
+Sedentary (little or no exercise): BMR x 1.2
+Lightly active (light exercise/sports 1-3 days/week): BMR x 1.375
+Moderately active (moderate exercise/sports 3-5 days/week): BMR x 1.55
+Very active (hard exercise/sports 6-7 days a week): BMR x 1.725
+Extra active (very hard exercise/sports & physical job or 2x training): BMR x 1.9
+"""
 """
 for i in range(trials):
 	party = random.randint(1, 13)
