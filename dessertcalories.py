@@ -18,7 +18,7 @@ for i in range(trials):
 	calories_results.append(total_calories)
 	total_calories = 0
 
-results = sorted(Counter(calories_results).items())
+calories_results = sorted(Counter(calories_results).items())
 print(results)
 
 graph_data = []

@@ -8,7 +8,7 @@ from collections import Counter
 
 # simulation ideas: what is the chance that based on how many times you travel and where you travel that you will catch a certain disease? and then also graph the data set really colorfully? or child slavery data set?
 
-# how much time would it take to lose 40 pounds for a female?
+# how much time would it take to lose 40 pounds for a female following a strict calorie counting diet?
 
 # one pound is 3,500 calories, and you should be pacing yourself to lose about 1-2 pounds a week. This means you should burn 3,500 calories a week
 # using the formula online: https://www.google.com/search?q=calculating+bmr+formula&oq=calculating+bmr+formula&aqs=chrome..69i57j0l5.4805j0j1&sourceid=chrome&ie=UTF-8
@@ -19,12 +19,8 @@ from collections import Counter
 trials = 100
 
 results = []
-cal = 0
 days = 0
-pound = 3500*cal
-week = 7*days
-month = 4 * week
-calories_less_per_day = 0
+calories_lost = 0
 for i in range(trials):
 	# current weight can be between 130 pounds and 500 pounds
 	current_weight = random.randint(130, 500)
@@ -51,35 +47,23 @@ for i in range(trials):
 		# extra active
 		activity_factor = 1.9
 	while current_weight > desired_weight:
+		# calculate bmr of current weight to get the number of calories needed to maintain your current weight
 		bmr = 655 + (4.35 * current_weight) + (4.7 * height) - (4.7 * age)
 		calories_maintaining = bmr * activity_factor
-		calories_cut_per_day = random.randint(500, 1000)
+		# assume the woman will go on a strict diet of eating only up to the calories needed to maintain the desired weight every day
+		bmr = 655 + (4.35 * desired_weight) + (4.7 * height) - (4.7 * age)
+		# calories_desired represents the daily calorie count needed of the desired weight (40 pounds lower)
+		calories_desired = bmr * activity_factor
+		calories_cut_per_day = calories_maintaining - calories_desired
+		calories_lost += calories_cut_per_day
+		days += 1
+		# 1 pound is 3500 calories. 
+		pounds = calories_lost / 3500
+		current_weight -= pounds
+	# days/30 is how many months, approximately.
+	results.append(days/30)
 
-
-
-
-
-"""
-Multiply your BMR by the appropriate activity factor, as follows:
-Sedentary (little or no exercise): BMR x 1.2
-Lightly active (light exercise/sports 1-3 days/week): BMR x 1.375
-Moderately active (moderate exercise/sports 3-5 days/week): BMR x 1.55
-Very active (hard exercise/sports 6-7 days a week): BMR x 1.725
-Extra active (very hard exercise/sports & physical job or 2x training): BMR x 1.9
-"""
-"""
-for i in range(trials):
-	party = random.randint(1, 13)
-	total_calories = 0
-	for j in range(party):
-		servings = random.randint(1, 8)
-		for k in range(servings):
-			calories = random.randint(40, 500)
-			total_calories += calories
-	calories_results.append(total_calories)
-	total_calories = 0
-
-results = sorted(Counter(calories_results).items())
+results = sorted(Counter(results).items())
 print(results)
 
 graph_data = []
@@ -92,6 +76,15 @@ for tuples in results:
 
 plt.plot(x_data, graph_data)
 plt.show()
+
+
+"""
+Multiply your BMR by the appropriate activity factor, as follows:
+Sedentary (little or no exercise): BMR x 1.2
+Lightly active (light exercise/sports 1-3 days/week): BMR x 1.375
+Moderately active (moderate exercise/sports 3-5 days/week): BMR x 1.55
+Very active (hard exercise/sports 6-7 days a week): BMR x 1.725
+Extra active (very hard exercise/sports & physical job or 2x training): BMR x 1.9
 """
 
 
