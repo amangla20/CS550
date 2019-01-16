@@ -16,12 +16,13 @@ from collections import Counter
 # Harris-Benedict Formula
 # account for the fact that it gets harder and harder to lose weight as you lower in weight because you have to continue to eat less and less
 # Women: BMR = 655 + ( 4.35 x weight in pounds ) + ( 4.7 x height in inches ) - ( 4.7 x age in years )
-trials = 100
+trials = 10000
 
-results = []
+time_results = []
 days = 0
 calories_lost = 0
 for i in range(trials):
+	days = 0
 	# current weight can be between 130 pounds and 500 pounds
 	current_weight = random.randint(130, 500)
 	desired_weight = current_weight - 40
@@ -51,19 +52,22 @@ for i in range(trials):
 		bmr = 655 + (4.35 * current_weight) + (4.7 * height) - (4.7 * age)
 		calories_maintaining = bmr * activity_factor
 		# assume the woman will go on a strict diet of eating only up to the calories needed to maintain the desired weight every day
-		bmr = 655 + (4.35 * desired_weight) + (4.7 * height) - (4.7 * age)
-		# calories_desired represents the daily calorie count needed of the desired weight (40 pounds lower)
-		calories_desired = bmr * activity_factor
-		calories_cut_per_day = calories_maintaining - calories_desired
-		calories_lost += calories_cut_per_day
+		calories_per_day = calories_maintaining - random.randint(500, 1000)
+		calories_lost += random.randint(500, 1000)
 		days += 1
 		# 1 pound is 3500 calories. 
 		pounds = calories_lost / 3500
-		current_weight -= pounds
+		if pounds >= 1:
+			current_weight -= pounds
+			calories_lost = 0
+		"""
+		if pounds >= 1:
+			current_weight -= pounds
+			calories_lost = 0
+		"""
 	# days/30 is how many months, approximately.
-	results.append(days/30)
-
-results = sorted(Counter(results).items())
+	time_results.append(days/30)
+results = sorted(Counter(time_results).items())
 print(results)
 
 graph_data = []
