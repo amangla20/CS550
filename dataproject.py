@@ -53,6 +53,7 @@ for i in range(trials):
 	while current_weight > desired_weight:
 		bmr = 655 + (4.35 * current_weight) + (4.7 * height) - (4.7 * age)
 		calories_maintaining = bmr * activity_factor
+		calories_cut_per_day = random.randint(500, 1000)
 
 
 
