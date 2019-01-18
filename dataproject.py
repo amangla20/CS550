@@ -7,14 +7,14 @@ import math
 import matplotlib.pyplot as plt
 from collections import Counter
 
-# How much time would it take to lose 40 pounds for a female following a strict calorie counting diet?
+# How much time would it take to lose 20-50 pounds for a female following a strict calorie counting diet?
 
-# one pound is 3,500 calories, and you should be pacing yourself to lose about 1-2 pounds a week. This means you should burn 3,500 calories a week
-# using the formula online: https://www.google.com/search?q=calculating+bmr+formula&oq=calculating+bmr+formula&aqs=chrome..69i57j0l5.4805j0j1&sourceid=chrome&ie=UTF-8
+# one pound is 3,500 calories
+# using the formula online, Harris-Benedict Formula: https://www.google.com/search?q=calculating+bmr+formula&oq=calculating+bmr+formula&aqs=chrome..69i57j0l5.4805j0j1&sourceid=chrome&ie=UTF-8
 # activity level: https://www.livestrong.com/article/146691-calorie-calculator-for-your-ideal-weight/
-# Harris-Benedict Formula
 # account for the fact that it gets harder and harder to lose weight as you lower in weight because you have to continue to eat less and less
 # Women: BMR = 655 + ( 4.35 x weight in pounds ) + ( 4.7 x height in inches ) - ( 4.7 x age in years )
+
 trials = 10000
 
 time_results = []
@@ -57,13 +57,13 @@ for i in range(trials):
 		bmr = 655 + (4.35 * current_weight) + (4.7 * height) - (4.7 * age)
 		calories_maintaining = bmr * activity_factor
 		# assume the woman will go on a strict diet of eating only up to the calories needed to maintain the desired weight every day (one way of doing)
-		# randomly eat 500 to 1000 calories less than the calories needed to sustain at weight - but why is it even needed to be found out if the calories lost are randomized?
 		#calories_per_day = calories_maintaining - random.randint(500, 1000)
 		#calories_lost += random.randint(500, 1000)
 		calories_cut_per_day = calories_maintaining - calories_desired
 		
 		calories_lost += calories_cut_per_day
 		days += 1
+		# increment days and change current weight
 		current_weight = starting_weight - (calories_lost/3500)
 
 		# 1 pound is 3500 calories. 
@@ -79,8 +79,7 @@ for i in range(trials):
 	# days/30 is how many months, approximately.
 	time_results.append(days/30)
 results = sorted(Counter(time_results).items())
-print(results)
-
+# create y axis and x axis ranges
 graph_data = []
 
 x_data = []
@@ -93,7 +92,7 @@ for tuples in results:
 plt.plot(x_data, graph_data, color="purple", linestyle = '--')
 plt.xlabel("Months")
 plt.ylabel("Frequency")
-plt.title("Amount of Time in Months Required For a Woman to Lose 40 Pounds")
+plt.title("Amount of Time in Months Required For a Woman to Lose 20-50 Pounds")
 plt.show()
 
 
