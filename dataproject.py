@@ -23,9 +23,11 @@ calories_lost = 0
 for i in range(trials):
 	days = 0
 	calories_cut_per_day = 0
+	calories_lost = 0
 	# current weight can be between 130 pounds and 500 pounds
 	current_weight = random.randint(130, 500)
-	desired_weight = current_weight - 40
+	starting_weight = current_weight
+	desired_weight = current_weight - random.randint(20, 50)
 	# heights of 4 feet 8 inches to 6 feet 6 inches
 	height = random.randint(56, 78)
 	# weight loss of 40 pounds should only be happening in women of a substantial age, like a normal ten year-old wouldn't worry about nor probably be able to lose 40 pounds.
@@ -50,7 +52,7 @@ for i in range(trials):
 		activity_factor = 1.9
 	bmr = 655 + (4.35 * desired_weight) + (4.7 * height) - (4.7 * age)
 	calories_desired = bmr * activity_factor
-	while current_weight > desired_weight + 5:
+	while current_weight > desired_weight + 10:
 		# calculate bmr of current weight to get the number of calories needed to maintain your current weight
 		bmr = 655 + (4.35 * current_weight) + (4.7 * height) - (4.7 * age)
 		calories_maintaining = bmr * activity_factor
@@ -59,13 +61,16 @@ for i in range(trials):
 		#calories_per_day = calories_maintaining - random.randint(500, 1000)
 		#calories_lost += random.randint(500, 1000)
 		calories_cut_per_day = calories_maintaining - calories_desired
+		
 		calories_lost += calories_cut_per_day
 		days += 1
+		current_weight = starting_weight - (calories_lost/3500)
+
 		# 1 pound is 3500 calories. 
-		pounds = calories_lost / 3500
-		if pounds >= 1:
-			current_weight -= pounds
-			calories_lost = 0
+		# pounds = calories_lost / 3500
+		# if pounds >= 1:
+		# 	current_weight -= pounds
+		# 	calories_lost = 0
 		"""
 		if pounds >= 1:
 			current_weight -= pounds
