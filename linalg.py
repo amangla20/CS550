@@ -14,7 +14,17 @@ print(mat_mul)
 # dot product and matrix multiplication yield the same result
 
 # calculates the determinant of an array
-array3 = numpy.array([[3, 6], [17, 89]])
+array3 = numpy.array([[3, 6], [17, 10]])
 determinant = numpy.linalg.det(array3)
 print("determinant of array1:", determinant)
+
+# solve equations through linear algebra
+solution = numpy.linalg.solve(array3, [[24], [64]])
+print("solution of the system of equations:", solution)
+
+# compare two arrays to see whether they are equal within a certain tolerance/error bound, using relative tolerance and absolute tolerance
+array4 = numpy.array([[7, 10], [9, 7]])
+close = numpy.allclose(array3, array4, 0.5, 0.8)
+
+print("are they equal? " + str(close))
 
