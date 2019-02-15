@@ -67,14 +67,29 @@ time = pygame.time.get_ticks
 
 all_sprites_list = pygame.sprite.Group()
 
-player = Player((255, 0, 0), 60, 60)
+player = Player((255, 0, 0), 25, 25)
 player.rect.x = 0
 player.rect.y = 0
 
 all_sprites_list.add(player)
 
-clock = pygame.time.Clock()
+#Day
+DayFont = Font.render("Day:{0:03}".format(Day),1, Black) #zero-pad day to 3 digits
+DayFontR=DayFont.get_rect()
+DayFontR.center=(985,20)
+#Hour
+HourFont = Font.render("Hour:{0:02}".format(Hour),1, Black) #zero-pad hours to 2 digits
+HourFontR=HourFont.get_rect()
+HourFontR.center=(1085,20)
+#Minute
+MinuteFont = Font.render("Minute:{0:02}".format(Minute),1, Black) #zero-pad minutes to 2 digits
+MinuteFontR=MinuteFont.get_rect()
+MinuteFontR.center=(1200,20)
 
+clock = pygame.time.Clock()
+clock_tick = pygame.USEREVENT + 1
+pygame.time.set_timer(clock_tick, 1000)
+#https://stackoverflow.com/questions/38045189/how-do-i-make-pygame-display-the-time-and-change-it-when-the-time-changes-using
 while not done:
 	# clock.tick(10)
 	for event in pygame.event.get():
@@ -83,6 +98,22 @@ while not done:
 		elif event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_q:
 				done = True
+		if event.type == clock_tick:
+			Minute=Minute+1
+			if Minute == 60:
+				Hour = Hour+1
+				Minute=0
+			if Hour==12:
+				Day=Day+1
+				Hour=0
+            # redraw time
+            screen.fill((255, 255, 255))
+            MinuteFont = Font.render("Minute:{0:02}".format(Minute),1, Black)
+            screen.blit(MinuteFont, MinuteFontR)
+            HourFont = Font.render("Hour:{0:02}".format(Hour),1, Black)
+            screen.blit(HourFont, HourFontR)
+            DayFont = Font.render("Day:{0:03}".format(Day),1, Black)
+            screen.blit(DayFont, DayFontR)
 
 	keys = pygame.key.get_pressed()
 	if keys[pygame.K_LEFT]:
@@ -111,6 +142,9 @@ while not done:
 		pygame.display.update()
 
 	all_sprites_list.draw(screen)
+
+	Font = pygame.font.SysFont("Trebuchet MS", 25)
+
 
 	pygame.display.flip()
 
