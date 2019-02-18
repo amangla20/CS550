@@ -7,10 +7,10 @@ import math
 # 		posy += 1
 
 class Ball:
-	def __init__(self, posx, posy, speed):
+	def __init__(self, posx, posy, color, speed):
 		self.posx = posx
 		self.posy = posy
-		self.image = pygame.draw.circle(screen, (0, 0, 255), [posx, posy], 5)
+		self.image = pygame.draw.circle(screen, self.color, [posx, posy], 5)
 		self.speed = speed
 	def oscillate_vertical(self):
 		# height_screen - 5 is height of screen - radius
@@ -20,7 +20,6 @@ class Ball:
 			self.speed = -1* self.speed # making sure it is positive
 		newposy = self.posy + self.speed
 		self.__init__(self.posx, newposy, self.speed)
-		print(self.posy)
 
 
 
@@ -70,6 +69,7 @@ height_screen = 500
 width_screen = 500
 size = [width_screen, height_screen]
 balls = []
+coins = []
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("World's Hardest Game! Can you beat it in time?")
 done = False
@@ -163,7 +163,7 @@ while not done:
 	posy = int(height_screen/5)
 
 	for i in range(5):
-		ball = Ball(posx, posy, 5)
+		ball = Ball(posx, posy, (0, 0, 255), 5)
 		balls.append(ball)
 		posx += 100
 		# may need to uncomment the comment below
@@ -179,7 +179,12 @@ while not done:
 	# 	for i in range(100):
 	# 		ball.oscillate_vertical(posy)
 	# 	pygame.display.update()
-		
+	
+	for i in range(3):
+		posx = 100
+		posy = 300
+		coin = Ball(posx, posy, (0, 255, 255), 0)
+		coins.append(coin)
 
 	all_sprites_list.draw(screen)
 
