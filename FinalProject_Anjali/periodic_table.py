@@ -42,7 +42,7 @@ class PeriodicTable:
         for elementdata in self.elements:
             
             # if found, returns the data for that element
-            if elementdata.getElement().upper() == elchoice.upper() or elementdata.getSymbol().upper() == elchoice.upper():
+            if elementdata.getElement().upper() == elchoice.upper() or elementdata:getSymbol().upper() == elchoice.upper():
                 return elementdata
 
     # This function calculates the molecular weight in g/mol of any molecular formula that the user puts in by splitting the molecular formula into strings by capital letters, so if the symbol has two letters or one it will be separated, and includes numbers in these separate elements of the list. It then checks which character in the formula is a digit in order to make that the multiplier against the weight of the element in each part of the list.

@@ -1,94 +1,68 @@
 import pygame
-WHITE = (255, 255, 255)
- 
-class Car(pygame.sprite.Sprite):
-    #This class represents a car. It derives from the "Sprite" class in Pygame.
-    
-    def __init__(self, color, width, height):
-        # Call the parent class (Sprite) constructor
-        super().__init__()
-        
-        # Pass in the color of the car, and its x and y position, width and height.
-        # Set the background color and set it to be transparent
-        self.image = pygame.Surface([width, height])
-        self.image.fill(WHITE)
-        self.image.set_colorkey(WHITE)
- 
-        # Draw the car (a rectangle!)
-        pygame.draw.rect(self.image, color, [0, 0, width, height])
-        
-        # Instead we could load a proper pciture of a car...
-        # self.image = pygame.image.load("car.png").convert_alpha()
- 
-        # Fetch the rectangle object that has the dimensions of the image.
-        self.rect = self.image.get_rect()
- 
-    def moveRight(self, pixels):
-        self.rect.x += pixels
- 
-    def moveLeft(self, pixels):
-        self.rect.x -= pixels
-
 pygame.init()
- 
-GREEN = (20, 255, 140)
-GREY = (210, 210 ,210)
-WHITE = (255, 255, 255)
-RED = (255, 0, 0)
-PURPLE = (255, 0, 255)
-        
-SCREENWIDTH=400
-SCREENHEIGHT=500
- 
-size = (SCREENWIDTH, SCREENHEIGHT)
+
+#Screen
+size = width, height = 1280, 720 #Make sure background image is same size
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption("Car Racing")
- 
-#This will be a list that will contain all the sprites we intend to use in our game.
-all_sprites_list = pygame.sprite.Group()
- 
-playerCar = Car(RED, 20, 30)
-playerCar.rect.x = 200
-playerCar.rect.y = 300
- 
-# Add the car to the list of objects
-all_sprites_list.add(playerCar)
- 
-#Allowing the user to close the window...
-carryOn = True
-clock=pygame.time.Clock()
- 
-while carryOn:
-        for event in pygame.event.get():
-            if event.type==pygame.QUIT:
-                carryOn=False
-            elif event.type==pygame.KEYDOWN:
-                if event.key==pygame.K_x: #Pressing the x Key will quit the game
-                     carryOn=False
- 
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            playerCar.moveLeft(5)
-        if keys[pygame.K_RIGHT]:
-            playerCar.moveRight(5)
-        
-        #Game Logic
-        all_sprites_list.update()
- 
-        #Drawing on Screen
-        screen.fill(GREEN)
-        #Draw The Road
-        pygame.draw.rect(screen, GREY, [40,0, 200,300])
-        #Draw Line painting on the road
-        pygame.draw.line(screen, WHITE, [140,0],[140,300],5)
-        
-        #Now let's draw all the sprites in one go. (For now we only have 1 sprite!)
-        all_sprites_list.draw(screen)
- 
-        #Refresh Screen
-        pygame.display.flip()
- 
-        #Number of frames per secong e.g. 60
-        clock.tick(60)
- 
-pygame.quit() 
+
+done = False
+
+#Time Info
+Time = 0
+Minute = 0
+Hour = 0
+Day = 0
+counter=0
+
+#Colour
+Black = (0,0,0)
+White = (255, 255, 255)
+
+#Fonts
+Font = pygame.font.SysFont("Trebuchet MS", 25)
+
+#Day
+DayFont = Font.render("Day:{0:03}".format(Day),1, Black) #zero-pad day to 3 digits
+DayFontR=DayFont.get_rect()
+DayFontR.center=(985,20)
+#Hour
+HourFont = Font.render("Hour:{0:02}".format(Hour),1, Black) #zero-pad hours to 2 digits
+HourFontR=HourFont.get_rect()
+HourFontR.center=(1085,20)
+#Minute
+MinuteFont = Font.render("Minute:{0:02}".format(Minute),1, Black) #zero-pad minutes to 2 digits
+MinuteFontR=MinuteFont.get_rect()
+MinuteFontR.center=(1200,20)
+
+Clock = pygame.time.Clock()
+CLOCKTICK = pygame.USEREVENT+1
+pygame.time.set_timer(CLOCKTICK, 1000) # fired once every second
+
+screen.fill(White)
+while not done:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+        if event.type == CLOCKTICK: # count up the clock
+            #Timer
+            Minute=Minute+1
+            if Minute == 60:
+                Hour=Hour+1
+                Minute=0
+            if Hour==12:
+                Day=Day+1
+                Hour=0
+            # redraw time
+            screen.fill(White)
+            MinuteFont = Font.render("Minute:{0:02}".format(Minute),1, Black)
+            screen.blit(MinuteFont, MinuteFontR)
+            HourFont = Font.render("Hour:{0:02}".format(Hour),1, Black)
+            screen.blit(HourFont, HourFontR)
+            DayFont = Font.render("Day:{0:03}".format(Day),1, Black)
+            screen.blit(DayFont, DayFontR)
+
+            pygame.display.flip()
+
+    Clock.tick(60) # ensures a maximum of 60 frames per second
+
+pygame.quit()
