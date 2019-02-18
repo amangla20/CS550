@@ -10,7 +10,8 @@ class Ball:
 	def __init__(self, posx, posy, color, speed):
 		self.posx = posx
 		self.posy = posy
-		self.image = pygame.draw.circle(screen, self.color, [posx, posy], 5)
+		self.color = color
+		self.image = pygame.draw.circle(screen, color, [posx, posy], 5)
 		self.speed = speed
 	def oscillate_vertical(self):
 		# height_screen - 5 is height of screen - radius
@@ -19,7 +20,7 @@ class Ball:
 		if self.posy <= 5:
 			self.speed = -1* self.speed # making sure it is positive
 		newposy = self.posy + self.speed
-		self.__init__(self.posx, newposy, self.speed)
+		self.__init__(self.posx, newposy, self.color, self.speed)
 
 
 
@@ -123,7 +124,7 @@ while not done:
 			if Hour == 12:
 				Day = Day + 1
 				Hour = 0
-			screen.fill((0, 0, 0))
+			#screen.fill((0, 0, 0))
 			# redraw time
 			MinuteFont = Font.render("Minute:{0:02}".format(Minute), 1, RED)
 			screen.blit(MinuteFont, MinuteFontR)
@@ -179,12 +180,13 @@ while not done:
 	# 	for i in range(100):
 	# 		ball.oscillate_vertical(posy)
 	# 	pygame.display.update()
-	
+	posx = 100
+	posy = 300
 	for i in range(3):
-		posx = 100
-		posy = 300
-		coin = Ball(posx, posy, (0, 255, 255), 0)
+		coin = Ball(posx, posy, (255, 255, 0), 0)
 		coins.append(coin)
+		posx += 150
+		pygame.display.update()
 
 	all_sprites_list.draw(screen)
 
