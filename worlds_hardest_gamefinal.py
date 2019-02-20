@@ -1,4 +1,6 @@
 # https://www.pygame.org/docs/tut/tom_games4.html
+# https://www.cs.ucsb.edu/~pconrad/cs5nm/topics/pygame/drawing/
+# https://pythonprogramming.net/displaying-images-pygame/
 import pygame, sys
 import math
 # def oscillate_vertical(posx, posy):
@@ -21,6 +23,32 @@ class Ball:
 			self.speed = -1* self.speed # making sure it is positive
 		newposy = self.posy + self.speed
 		self.__init__(self.posx, newposy, self.color, self.speed)
+
+class Block(pygame.sprite.Sprite):
+	def __init__(self, posx, posy, speed, width, height):
+		super().__init__()
+		self.posx = posx
+		self.posy = posy
+		self.width = width
+		self.height = height
+		self.speed = speed
+		self.image = pygame.Surface([width, height])
+		self.image.fill(WHITE)
+		self.image.set_colorkey(WHITE)
+
+		self.image = pygame.image.load("movingblock.png").convert_alpha()
+
+		self.rect = self.image.get_rect()
+		screen.blit(self.image, (self.posx, self.posy))
+	def oscillate_vertical(self):
+		# height_screen - 5 is height of screen - radius
+		if self.posy >= height_screen - 5:
+			self.speed = -1 * self.speed
+		if self.posy <= 5:
+			self.speed = -1* self.speed # making sure it is positive
+		newposy = self.posy + self.speed
+		self.__init__(self.posx, newposy, self.speed, self.width, self.height)
+
 
 
 
@@ -164,11 +192,12 @@ while not done:
 	posy = int(height_screen/5)
 
 	for i in range(5):
-		ball = Ball(posx, posy, (0, 0, 255), 5)
+		ball = Ball(posx, posy, (0, 0, 255), 10)
 		balls.append(ball)
 		posx += 100
 		# may need to uncomment the comment below
-		pygame.display.update()
+		
+	screen.fill((0, 0, 0))
 
 	for i in range(5):
 		balls[i].oscillate_vertical()
@@ -188,8 +217,14 @@ while not done:
 		posx += 150
 		pygame.display.update()
 
-	all_sprites_list.draw(screen)
+	
 
+	all_sprites_list.draw(screen)
+	block = Block(0, 200, 15, 300, 300)
+	block.oscillate_vertical()
+	for b in balls:
+		print(b.posy)
+	print(block.posy)
 
 	pygame.display.flip()
 
@@ -197,7 +232,44 @@ while not done:
 pygame.quit()
 # hints with text box for each level 
 
+def start_screen():
+	screen.fill(WHITE)
+	welcome_font = pygame.font.SysFont('Trebuchet MS', 25)
+	welcome = welcome_font.render("Welcome to World's Hardest Game!", True, BLACK)
+	welcome_rect = welcome.get_rect()
+	welcome_rect.center = (width_screen/2, height_screen/2)
 
+	screen.blit(welcome, welcome_rect)
+	
+	button = Block(width_screen/2, height_screen/2, 0, 100, 100)
+
+def button(x,y,w,h,ic,ac,action=None):
+	    mouse = pygame.mouse.get_pos()
+	    click = pygame.mouse.get_pressed()
+	    print(click)
+	    if x+w > mouse[0] > x and y+h > mouse[1] > y:
+	        pygame.draw.rect(gameDisplay, ac,(x,y,w,h))
+
+	        if click[0] == 1 and action != None:
+				action()         
+	    else:
+	        pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
+
+	    start_font = pygame.font.SysFont("comicsansms",20)
+	    start = start_font.render("START!", True, BLACK)
+		start_rect = welcome.get_rect()
+		start_rect.center = (width_screen/2, height_screen/2)
+
+		screen.blit(welcome, welcome_rect)
+	    textRect.center = ( (x+(w/2)), (y+(h/2)) )
+	    gameDisplay.blit(textSurf, textRect)
+
+
+
+
+
+	#start_button = 
+	# CREATE A WAY TO press the start button and go to game and press the B button to go back to start screen
 
 
 
