@@ -241,28 +241,27 @@ def start_screen():
 
 	screen.blit(welcome, welcome_rect)
 	
-	button = Block(width_screen/2, height_screen/2, 0, 100, 100)
+	#button = Block(width_screen/2, height_screen/2, 0, 100, 100)
 
-def button(x,y,w,h,ic,ac,action=None):
+	button("START!", 200, 300, 200, 80, l)
+
+def button(message, x,y,w,h,ic,ac,action=None):
 	    mouse = pygame.mouse.get_pos()
 	    click = pygame.mouse.get_pressed()
 	    print(click)
 	    if x+w > mouse[0] > x and y+h > mouse[1] > y:
-	        pygame.draw.rect(gameDisplay, ac,(x,y,w,h))
+	        pygame.draw.rect(screen, ac,(x,y,w,h))
 
 	        if click[0] == 1 and action != None:
 				action()         
 	    else:
-	        pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
+	        pygame.draw.rect(screen, ic,(x,y,w,h))
 
-	    start_font = pygame.font.SysFont("comicsansms",20)
-	    start = start_font.render("START!", True, BLACK)
-		start_rect = welcome.get_rect()
-		start_rect.center = (width_screen/2, height_screen/2)
-
-		screen.blit(welcome, welcome_rect)
-	    textRect.center = ( (x+(w/2)), (y+(h/2)) )
-	    gameDisplay.blit(textSurf, textRect)
+	    btn_font = pygame.font.SysFont("comicsansms",20)
+	    btn = btn_font.render(message, True, BLACK)
+		btn_rect = btn.get_rect()
+		btn_rect.center = (x + (w/2), (y + (h/2)))
+		screen.blit(btn, btn_rect)
 
 
 
