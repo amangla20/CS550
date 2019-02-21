@@ -14,10 +14,12 @@ class CreateBall:
 		self.image = pygame.draw.circle(self.surface, (self.rcolor, self.gcolor, self.bcolor), [self.posx, self.posy], 5)
 
 
-	# def display(self, posx, posy, rcolor, gcolor, bcolor):
-	# 	for piece in self.balls:
-	# 		if piece.kind == "1":
-	# 			pygame.draw.circle(self.surface, (int(rcolor), int(gcolor), int(bcolor)), [int(piece.posx), int(newposy)], 5)
+	# Type 1 - balls oscillate vertically
+	# Type 2 - balls oscillzate horizontallly 
+	# Type 3 - coin with speed 0 
+
+	# if collide with type 1 and type 2, then death increments and coins return and player goes back to start
+	# if collides with type 3, coins increment
 	def oscillate_direction(self):
 		if self.kind == 1:
 			self.oscillate_vertical()

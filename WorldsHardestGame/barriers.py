@@ -3,9 +3,10 @@ import csv
 from init_barrier import Create
 class Barriers:
 
-# def makeGreenSpace():
-# 	gs = Wall(3, 316, 152, 127, surface, 3)
-# 	gs.display()
+
+#Kind 1 is a purple wall - if player comes into contact, it cannot move up/left/down/right into wall
+#Kind 2 is black space - if player comes into contact, it dies, coins return to screen, and it must go back to starting location, increment death variable
+# Kind 3 is green space - if player comes into contact with this, check if they've collected all the coins, if so they win, if not do nothing
 
 	def __init__(self, surface):
 		#self.surface = surface
