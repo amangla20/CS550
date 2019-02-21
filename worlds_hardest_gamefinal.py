@@ -128,13 +128,9 @@ def game():
 	if keys[pygame.K_LEFT]:
 		if player.rect.x > 0:
 			player.moveLeft(5)
-		else:
-			pass
 	if keys[pygame.K_RIGHT]:
 		if player.rect.x < 500 - player.rect.width:
 			player.moveRight(5)
-		else:
-			pass
 	if keys[pygame.K_UP]:
 		if player.rect.y > 0:
 			player.moveUp(5)
@@ -149,7 +145,7 @@ def game():
 
 	all_sprites_list.update()
 
-	screen.fill((0, 0, 0))
+	#screen.fill((0, 0, 0))
 
 	posx = int(width_screen/10)
 	posy = int(height_screen/5)
@@ -190,6 +186,7 @@ pygame.init()
 height_screen = 446
 width_screen = 677
 size = [width_screen, height_screen]
+gameState = 0
 balls = []
 coins = []
 screen = pygame.display.set_mode(size)
@@ -256,10 +253,10 @@ while not done:
 			DayFont = Font.render("Day:{0:03}".format(Day), 1, RED)
 			screen.blit(DayFont, DayFontR)
 
-	#start_screen()
+	# start_screen()
 	screen.fill((0, 0, 0))
 	welcome_font = pygame.font.SysFont('Trebuchet MS', 25)
-	welcome = welcome_font.render("Welcome to World's Hardest Game!", True, (0, 0, 0))
+	welcome = welcome_font.render("Welcome to World's Hardest Game!", True, (255, 255, 255))
 	welcome_rect = welcome.get_rect()
 	welcome_rect.center = (width_screen/2, height_screen/2)
 
