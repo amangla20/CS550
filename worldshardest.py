@@ -2,7 +2,7 @@ import pygame
 from barriers import Barriers
 from init_balls import CreateBall
 import csv
-from player import Player
+from player2 import Player
 
 pygame.display.init()
 Clock = pygame.time.Clock()
