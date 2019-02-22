@@ -22,7 +22,7 @@ def loadBackground():
 		surface.blit(background, ball.image, ball.image)
 		ball.oscillate_direction()
 def text_display(message, posx, posy, color):
-	text_font = pygame.font.SysFont("comicsansms", 10)
+	text_font = pygame.font.SysFont("comicsansms", 20)
 	text = text_font.render(message, True, color)
 	text_rect = text.get_rect()
 	text_rect.center = (posx, posy)
@@ -50,13 +50,14 @@ def instruct_screen():
 def start_screen():
 	surface.fill((255, 255, 255))
 	text_display("WELCOME TO THE WORLD'S HARDEST GAME! CLICK START TO BEGIN, THOUGH I THINK IT'S FUNNY YOU THINK YOU CAN BEAT ME.", 677/2, 446/2, (0, 0, 0))
-	button("START!", 677/2, 446 * 2/3, 200, 50, 200, 50, (0, 255, 0), (0, 180, 0), loadBackground)
+	button("START!", 677/2, 446 * 2/3, 200, 50, (0, 255, 0), (0, 180, 0), loadBackground)
 
 
 instruct_screen()
 start_screen()
 death = 0
 coins = 0
+# coins_gotten = []
 done = False
 noMoveRight = False
 background = pygame.image.load('background.png')
@@ -100,6 +101,7 @@ def collision_detection():
 			if ball.kind == 1 or ball.kind == 2:
 				death += 1
 				coins = 0
+				balls.append(coins_gotten)
 				player.posx = 75
 				player.posy = 373
 				loadBackground()
@@ -107,7 +109,8 @@ def collision_detection():
 				#player.posy = 373
 			elif ball.kind == 3:
 				coins += 1
-				#balls.remove(ball)
+				# balls.remove(ball)
+				# coins_gotten.append(ball)
 	for barrier in wall.barriers:
 		if barrier.getKind() == "2":
 			pass
@@ -125,7 +128,8 @@ while not done:
 	#wall.display()
 	collision_detection()
 	# wall_collision()
-	text_display("Deaths: " + str(death), 30, 10, (0, 0, 0))
+	text_display("Deaths: " + str(death), 50, 10, (0, 0, 0))
+	text_display("Coins: " + str(coins), 150, 10, (0, 0, 0))
 	# font = pygame.font.SysFont("comicsansms", 20)
 	# death_text = font.render("hey", True, (0, 0, 0))
 	# death_rect = death_text.get_rect()

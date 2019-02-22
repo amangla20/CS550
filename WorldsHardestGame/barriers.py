@@ -1,7 +1,7 @@
 import pygame, sys
 import csv
 from init_barrier import Create
-class Barriers:
+class Barriers(pygame.sprite.Sprite):
 
 
 #Kind 1 is a purple wall - if player comes into contact, it cannot move up/left/down/right into wall
@@ -10,6 +10,7 @@ class Barriers:
 
 	def __init__(self, surface):
 		#self.surface = surface
+		super().__init__()
 		self.surface = surface
 		self.barriers = []
 		with open('barriers.csv') as csv_file:
