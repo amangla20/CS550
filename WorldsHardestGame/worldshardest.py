@@ -1,4 +1,4 @@
-import pygame
+import pygame, sys
 from barriers import Barriers
 from init_balls import CreateBall
 import csv
@@ -46,6 +46,7 @@ def loadBackground():
 	wall.display()
 	# player = Player(surface, background, 75, 373, (255,0,0),15,15)
 	surface.blit(background, player.image, player.image)
+	# load_balls()
 	for ball in balls:
 		surface.blit(background, ball.image, ball.image)
 		ball.oscillate_direction()
@@ -70,13 +71,15 @@ def collision_detection():
 			elif ball.kind == 3:
 				coins += 1
 				#balls.remove(ball)
+	for barrier in wall.barriers:
+		pass
 
-# def text_display(message, posx, posy, color):
-# 	text_font = pygame.font.SysFont("comicsansms", 10)
-# 	text = text_font.render(message, True, color)
-# 	text_rect = text.get_rect()
-# 	text_rect.center = (posx, posy)
-# 	screen.blit(text, text_rect)
+def text_display(message, posx, posy, color):
+	text_font = pygame.font.SysFont("comicsansms", 10)
+	text = text_font.render(message, True, color)
+	text_rect = text.get_rect()
+	text_rect.center = (posx, posy)
+	screen.blit(text, text_rect)
 
 
 while not done:
@@ -85,6 +88,11 @@ while not done:
 	#wall.display()
 	collision_detection()
 	# text_display("Deaths: " + str(death), 30, 10, (0, 0, 0))
+	font = pygame.font.SysFont("comicsansms", 20)
+	death_text = font.render("hey", True, (0, 0, 0))
+	death_rect = death_text.get_rect()
+	death_rect.center = (x + (w/2), (y + (h/2)))
+	surface.blit(death_text, death_rect)
 	for ball in balls:
 		surface.blit(background, ball.image, ball.image)
 		ball.oscillate_direction()
