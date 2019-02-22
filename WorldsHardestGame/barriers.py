@@ -1,6 +1,7 @@
 import pygame, sys
 import csv
 from init_barrier import Create
+from player2 import Player
 class Barriers(pygame.sprite.Sprite):
 
 
@@ -34,4 +35,12 @@ class Barriers(pygame.sprite.Sprite):
 			#self.display.update()
 		
 	def collision(self):
-		pass
+		for location in self.barriers:
+			if location.getKind() == "1": #purple walls
+
+			elif location.getKind() == "2": #black space
+				pygame.draw.rect(self.surface, (0,0,0), (int(location.getPosx()), int(location.getPosy()), int(location.getDimw()), int(location.getDimh())))
+
+			elif location.getKind() == "3": 
+				#green safe space
+				pygame.draw.rect(self.surface, (0, 255, 100), (int(location.getPosx()), int(location.getPosy()), int(location.getDimw()), int(location.getDimh())))
