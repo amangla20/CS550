@@ -11,6 +11,7 @@ Clock = pygame.time.Clock()
 #print(pygame.font.get_fonts())
 # instruct_screen()
 surface = pygame.display.set_mode((677,446))
+gameState = 0
 def loadBackground():
 	surface.blit(background, rect)
 	wall.display()
@@ -51,10 +52,13 @@ def start_screen():
 	surface.fill((255, 255, 255))
 	text_display("WELCOME TO THE WORLD'S HARDEST GAME! CLICK START TO BEGIN, THOUGH I THINK IT'S FUNNY YOU THINK YOU CAN BEAT ME.", 677/2, 446/2, (0, 0, 0))
 	button("START!", 677/2, 446 * 2/3, 200, 50, (0, 255, 0), (0, 180, 0), loadBackground)
+	gameState = 1
+
+def checkCoins():
+	pass
 
 
-instruct_screen()
-start_screen()
+
 death = 0
 coins = 0
 # coins_gotten = []
@@ -121,8 +125,11 @@ def collision_detection():
 # 		if barrier.getKind() == 1:
 # 			if int(barrier.posx) == player.posx:
 # 				noMoveRight = True
-
 while not done:
+	if gameState == 0:
+		instruct_screen()
+	else:
+		pass
 	print(death)
 	print(coins)
 	#wall.display()
