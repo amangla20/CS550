@@ -6,8 +6,10 @@ from player2 import Player
 import math
 
 pygame.display.init()
+pygame.init()
 Clock = pygame.time.Clock()
 #print(pygame.font.get_fonts())
+# instruct_screen()
 surface = pygame.display.set_mode((677,446))
 death = 0
 coins = 0
@@ -44,7 +46,7 @@ player = Player(surface, background, 75, 373, (255,0,0),15,15)
 def loadBackground():
 	surface.blit(background, rect)
 	wall.display()
-	# player = Player(surface, background, 75, 373, (255,0,0),15,15)
+	player = Player(surface, background, 75, 373, (255,0,0),15,15)
 	surface.blit(background, player.image, player.image)
 	# load_balls()
 	for ball in balls:
@@ -72,34 +74,34 @@ def collision_detection():
 				coins += 1
 				#balls.remove(ball)
 
-def wall_collision():
-	for barrier in wall.barriers:
-		print(int(barrier.posx))
-		if barrier.getKind() == 1:
-			if int(barrier.posx) == player.posx:
-				noMoveRight = True
+# def wall_collision():
+# 	for barrier in wall.barriers:
+# 		print(int(barrier.posx))
+# 		if barrier.getKind() == 1:
+# 			if int(barrier.posx) == player.posx:
+# 				noMoveRight = True
 
-# def text_display(message, posx, posy, color):
-# 	text_font = pygame.font.SysFont("comicsansms", 10)
-# 	text = text_font.render(message, True, color)
-# 	text_rect = text.get_rect()
-# 	text_rect.center = (posx, posy)
-# 	screen.blit(text, text_rect)
+def text_display(message, posx, posy, color):
+	text_font = pygame.font.SysFont("comicsansms", 10)
+	text = text_font.render(message, True, color)
+	text_rect = text.get_rect()
+	text_rect.center = (posx, posy)
+	surface.blit(text, text_rect)
 def button(message, x,y,w,h,inactive_c,active_c, action=None):
 		mouse = pygame.mouse.get_pos()
 		click = pygame.mouse.get_pressed()
 		if x+w > mouse[0] > x and y+h > mouse[1] > y:
-			pygame.draw.rect(screen, active_c,(x,y,w,h))
+			pygame.draw.rect(surface, active_c,(x,y,w,h))
 			if click[0] == 1 and action != None:
 				action()     
 		else:
-			pygame.draw.rect(screen, inactive_c,(x,y,w,h))
+			pygame.draw.rect(surface, inactive_c,(x,y,w,h))
 
 		btn_font = pygame.font.SysFont("comicsansms",20)
 		btn = btn_font.render(message, True, BLACK)
 		btn_rect = btn.get_rect()
 		btn_rect.center = (x + (w/2), (y + (h/2)))
-		screen.blit(btn, btn_rect)
+		surface.blit(btn, btn_rect)
 def instruct_screen():
 	surface.fill((255, 255, 255))
 	text_display("HOW TO PLAY", 677/2, 446/2, (0, 0, 0))
@@ -115,8 +117,8 @@ while not done:
 	print(coins)
 	#wall.display()
 	collision_detection()
-	wall_collision()
-	# text_display("Deaths: " + str(death), 30, 10, (0, 0, 0))
+	# wall_collision()
+	text_display("Deaths: " + str(death), 30, 10, (0, 0, 0))
 	# font = pygame.font.SysFont("comicsansms", 20)
 	# death_text = font.render("hey", True, (0, 0, 0))
 	# death_rect = death_text.get_rect()

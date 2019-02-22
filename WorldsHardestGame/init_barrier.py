@@ -1,3 +1,4 @@
+import pygame, sys
 class Create:
 	def __init__(self, posx, posy, dimw, dimh, kind):
 		self.posx = posx

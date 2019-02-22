@@ -1,4 +1,4 @@
-import pygame
+import pygame, sys
 class Player(pygame.sprite.Sprite):
 
 	def __init__(self, surface, background, posx, posy, color, width, height):

@@ -1,4 +1,4 @@
-import pygame
+import pygame, sys
 import math
 from player2 import Player
 class CreateBall:

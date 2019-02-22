@@ -1,4 +1,4 @@
-import pygame
+import pygame, sys
 import csv
 from init_barrier import Create
 class Barriers:
