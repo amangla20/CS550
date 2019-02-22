@@ -12,7 +12,7 @@ surface = pygame.display.set_mode((677,446))
 death = 0
 coins = 0
 done = False
-
+noMoveRight = False
 background = pygame.image.load('background.png')
 background = pygame.transform.scale(background,(677,446))
 rect = background.get_rect()
@@ -71,15 +71,20 @@ def collision_detection():
 			elif ball.kind == 3:
 				coins += 1
 				#balls.remove(ball)
-	for barrier in wall.barriers:
-		pass
 
-def text_display(message, posx, posy, color):
-	text_font = pygame.font.SysFont("comicsansms", 10)
-	text = text_font.render(message, True, color)
-	text_rect = text.get_rect()
-	text_rect.center = (posx, posy)
-	screen.blit(text, text_rect)
+def wall_collision():
+	for barrier in wall.barriers:
+		print(int(barrier.getPosx()))
+		if barrier.getKind() == 1:
+			if int(barrier.getPosx()) == player.posx:
+				noMoveRight = True
+
+# def text_display(message, posx, posy, color):
+# 	text_font = pygame.font.SysFont("comicsansms", 10)
+# 	text = text_font.render(message, True, color)
+# 	text_rect = text.get_rect()
+# 	text_rect.center = (posx, posy)
+# 	screen.blit(text, text_rect)
 
 
 while not done:
@@ -87,12 +92,13 @@ while not done:
 	print(coins)
 	#wall.display()
 	collision_detection()
+	wall_collision()
 	# text_display("Deaths: " + str(death), 30, 10, (0, 0, 0))
-	font = pygame.font.SysFont("comicsansms", 20)
-	death_text = font.render("hey", True, (0, 0, 0))
-	death_rect = death_text.get_rect()
-	death_rect.center = (x + (w/2), (y + (h/2)))
-	surface.blit(death_text, death_rect)
+	# font = pygame.font.SysFont("comicsansms", 20)
+	# death_text = font.render("hey", True, (0, 0, 0))
+	# death_rect = death_text.get_rect()
+	# death_rect.center = (x + (w/2), (y + (h/2)))
+	# surface.blit(death_text, death_rect)
 	for ball in balls:
 		surface.blit(background, ball.image, ball.image)
 		ball.oscillate_direction()
@@ -101,7 +107,6 @@ while not done:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			done = True
-
 	keys = pygame.key.get_pressed()
 	if keys[pygame.K_LEFT]:
 		#if player.rect.x > 0:
@@ -112,8 +117,11 @@ while not done:
 	if keys[pygame.K_RIGHT]:
 		#if player.rect.x < 677 - player.rect.width:
 		if player.posx < 677 - player.width:
-			surface.blit(background, player.image, player.image)
-			player.moveRight(5)
+			if noMoveRight == False:
+				surface.blit(background, player.image, player.image)
+				player.moveRight(5)
+			else:
+				pass
 
 	if keys[pygame.K_UP]:
 		#if player.rect.y > 0:
