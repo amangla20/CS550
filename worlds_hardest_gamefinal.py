@@ -8,7 +8,6 @@ import math
 # 	for i in range(height - posy):
 # 		ball = Ball(posx, posy)
 # 		posy += 1
-
 class Ball:
 	def __init__(self, posx, posy, color, speed):
 		self.posx = posx

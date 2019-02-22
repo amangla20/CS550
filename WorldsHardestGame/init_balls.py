@@ -1,4 +1,6 @@
 import pygame
+import math
+from player2 import Player
 class CreateBall:
 	def __init__(self, surface, posx, posy, upperlim, lowerlim, speed, kind, rcolor, gcolor, bcolor):
 		self.surface = surface
