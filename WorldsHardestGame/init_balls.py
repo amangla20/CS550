@@ -14,14 +14,15 @@ class CreateBall:
 		self.gcolor = int(gcolor)
 		self.bcolor = int(bcolor)
 		if self.kind == 4 or self.kind == 5:
-			self.image = pygame.Surface([25, 25])
-			self.image.fill((255, 255, 255))
-			self.image.set_colorkey((255, 255, 255))
+			self.image = pygame.Surface([10, 10])
+			# transparent = white, all are 255
+			self.image.fill((self.rcolor, self.gcolor, self.bcolor))
+			self.image.set_colorkey((self.rcolor, self.gcolor, self.bcolor))
 
 			self.image = pygame.image.load("movingblock.png").convert_alpha()
 
 			self.rect = self.image.get_rect()
-			screen.blit(self.image, (self.posx, self.posy))
+			
 		else:
 			self.image = pygame.draw.circle(self.surface, (self.rcolor, self.gcolor, self.bcolor), [self.posx, self.posy], 5)
 
@@ -33,10 +34,12 @@ class CreateBall:
 	# if collide with type 1 and type 2, then death increments and coins return and player goes back to start
 	# if collides with type 3, coins increment
 	def oscillate_direction(self):
-		if self.kind == 1 or self.kind == 4:
+		if self.kind == 1:
 			self.oscillate_vertical()
 		elif self.kind == 2 or self.kind == 3 or self.kind == 5:
 			self.oscillate_horizontal()	
+		elif self.kind == 4:
+			self.oscillate_vertical()
 
 	def oscillate_vertical(self):
 			if self.posy >= self.lowerlim:

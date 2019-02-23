@@ -13,7 +13,6 @@ Clock = pygame.time.Clock()
 surface = pygame.display.set_mode((677,446))
 gameState = 0
 def loadBackground():
-
 	surface.blit(background, rect)
 	wall.display()
 	player = Player(surface, background, 75, 373, (255,0,0),15,15)
@@ -21,8 +20,9 @@ def loadBackground():
 	# surface.blit(background, player.image, player.image)
 	# load_balls()
 	for ball in balls:
-		surface.blit(background, ball.image, ball.image)
-		ball.oscillate_direction()
+		if ball.kind < 4:
+			surface.blit(background, ball.image, ball.image)
+			ball.oscillate_direction()
 def text_display(message, posx, posy, color):
 	text_font = pygame.font.SysFont("comicsansms", 20)
 	text = text_font.render(message, True, color)
@@ -123,6 +123,11 @@ def collision_detection():
 				# ball.posy = 1000
 				balls.remove(ball)
 				coins_gotten.append(ball)
+			elif ball.kind == 4:
+				if ball.speed == 5:
+					player.moveUp(ball.speed)
+				elif ball.speed == -5:
+					player.moveDown(-1 * ball.speed)
 
 # def wall_collision():
 # 	for barrier in wall.barriers:
@@ -131,7 +136,8 @@ def collision_detection():
 # 			if int(barrier.posx) == player.posx:
 # 				noMoveRight = True
 while not done:
-	pygame.mouse.get_pos()
+	location = pygame.mouse.get_pos()
+	print(location)
 	print("Game State: " + str(gameState))
 	if gameState == 0:
 		# instruct_screen()
@@ -154,8 +160,13 @@ while not done:
 	# death_rect.center = (x + (w/2), (y + (h/2)))
 	# surface.blit(death_text, death_rect)
 	for ball in balls:
-		surface.blit(background, ball.image, ball.image)
-		ball.oscillate_direction()
+		if ball.kind < 4:
+			surface.blit(background, ball.image, ball.image)
+			ball.oscillate_direction()
+		if ball.kind > 4:
+			print()
+			surface.blit(self.image, (self.posx, self.posy))
+			ball.oscillate_direction()
 		
 	
 	for event in pygame.event.get():
