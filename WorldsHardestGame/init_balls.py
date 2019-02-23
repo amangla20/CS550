@@ -14,13 +14,13 @@ class CreateBall:
 		self.gcolor = int(gcolor)
 		self.bcolor = int(bcolor)
 		if self.kind == 4 or self.kind == 5:
-			self.image = pygame.Surface([10, 10])
+			self.image = pygame.Surface([75, 75])
 			# transparent = white, all are 255
 			self.image.fill((self.rcolor, self.gcolor, self.bcolor))
 			self.image.set_colorkey((self.rcolor, self.gcolor, self.bcolor))
 
 			self.image = pygame.image.load("movingblock.png").convert_alpha()
-
+			self.image = pygame.transform.scale(self.image, (75, 75))
 			self.rect = self.image.get_rect()
 			
 		else:
@@ -39,7 +39,13 @@ class CreateBall:
 		elif self.kind == 2 or self.kind == 3 or self.kind == 5:
 			self.oscillate_horizontal()	
 		elif self.kind == 4:
-			self.oscillate_vertical()
+			# self.oscillate_vertical()
+			if self.posy >= self.lowerlim:
+				self.speed = -1 * self.speed
+			if self.posy <= self.upperlim:
+				self.speed = -1 * self.speed
+			self.rect = self.image.get_rect()
+			self.rect = self.rect.move(self.posx, self.posy + self.speed)
 
 	def oscillate_vertical(self):
 			if self.posy >= self.lowerlim:

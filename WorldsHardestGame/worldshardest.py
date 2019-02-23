@@ -23,6 +23,11 @@ def loadBackground():
 		if ball.kind < 4:
 			surface.blit(background, ball.image, ball.image)
 			ball.oscillate_direction()
+		if ball.kind >= 4:
+			print(ball.posx, " moving block x")
+			print(ball.posy, "moving block y")
+			surface.blit(ball.image, (ball.posx, ball.posy))
+			ball.oscillate_direction()
 def text_display(message, posx, posy, color):
 	text_font = pygame.font.SysFont("comicsansms", 20)
 	text = text_font.render(message, True, color)
@@ -163,10 +168,12 @@ while not done:
 		if ball.kind < 4:
 			surface.blit(background, ball.image, ball.image)
 			ball.oscillate_direction()
-		if ball.kind > 4:
-			print()
-			surface.blit(self.image, (self.posx, self.posy))
+		if ball.kind >= 4:
+			print(ball.posx, " moving block x")
+			print(ball.posy, "moving block y")
+			surface.blit(ball.image, (ball.posx, ball.posy))
 			ball.oscillate_direction()
+			# surface.blit(ball.image, (ball.posx, ball.posy))
 		
 	
 	for event in pygame.event.get():
