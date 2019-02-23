@@ -13,6 +13,7 @@ Clock = pygame.time.Clock()
 surface = pygame.display.set_mode((677,446))
 gameState = 0
 def loadBackground():
+
 	surface.blit(background, rect)
 	wall.display()
 	player = Player(surface, background, 75, 373, (255,0,0),15,15)
@@ -28,40 +29,39 @@ def text_display(message, posx, posy, color):
 	text_rect = text.get_rect()
 	text_rect.center = (posx, posy)
 	surface.blit(text, text_rect)
-def button(message, x,y,w,h,inactive_c,active_c, action=None):
-		mouse = pygame.mouse.get_pos()
-		click = pygame.mouse.get_pressed()
-		if x+w > mouse[0] > x and y+h > mouse[1] > y:
-			pygame.draw.rect(surface, active_c,(x,y,w,h))
-			if click[0] == 1 and action != None:
-				action()     
-		else:
-			pygame.draw.rect(surface, inactive_c,(x,y,w,h))
+def button(message, x,y,w,h,inactive_c,active_c):
+	global gameState
+	mouse = pygame.mouse.get_pos()
+	click = pygame.mouse.get_pressed()
+	if x+w > mouse[0] > x and y+h > mouse[1] > y:
+		pygame.draw.rect(surface, active_c,(x,y,w,h))
+		if click[0] == 1:
+			gameState += 1     
+	else:
+		pygame.draw.rect(surface, inactive_c,(x,y,w,h))
 
 		btn_font = pygame.font.SysFont("comicsansms",20)
 		btn = btn_font.render(message, True, (0, 0, 0))
 		btn_rect = btn.get_rect()
 		btn_rect.center = (x + (w/2), (y + (h/2)))
 		surface.blit(btn, btn_rect)
+
 def instruct_screen():
 	surface.fill((255, 255, 255))
 	text_display("HOW TO PLAY", 677/2, 446/2, (0, 0, 0))
-	button("CONTINUE (IF YOU DARE)", 677/2, 446 * 2/3, 200, 50, (255, 0, 0), (180, 0, 0), start_screen)
+	button("CONTINUE (IF YOU DARE)", 677/2, 446 * 2/3, 200, 50, (255, 0, 0), (180, 0, 0))
 
 def start_screen():
 	surface.fill((255, 255, 255))
 	text_display("WELCOME TO THE WORLD'S HARDEST GAME! CLICK START TO BEGIN, THOUGH I THINK IT'S FUNNY YOU THINK YOU CAN BEAT ME.", 677/2, 446/2, (0, 0, 0))
-	button("START!", 677/2, 446 * 2/3, 200, 50, (0, 255, 0), (0, 180, 0), loadBackground)
-	gameState = 1
-
-def checkCoins():
-	pass
+	button("START!", 677/2, 446 * 2/3, 200, 50, (0, 255, 0), (0, 180, 0))
 
 
 
 death = 0
 coins = 0
-# coins_gotten = []
+total_coins = 0
+coins_gotten = []
 done = False
 noMoveRight = False
 background = pygame.image.load('background.png')
@@ -92,8 +92,13 @@ player = Player(surface, background, 75, 373, (255,0,0),15,15)
 # player.rect.y = 0
 #all_sprites_list.add(player)
 
-
-
+for ball in balls:
+	if ball.kind == 3:
+		total_coins += 1
+def checkCoins():
+	if len(coins_gotten) == total_coins:
+		# will convert to textual message
+		print("Ok, so now you have all of the coins! You just have to survive to make it to home base in order to win the world's hardest game.")
 def collision_detection():
 	global death
 	global coins
@@ -105,7 +110,8 @@ def collision_detection():
 			if ball.kind == 1 or ball.kind == 2:
 				death += 1
 				coins = 0
-				balls.append(coins_gotten)
+				for ball in coins_gotten:
+					balls.append(ball)
 				player.posx = 75
 				player.posy = 373
 				loadBackground()
@@ -113,11 +119,10 @@ def collision_detection():
 				#player.posy = 373
 			elif ball.kind == 3:
 				coins += 1
-				# balls.remove(ball)
-				# coins_gotten.append(ball)
-	for barrier in wall.barriers:
-		if barrier.getKind() == "2":
-			pass
+				# ball.posx = 1000
+				# ball.posy = 1000
+				balls.remove(ball)
+				coins_gotten.append(ball)
 
 # def wall_collision():
 # 	for barrier in wall.barriers:
@@ -126,9 +131,15 @@ def collision_detection():
 # 			if int(barrier.posx) == player.posx:
 # 				noMoveRight = True
 while not done:
+	pygame.mouse.get_pos()
+	print("Game State: " + str(gameState))
 	if gameState == 0:
-		instruct_screen()
-	else:
+		# instruct_screen()
+		pass
+	elif gameState == 1:
+		# start_screen()
+		pass
+	elif gameState == 2:
 		pass
 	print(death)
 	print(coins)

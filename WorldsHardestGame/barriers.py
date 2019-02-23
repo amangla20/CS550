@@ -37,7 +37,7 @@ class Barriers(pygame.sprite.Sprite):
 	def collision(self):
 		for location in self.barriers:
 			if location.getKind() == "1": #purple walls
-			
+				pygame.draw.rect(self.surface, (255, 100, 255), (location.getPosx(), location.getPosy(), location.getDimw(), location.getDimh()))
 			elif location.getKind() == "2": #black space
 				pygame.draw.rect(self.surface, (0,0,0), (int(location.getPosx()), int(location.getPosy()), int(location.getDimw()), int(location.getDimh())))
 
