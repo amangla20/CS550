@@ -39,14 +39,15 @@ class CreateBall:
 		elif self.kind == 2 or self.kind == 3 or self.kind == 5:
 			self.oscillate_horizontal()	
 		elif self.kind == 4:
-			# self.oscillate_vertical()
-			if self.posy >= self.lowerlim:
-				self.speed = -1 * self.speed
-			if self.posy <= self.upperlim:
-				self.speed = -1 * self.speed
-			self.rect = self.image.get_rect()
-			self.rect = self.rect.move(self.posx, self.posy + self.speed)
-			return self.rect
+			self.oscillate_vertical()
+			# if self.posy >= self.lowerlim:
+			# 	self.speed = -1 * self.speed
+			# if self.posy <= self.upperlim:
+			# 	self.speed = -1 * self.speed
+			# self.rect = self.image.get_rect()
+			# self.rect = self.rect.move(self.posx, self.posy + self.speed)
+			# self.surface.blit(self.image, self.rect)
+			# # return self.rect
 
 	def oscillate_vertical(self):
 			if self.posy >= self.lowerlim:
