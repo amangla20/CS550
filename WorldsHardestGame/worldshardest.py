@@ -4,7 +4,7 @@ from init_balls import CreateBall
 import csv
 from player2 import Player
 import math
-
+# ADD THE Q QUIT FEATURE AND TWEAK START AND END SCREEN
 pygame.display.init()
 pygame.init()
 Clock = pygame.time.Clock()
@@ -171,9 +171,9 @@ while not done:
 		if ball.kind >= 4:
 			print(ball.posx, " moving block x")
 			print(ball.posy, "moving block y")
-			surface.blit(ball.image, (ball.posx, ball.posy))
-			ball.oscillate_direction()
 			# surface.blit(ball.image, (ball.posx, ball.posy))
+			surface.blit(ball.image, ball.oscillate_direction())
+			#surface.blit(ball.image, (ball.posx, ball.posy))
 		
 	
 	for event in pygame.event.get():

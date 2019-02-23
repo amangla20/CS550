@@ -46,6 +46,7 @@ class CreateBall:
 				self.speed = -1 * self.speed
 			self.rect = self.image.get_rect()
 			self.rect = self.rect.move(self.posx, self.posy + self.speed)
+			return self.rect
 
 	def oscillate_vertical(self):
 			if self.posy >= self.lowerlim:
