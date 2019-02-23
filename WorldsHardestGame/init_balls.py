@@ -22,6 +22,7 @@ class CreateBall:
 			self.image = pygame.image.load("movingblock.png").convert_alpha()
 			self.image = pygame.transform.scale(self.image, (75, 75))
 			self.rect = self.image.get_rect()
+			self.pos = self.rect.move(self.posx, self.posy)
 			
 		else:
 			self.image = pygame.draw.circle(self.surface, (self.rcolor, self.gcolor, self.bcolor), [self.posx, self.posy], 5)
@@ -45,9 +46,11 @@ class CreateBall:
 			# if self.posy <= self.upperlim:
 			# 	self.speed = -1 * self.speed
 			# self.rect = self.image.get_rect()
+			# self.pos = self.pos.move(0, self.speed)
+			# return self.pos
 			# self.rect = self.rect.move(self.posx, self.posy + self.speed)
 			# self.surface.blit(self.image, self.rect)
-			# # return self.rect
+			# return self.rect
 
 	def oscillate_vertical(self):
 			if self.posy >= self.lowerlim:

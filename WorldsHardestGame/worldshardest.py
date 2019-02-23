@@ -128,11 +128,11 @@ def collision_detection():
 				# ball.posy = 1000
 				balls.remove(ball)
 				coins_gotten.append(ball)
-			elif ball.kind == 4:
-				if ball.speed == 5:
-					player.moveUp(ball.speed)
-				elif ball.speed == -5:
-					player.moveDown(-1 * ball.speed)
+			# elif ball.kind == 4:
+			# 	if ball.speed == 5:
+			# 		player.moveUp(ball.speed)
+			# 	elif ball.speed == -5:
+			# 		player.moveDown(-1 * ball.speed)
 
 # def wall_collision():
 # 	for barrier in wall.barriers:
