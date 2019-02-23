@@ -4,30 +4,21 @@ from init_balls import CreateBall
 import csv
 from player2 import Player
 import math
-# ADD THE Q QUIT FEATURE AND TWEAK START AND END SCREEN
+
+gameState = 0
 pygame.display.init()
 pygame.init()
 Clock = pygame.time.Clock()
-#print(pygame.font.get_fonts())
-# instruct_screen()
 surface = pygame.display.set_mode((677,446))
-gameState = 0
+wall = Barriers(surface)
+wall.display(True)
 def loadBackground():
 	surface.blit(background, rect)
-	wall.display()
+	wall.display(True)
 	player = Player(surface, background, 75, 373, (255,0,0),15,15)
-	print(player.color)
-	# surface.blit(background, player.image, player.image)
-	# load_balls()
 	for ball in balls:
-		if ball.kind < 4:
-			surface.blit(background, ball.image, ball.image)
-			ball.oscillate_direction()
-		if ball.kind >= 4:
-			print(ball.posx, " moving block x")
-			print(ball.posy, "moving block y")
-			surface.blit(ball.image, (ball.posx, ball.posy))
-			ball.oscillate_direction()
+		surface.blit(background, ball.image, ball.image)
+		ball.oscillate_direction()
 def text_display(message, posx, posy, color):
 	text_font = pygame.font.SysFont("comicsansms", 20)
 	text = text_font.render(message, True, color)
@@ -50,7 +41,6 @@ def button(message, x,y,w,h,inactive_c,active_c):
 		btn_rect = btn.get_rect()
 		btn_rect.center = (x + (w/2), (y + (h/2)))
 		surface.blit(btn, btn_rect)
-
 def instruct_screen():
 	surface.fill((255, 255, 255))
 	text_display("HOW TO PLAY", 677/2, 446/2, (0, 0, 0))
@@ -62,21 +52,25 @@ def start_screen():
 	button("START!", 677/2, 446 * 2/3, 200, 50, (0, 255, 0), (0, 180, 0))
 
 
-
+# instruct_screen()
+# start_screen()
 death = 0
 coins = 0
+safe = False
 total_coins = 0
 coins_gotten = []
 done = False
+noMoveLeft = False
 noMoveRight = False
+noMoveUp = False
+noMoveDown = False
 background = pygame.image.load('background.png')
 background = pygame.transform.scale(background,(677,446))
 rect = background.get_rect()
 rect = rect.move((0,0))
 surface.blit(background,rect)
 
-wall = Barriers(surface)
-wall.display()
+
 def load_balls():
 	balls = []
 	with open('balls.csv') as csv_file:
@@ -90,23 +84,25 @@ def load_balls():
 balls = load_balls()
 
 
-#all_sprites_list = pygame.sprite.Group()
+
 #player = Player(surface, background, (255, 0, 0), 15, 15)
 player = Player(surface, background, 75, 373, (255,0,0),15,15)
-# player.rect.x = 0
-# player.rect.y = 0
-#all_sprites_list.add(player)
 
-for ball in balls:
-	if ball.kind == 3:
-		total_coins += 1
-def checkCoins():
-	if len(coins_gotten) == total_coins:
-		# will convert to textual message
-		print("Ok, so now you have all of the coins! You just have to survive to make it to home base in order to win the world's hardest game.")
+
+
 def collision_detection():
 	global death
 	global coins
+	global safe
+	global player
+	global noMoveLeft
+	global noMoveRight
+	global noMoveUp
+	global noMoveDown
+	noMoveRight = False
+	noMoveLeft = False
+	noMoveUp = False
+	noMoveDown = False
 	for ball in balls:
 		# position of bottom right corner of player is (posx + 15, posy + 15)
 		# center of player is (posx + 7.5, posy + 7.5)
@@ -124,22 +120,59 @@ def collision_detection():
 				#player.posy = 373
 			elif ball.kind == 3:
 				coins += 1
-				# ball.posx = 1000
-				# ball.posy = 1000
 				balls.remove(ball)
 				coins_gotten.append(ball)
-			# elif ball.kind == 4:
-			# 	if ball.speed == 5:
-			# 		player.moveUp(ball.speed)
-			# 	elif ball.speed == -5:
-			# 		player.moveDown(-1 * ball.speed)
 
-# def wall_collision():
-# 	for barrier in wall.barriers:
-# 		print(int(barrier.posx))
-# 		if barrier.getKind() == 1:
-# 			if int(barrier.posx) == player.posx:
-# 				noMoveRight = True
+	for barrier in wall.barriers:
+		if (barrier.getPosx() -7 )<= player.posx +7.5 <=(barrier.getPosx() + barrier.getDimw() +7) and (barrier.getPosy() -7) <= player.posy +7.5 <= (barrier.getPosy() + barrier.getDimh() + 7):
+			if barrier.getKind() == 2 and safe == False:
+				death += 1
+				coins = 0
+				for ball in coins_gotten:
+					balls.append(ball)
+				player.posx = 75
+				player.posy = 373
+				loadBackground()
+
+			if barrier.getKind() == 1:
+				if player.posx <= barrier.getPosx():
+					noMoveRight = True
+				if player.posx >= barrier.getPosx():
+					noMoveLeft = True
+				if player.posy <= barrier.getPosy():
+					noMoveDown = True
+				if player.posy >= barrier.getPosy():
+					noMoveUp = True
+		
+	for ball in balls:
+		if (ball.posx -16)<= player.posx +7.5 <=(ball.posx + 75 +16) and (ball.posy -16) <= player.posy +7.5 <= (ball.posy + 75 +16):
+			if ball.kind == 4:
+				safe = True
+				if ball.speed > 0:
+					surface.blit(background, player.image, player.image)
+					player.moveDown(3)
+				if ball.speed < 0:
+					surface.blit(background, player.image, player.image)
+					player.moveUp(3)
+			# if ball.kind == 5:
+			# 	safe = True
+			# 	if ball.speed < 0:
+			# 		player.moveLeft(3)
+			# 	if ball.speed > 0:
+			# 		player.moveRight(3)
+
+			else:
+				safe = False
+				#player = Player(surface, background, ball.posx, ball.posy, (255,0,0),15,15)
+
+for ball in balls:
+	if ball.kind == 3:
+		total_coins += 1
+def checkCoins():
+	if len(coins_gotten) == total_coins:
+		# will convert to textual message
+		print("Ok, so now you have all of the coins! You just have to survive to make it to home base in order to win the world's hardest game.")
+
 while not done:
 	location = pygame.mouse.get_pos()
 	print(location)
@@ -154,10 +187,9 @@ while not done:
 		pass
 	print(death)
 	print(coins)
-	#wall.display()
 	collision_detection()
 	# wall_collision()
-	text_display("Deaths: " + str(death), 50, 10, (0, 0, 0))
+	text_display("Deaths: " + str(death), 30, 10, (0, 0, 0))
 	text_display("Coins: " + str(coins), 150, 10, (0, 0, 0))
 	# font = pygame.font.SysFont("comicsansms", 20)
 	# death_text = font.render("hey", True, (0, 0, 0))
@@ -165,34 +197,25 @@ while not done:
 	# death_rect.center = (x + (w/2), (y + (h/2)))
 	# surface.blit(death_text, death_rect)
 	for ball in balls:
-		if ball.kind < 4:
-			surface.blit(background, ball.image, ball.image)
-			ball.oscillate_direction()
-		if ball.kind >= 4:
-			print(ball.posx, " moving block x")
-			print(ball.posy, "moving block y")
-			surface.blit(ball.image, (ball.posx, ball.posy))
-			ball.oscillate_direction()
-			# surface.blit(ball.image, ball.oscillate_direction())
-			# surface.blit(ball.image, (ball.posx, ball.posy))
+		surface.blit(background, ball.image, ball.image)
+		ball.oscillate_direction()
 		
 	
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			done = True
-		elif event.type == pygame.KEYDOWN:
-			if event.key == pygame.K_q:
-				done = True
 	keys = pygame.key.get_pressed()
 	if keys[pygame.K_LEFT]:
-		#if player.rect.x > 0:
-		if player.posx>0:
-			surface.blit(background, player.image, player.image)
-			player.moveLeft(5)
+		if player.posx > 5:
+			if noMoveLeft == False:
+				surface.blit(background, player.image, player.image)
+				player.moveLeft(5)
+			else:
+				pass
 
 	if keys[pygame.K_RIGHT]:
 		#if player.rect.x < 677 - player.rect.width:
-		if player.posx < 677 - player.width:
+		if player.posx < 671 - player.width:
 			if noMoveRight == False:
 				surface.blit(background, player.image, player.image)
 				player.moveRight(5)
@@ -201,19 +224,22 @@ while not done:
 
 	if keys[pygame.K_UP]:
 		#if player.rect.y > 0:
-		if player.posy > 0:
-			surface.blit(background, player.image, player.image)
-			player.moveUp(5)
+		if player.posy > 34:
+			if noMoveUp == False:
+				surface.blit(background, player.image, player.image)
+				player.moveUp(5)
+
+			else:
+				pass
 
 	if keys[pygame.K_DOWN]:
 		#if player.rect.y < 446 - player.rect.height:
-		if player.posy < 446 - player.height:
-			surface.blit(background, player.image, player.image)
-			player.moveDown(5)
-
-	
-
-	#all_sprites_list.update()
-
+		if player.posy < 442 - player.height:
+			if noMoveDown == False:
+				surface.blit(background, player.image, player.image)
+				player.moveDown(5)
+			else:
+				pass
+	wall.display(False)
 	msElapsed = Clock.tick(20)
 	pygame.display.flip()

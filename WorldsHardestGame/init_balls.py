@@ -1,6 +1,4 @@
-import pygame, sys
-import math
-from player2 import Player
+import pygame
 class CreateBall:
 	def __init__(self, surface, posx, posy, upperlim, lowerlim, speed, kind, rcolor, gcolor, bcolor):
 		self.surface = surface
@@ -14,43 +12,20 @@ class CreateBall:
 		self.gcolor = int(gcolor)
 		self.bcolor = int(bcolor)
 		if self.kind == 4 or self.kind == 5:
-			self.image = pygame.Surface([75, 75])
-			# transparent = white, all are 255
-			self.image.fill((self.rcolor, self.gcolor, self.bcolor))
-			self.image.set_colorkey((self.rcolor, self.gcolor, self.bcolor))
-
-			self.image = pygame.image.load("movingblock.png").convert_alpha()
-			self.image = pygame.transform.scale(self.image, (75, 75))
-			self.rect = self.image.get_rect()
-			self.pos = self.rect.move(self.posx, self.posy)
-			
+			self.image = pygame.draw.rect(self.surface, (self.rcolor, self.gcolor, self.bcolor), [self.posx, self.posy, 75, 75])
 		else:
 			self.image = pygame.draw.circle(self.surface, (self.rcolor, self.gcolor, self.bcolor), [self.posx, self.posy], 5)
 
 
-	# Type 1 - balls oscillate vertically
-	# Type 2 - balls oscillzate horizontallly 
-	# Type 3 - coin with speed 0 
-
-	# if collide with type 1 and type 2, then death increments and coins return and player goes back to start
-	# if collides with type 3, coins increment
+	# def display(self, posx, posy, rcolor, gcolor, bcolor):
+	# 	for piece in self.balls:
+	# 		if piece.kind == "1":
+	# 			pygame.draw.circle(self.surface, (int(rcolor), int(gcolor), int(bcolor)), [int(piece.posx), int(newposy)], 5)
 	def oscillate_direction(self):
-		if self.kind == 1:
+		if self.kind == 1 or self.kind == 4:
 			self.oscillate_vertical()
 		elif self.kind == 2 or self.kind == 3 or self.kind == 5:
 			self.oscillate_horizontal()	
-		elif self.kind == 4:
-			self.oscillate_vertical()
-			# if self.posy >= self.lowerlim:
-			# 	self.speed = -1 * self.speed
-			# if self.posy <= self.upperlim:
-			# 	self.speed = -1 * self.speed
-			# self.rect = self.image.get_rect()
-			# self.pos = self.pos.move(0, self.speed)
-			# return self.pos
-			# self.rect = self.rect.move(self.posx, self.posy + self.speed)
-			# self.surface.blit(self.image, self.rect)
-			# return self.rect
 
 	def oscillate_vertical(self):
 			if self.posy >= self.lowerlim:
