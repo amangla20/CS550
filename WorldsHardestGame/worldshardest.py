@@ -157,9 +157,11 @@ def collision_detection():
 				if ball.speed > 0:
 					surface.blit(ball.surface, player.image, player.image)
 					player.moveDown(3)
+					pygame.display.update()
 				if ball.speed < 0:
 					surface.blit(ball.surface, player.image, player.image)
 					player.moveUp(3)
+					pygame.display.update()
 			# if ball.kind == 5:
 			# 	safe = True
 			# 	if ball.speed < 0:
