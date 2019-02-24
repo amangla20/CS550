@@ -19,13 +19,13 @@ def loadBackground():
 	for ball in balls:
 		surface.blit(background, ball.image, ball.image)
 		ball.oscillate_direction()
-def text_display(message, posx, posy, color):
-	text_font = pygame.font.SysFont("comicsansms", 20)
+def text_display(message, size, posx, posy, color):
+	text_font = pygame.font.SysFont("comicsansms", size)
 	text = text_font.render(message, True, color)
 	text_rect = text.get_rect()
 	text_rect.center = (posx, posy)
 	surface.blit(text, text_rect)
-def button(message, x,y,w,h,inactive_c,active_c):
+def button(message, size, x,y,w,h,inactive_c,active_c):
 	global gameState
 	mouse = pygame.mouse.get_pos()
 	click = pygame.mouse.get_pressed()
@@ -36,19 +36,19 @@ def button(message, x,y,w,h,inactive_c,active_c):
 	else:
 		pygame.draw.rect(surface, inactive_c,(x,y,w,h))
 
-		btn_font = pygame.font.SysFont("comicsansms",20)
+		btn_font = pygame.font.SysFont("comicsansms",size)
 		btn = btn_font.render(message, True, (0, 0, 0))
 		btn_rect = btn.get_rect()
 		btn_rect.center = (x + (w/2), (y + (h/2)))
 		surface.blit(btn, btn_rect)
 def instruct_screen():
 	surface.fill((255, 255, 255))
-	text_display("HOW TO PLAY", 677/2, 446/2, (0, 0, 0))
-	button("CONTINUE (IF YOU DARE)", 677/2, 446 * 2/3, 200, 50, (255, 0, 0), (180, 0, 0))
+	text_display("HOW TO PLAY", 20, 677/2, 446/2, (0, 0, 0))
+	button("CONTINUE (IF YOU DARE)", 20, 677/2, 446 * 2/3, 200, 50, (255, 0, 0), (180, 0, 0))
 
 def start_screen():
 	surface.fill((255, 255, 255))
-	text_display("WELCOME TO THE WORLD'S HARDEST GAME! CLICK START TO BEGIN, THOUGH I THINK IT'S FUNNY YOU THINK YOU CAN BEAT ME.", 677/2, 446/2, (0, 0, 0))
+	text_display("WELCOME TO THE WORLD'S HARDEST GAME! CLICK START TO BEGIN, THOUGH I THINK IT'S FUNNY YOU THINK YOU CAN BEAT ME.", 10, 677/2, 446/2, (0, 0, 0))
 	button("START!", 677/2, 446 * 2/3, 200, 50, (0, 255, 0), (0, 180, 0))
 
 
@@ -113,6 +113,9 @@ def collision_detection():
 				coins = 0
 				for ball in coins_gotten:
 					balls.append(ball)
+					# coins_gotten.remove(ball)
+				for ball in coins_gotten:
+					coins_gotten.remove(ball)
 				player.posx = 75
 				player.posy = 373
 				loadBackground()
@@ -130,6 +133,9 @@ def collision_detection():
 				coins = 0
 				for ball in coins_gotten:
 					balls.append(ball)
+				for ball in coins_gotten:
+					coins_gotten.remove(ball)
+					# coins_gotten.remove(ball)
 				player.posx = 75
 				player.posy = 373
 				loadBackground()
@@ -149,10 +155,10 @@ def collision_detection():
 			if ball.kind == 4:
 				safe = True
 				if ball.speed > 0:
-					surface.blit(background, player.image, player.image)
+					surface.blit(ball.surface, player.image, player.image)
 					player.moveDown(3)
 				if ball.speed < 0:
-					surface.blit(background, player.image, player.image)
+					surface.blit(ball.surface, player.image, player.image)
 					player.moveUp(3)
 			# if ball.kind == 5:
 			# 	safe = True
@@ -193,10 +199,11 @@ while not done:
 		pass
 	print(death)
 	print(coins)
+	print(len(coins_gotten))
 	collision_detection()
 	# wall_collision()
-	text_display("Deaths: " + str(death), 50, 10, (0, 0, 0))
-	text_display("Coins: " + str(coins), 150, 10, (0, 0, 0))
+	text_display("Deaths: " + str(death), 20, 50, 10, (0, 0, 0))
+	text_display("Coins: " + str(coins), 20, 150, 10, (0, 0, 0))
 	# font = pygame.font.SysFont("comicsansms", 20)
 	# death_text = font.render("hey", True, (0, 0, 0))
 	# death_rect = death_text.get_rect()
