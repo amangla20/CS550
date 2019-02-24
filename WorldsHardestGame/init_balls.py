@@ -27,6 +27,7 @@ class CreateBall:
 	# 		if piece.kind == "1":
 	# 			pygame.draw.circle(self.surface, (int(rcolor), int(gcolor), int(bcolor)), [int(piece.posx), int(newposy)], 5)
 	# oscillate either vertically or horizontally
+	# balls of kind 1 oscillate vertically, and balls of kind 2 are blue balls that oscillate horizontally. Kind 3 represents yellow circles, or coins, that have no speed since they are stationary. Kinds 4 and 5 represent moving blocks, where 4 is a vertically moving block, and 5 is a horizontally moving block.
 	def oscillate_direction(self):
 		if self.kind == 1 or self.kind == 4:
 			self.oscillate_vertical()

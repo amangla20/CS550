@@ -1,6 +1,8 @@
+# import pygame package
 import pygame, sys
+# use sprite module from the pygame package in order to allow the player to access sprite attributes
 class Player(pygame.sprite.Sprite):
-
+	# constructor that takes into account the surface, background, x and y positions, color, and width and height of the player object.
 	def __init__(self, surface, background, posx, posy, color, width, height):
 		super().__init__()
 		self.surface = surface
@@ -10,25 +12,30 @@ class Player(pygame.sprite.Sprite):
 		self.color = color
 		self. width = width
 		self. height = height
-		# self.image = pygame.Surface([width, height])
-		# self.image.fill((255, 255, 255))
-		# self.image.set_colorkey((255, 255, 255))
+		# self.image represents what you seen on the screen, a.k.a. the red square that is the player
 		self.image = pygame.draw.rect(self.surface, color, [posx, posy, width, height])
-		#self.rect = self.image.get_rect()
-		#surface.blit(self.image, self.rect)
 
+# move functions for the player based on key presses --> up corresponds to up arrow, down to down, etc.
 	def moveRight(self, delta_x):
+		# delta_x is almost like the speed of the player; it is what the position increments by every time you move it up, down, right, or left.
 		posx = self.posx + delta_x
+		# redraw/initialize the player.
 		self.__init__(self.surface, self.background, posx, self.posy, self.color, self.width, self.height)
 
 	def moveLeft(self, delta_x):
+		# delta_x is almost like the speed of the player; it is what the position increments by every time you move it up, down, right, or left.
 		posx = self.posx - delta_x
+		# redraw/initialize the player.
 		self.__init__(self.surface, self.background, posx, self.posy, self.color, self.width, self.height)
 
 	def moveUp(self, delta_y):
+		# delta_x is almost like the speed of the player; it is what the position increments by every time you move it up, down, right, or left.
 		posy = self.posy - delta_y
+		# redraw/initialize the player.
 		self.__init__(self.surface, self.background, self.posx, posy, self.color, self.width, self.height)
 
 	def moveDown(self, delta_y):
+		# delta_x is almost like the speed of the player; it is what the position increments by every time you move it up, down, right, or left.
 		posy = self.posy + delta_y
+		# redraw/initialize the player.
 		self.__init__(self.surface, self.background, self.posx, posy, self.color, self.width, self.height)
