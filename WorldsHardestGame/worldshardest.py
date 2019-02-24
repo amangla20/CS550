@@ -6,6 +6,7 @@ from player2 import Player
 import math
 
 gameState = 0
+got_coins = False
 pygame.display.init()
 pygame.init()
 Clock = pygame.time.Clock()
@@ -140,6 +141,11 @@ def collision_detection():
 				player.posy = 373
 				loadBackground()
 
+			if barrier.getKind() == 3 and safe == True:
+				checkCoins()
+				if got_coins == True:
+					gameState += 1
+
 			if barrier.getKind() == 1:
 				if player.posx <= barrier.getPosx():
 					noMoveRight = True
@@ -177,10 +183,14 @@ for ball in balls:
 	if ball.kind == 3:
 		total_coins += 1
 def checkCoins():
-	if len(coins_gotten) == total_coins:
+	if len(coins_gotten) >= total_coins:
 		# will convert to textual message
 		print("Ok, so now you have all of the coins! You just have to survive to make it to home base in order to win the world's hardest game.")
+		got_coins = True
 
+def win_screen():
+	surface.fill(255, 255, 255)
+	text_display("YOU WON!", 50, 677/2, 446/2, (0, 0, 0))
 while not done:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
@@ -199,6 +209,8 @@ while not done:
 		pass
 	elif gameState == 2:
 		pass
+	elif gameState == 3:
+		win_screen()
 	print(death)
 	print(coins)
 	print(len(coins_gotten))
