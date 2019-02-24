@@ -197,7 +197,8 @@ def checkCoins():
 def win_screen():
 	text_display("YOU WON!", 30, 60, 370, (0, 0, 0))
 	text_display("Press P to play again and Q to quit.", 17, 60, 400, (0, 0, 0))
-
+pygame.mixer.music.load('worldshardestaudio.mp3')
+pygame.mixer.music.play(-1)
 
 while not done:
 	position = pygame.mouse.get_pos()
