@@ -174,6 +174,12 @@ def checkCoins():
 		print("Ok, so now you have all of the coins! You just have to survive to make it to home base in order to win the world's hardest game.")
 
 while not done:
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			done = True
+		elif event.type == pygame.KEYDOWN:
+			if event.key == pygame.K_q:
+				done = True
 	location = pygame.mouse.get_pos()
 	print(location)
 	print("Game State: " + str(gameState))
@@ -189,7 +195,7 @@ while not done:
 	print(coins)
 	collision_detection()
 	# wall_collision()
-	text_display("Deaths: " + str(death), 30, 10, (0, 0, 0))
+	text_display("Deaths: " + str(death), 50, 10, (0, 0, 0))
 	text_display("Coins: " + str(coins), 150, 10, (0, 0, 0))
 	# font = pygame.font.SysFont("comicsansms", 20)
 	# death_text = font.render("hey", True, (0, 0, 0))
@@ -243,3 +249,4 @@ while not done:
 	wall.display(False)
 	msElapsed = Clock.tick(20)
 	pygame.display.flip()
+pygame.quit()
