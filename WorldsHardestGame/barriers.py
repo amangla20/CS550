@@ -17,12 +17,12 @@ class Barriers():
 			
 	# use the getters and setters from init_barrier to, based on the kind of wall (1 = purple, 2 = black, 3 = green safe space) display the wall by getting the values of csv file that specifies the dimensions for that specific wall
 	def display(self, choice):
-		if choice == False:
+		if choice == 2:
 			for location in self.barriers:
 				if location.getKind() == 1: #purple walls
 					pygame.draw.rect(self.surface, (255, 100, 255), (location.getPosx(), location.getPosy(), location.getDimw(), location.getDimh()))
 
-		else:
+		if choice == 1:
 			for location in self.barriers:
 				if location.getKind() == 2: #black space
 					pygame.draw.rect(self.surface, (0,0,0), (location.getPosx(), location.getPosy(), location.getDimw(), location.getDimh()))
